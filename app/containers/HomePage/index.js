@@ -4,6 +4,7 @@
  * This is the first thing users see of our App, at the '/' route
  */
 /* just for test */
+/* just for test 2 */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';

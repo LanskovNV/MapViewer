@@ -1,6 +1,6 @@
 # MapViewer
 ## Banner
-*in definition*
+![](http://www.visit-petersburg.ru//media/uploads/%D0%BC%D0%B0%D1%80%D1%88%D1%80%D1%83%D1%82%D1%8B.jpeg)
 ## Puprose
 Java Script project to work with maps
 ## Limitations
@@ -14,5 +14,11 @@ Java Script project to work with maps
  1) Clone project with git
  2) If you want to work with develop version, check out develop
     branch and update project
- 3) open built-in terminal and run npm install
- 4) when installation completed, run npm start 
+ 3) open built-in terminal and run 
+ ```
+ npm install
+ ```
+ 4) when installation completed, run 
+ ```
+ npm start
+ ``` 

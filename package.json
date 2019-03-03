@@ -1,17 +1,16 @@
 {
-  "name": "react-boilerplate",
-  "version": "3.7.0",
-  "description": "A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices",
+  "name": "map-viewer",
+  "version": "0.0.1",
+  "description": "Simple project to work with maps",
   "repository": {
     "type": "git",
-    "url": "git://github.com/react-boilerplate/react-boilerplate.git"
+    "url": "git://github.com/LanskovNV/MapViewer.git"
   },
   "engines": {
     "npm": ">=5",
     "node": ">=8.10.0"
   },
-  "author": "Max Stoiber",
-  "license": "MIT",
+  "author": "LanskovNV, sevarsh, Tumanov-Viatcheslav",
   "scripts": {
     "analyze:clean": "rimraf stats.json",
     "preanalyze": "npm run analyze:clean",
@@ -132,9 +131,9 @@
     "file-loader": "2.0.0",
     "html-loader": "0.5.5",
     "html-webpack-plugin": "3.2.0",
-    "image-webpack-loader": "^4.6.0",
+    "image-webpack-loader": "4.4.0",
     "imports-loader": "0.8.0",
-    "jest-cli": "^24.1.0",
+    "jest-cli": "23.6.0",
     "jest-styled-components": "6.2.2",
     "lint-staged": "7.3.0",
     "ngrok": "3.1.0",
@@ -149,7 +148,7 @@
     "rimraf": "2.6.2",
     "shelljs": "0.8.2",
     "style-loader": "0.23.1",
-    "stylelint": "^9.10.1",
+    "stylelint": "9.6.0",
     "stylelint-config-recommended": "2.1.0",
     "stylelint-config-styled-components": "0.1.1",
     "stylelint-processor-styled-components": "1.5.0",

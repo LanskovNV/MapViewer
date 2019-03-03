@@ -14,6 +14,6 @@ export default defineMessages({
   },
   features: {
     id: `${scope}.features`,
-    defaultMessage: 'Features',
+    defaultMessage: 'Map',
   },
 });

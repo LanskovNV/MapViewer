@@ -1,5 +1,5 @@
 /*
- * MapMapPage
+ * MapPage
  *
  * List all the features
  */
@@ -25,10 +25,7 @@ export default class MapPage extends React.Component {
       <div>
         <Helmet>
           <title>Map Page</title>
-          <meta
-            name="description"
-            content="Feature page of React.js Boilerplate application"
-          />
+          <meta name="description" content="Map page of React.js application" />
         </Helmet>
         <H1>
           <FormattedMessage {...messages.header} />

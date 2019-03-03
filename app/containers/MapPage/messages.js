@@ -10,7 +10,7 @@ export const scope = 'boilerplate.containers.MapPage';
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'Features',
+    defaultMessage: 'Map',
   },
   scaffoldingHeader: {
     id: `${scope}.scaffolding.header`,

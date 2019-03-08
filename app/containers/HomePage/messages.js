@@ -10,6 +10,6 @@ export const scope = 'boilerplate.containers.HomePage';
 export default defineMessages({
   readyMaps: {
     id: `${scope}.ready.maps`,
-    defaultMessage: 'Ready Maps',
+    defaultMessage: 'Show Ready Maps',
   },
 });

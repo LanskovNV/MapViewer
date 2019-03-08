@@ -19,15 +19,14 @@ import {
   makeSelectLoading,
   makeSelectError,
 } from 'containers/App/selectors';
-import H2 from 'components/H2';
-import CenteredSection from './CenteredSection';
 import Section from './Section';
 import messages from './messages';
 import { loadRepos } from '../App/actions';
-import { changeUsername } from './actions';
 import { makeSelectUsername } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import ReposList from '../../components/ReposList';
+import Button from '../../components/Button';
 
 /* eslint-disable react/prefer-stateless-function */
 export class HomePage extends React.PureComponent {
@@ -36,17 +35,17 @@ export class HomePage extends React.PureComponent {
    */
   componentDidMount() {
     if (this.props.username && this.props.username.trim().length > 0) {
-      this.props.onSubmitForm();
+      this.props.onClickButton();
     }
   }
 
   render() {
-    /* const { loading, error, repos } = this.props;
+    const { loading, error, repos } = this.props;
     const reposListProps = {
       loading,
       error,
       repos,
-    }; */
+    };
 
     return (
       <article>
@@ -55,12 +54,12 @@ export class HomePage extends React.PureComponent {
           <meta name="description" content="A React.js application homepage" />
         </Helmet>
         <div>
-          <CenteredSection>
-            <H2>
+          <Section>
+            <Button onClick={this.props.onClickButton}>
               <FormattedMessage {...messages.readyMaps} />
-            </H2>
-          </CenteredSection>
-          <Section>{/* TODO Display list of ready maps */}</Section>
+            </Button>
+            <ReposList {...reposListProps} />
+          </Section>
         </div>
       </article>
     );
@@ -71,15 +70,12 @@ HomePage.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   repos: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
-  onSubmitForm: PropTypes.func,
-  username: PropTypes.string,
-  onChangeUsername: PropTypes.func,
+  onClickButton: PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onChangeUsername: evt => dispatch(changeUsername(evt.target.value)),
-    onSubmitForm: evt => {
+    onClickButton: evt => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(loadRepos());
     },

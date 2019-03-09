@@ -1,0 +1,9 @@
+{
+  "boilerplate.containers.HomePage.ready.maps": "Показать готовые карты",
+  "boilerplate.components.Footer.author.message": "Сделано с любовью командой {author}.",
+  "boilerplate.components.Header.map": "Карта",
+  "boilerplate.components.Header.home": "Домашняя страница",
+  "boilerplate.containers.LocaleToggle.ru": "Русский(ru)",
+  "boilerplate.containers.LocaleToggle.en": "Английский(eng)",
+  "boilerplate.containers.NotFoundPage.header": "Страница не найдена"
+}

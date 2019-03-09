@@ -15,7 +15,12 @@
  *    }
  */
 
-import { LOAD_REPOS, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR } from './constants';
+import {
+  READ_MAP,
+  LOAD_REPOS,
+  LOAD_REPOS_SUCCESS,
+  LOAD_REPOS_ERROR,
+} from './constants';
 
 /**
  * Load the repositories, this action starts the request saga
@@ -55,5 +60,19 @@ export function repoLoadingError(error) {
   return {
     type: LOAD_REPOS_ERROR,
     error,
+  };
+}
+
+/**
+ * Changes the input field of the form
+ *
+ * @param  {name} mapname The new text of the input field
+ *
+ * @return {object}    An action object with a type of READ_MAP
+ */
+export function readMap(mapname) {
+  return {
+    type: READ_MAP,
+    mapname,
   };
 }

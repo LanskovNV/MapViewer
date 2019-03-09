@@ -1,6 +1,6 @@
-# MapViewer
+  # MapViewer
 ![](http://www.visit-petersburg.ru//media/uploads/%D0%BC%D0%B0%D1%80%D1%88%D1%80%D1%83%D1%82%D1%8B.jpeg)
-## Puprose
+## Purpose
 Java Script project to work with maps
 ## Limitations
  For now provided only react boilerplate in dev branch
@@ -9,7 +9,7 @@ Java Script project to work with maps
  - git
  - WebStorm *// optional*  
 ## Command interface
- To run the project in WebStorm on localhost:
+ To run the projectnpx in WebStorm on localhost:
  1) Clone project with git
  2) If you want to work with develop version, check out develop
     branch and update project

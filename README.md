@@ -1,8 +1,8 @@
   # MapViewer
 ![](http://www.visit-petersburg.ru//media/uploads/%D0%BC%D0%B0%D1%80%D1%88%D1%80%D1%83%D1%82%D1%8B.jpeg)
-## Puprose
+## Purpose
 Java Script project to work with maps
-## Limitationsя
+## Limitations
  For now provided only react boilerplate in dev branch
 ## Prerequisites
  - NodeJS and npm

@@ -1,7 +1,6 @@
 {
   "boilerplate.containers.HomePage.ready.maps": "Show ready maps",
   "boilerplate.components.Footer.author.message": "Made with love by {author}.",
-  "boilerplate.components.Footer.license.message": "This project is licensed under the MIT license.",
   "boilerplate.components.Header.map": "Map",
   "boilerplate.components.Header.home": "Home",
   "boilerplate.containers.HomePage.tryme.atPrefix": "@",
@@ -10,5 +9,5 @@
 
   "boilerplate.containers.LocaleToggle.ru": "ru",
   "boilerplate.containers.LocaleToggle.en": "en",
-  "boilerplate.containers.NotFoundPage.header": "Page not found."
+  "boilerplate.containers.NotFoundPage.header": "Page not found"
 }

@@ -13,7 +13,7 @@ export default defineMessages({
     defaultMessage: 'en',
   },
   de: {
-    id: `${scope}.de`,
-    defaultMessage: 'de',
+    id: `${scope}.ru`,
+    defaultMessage: 'ru',
   },
 });

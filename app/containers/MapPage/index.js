@@ -6,11 +6,12 @@ import styled from 'styled-components';
 import { Button, ButtonGroup, InputGroup } from 'react-bootstrap';
 
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 import H2 from '../../components/H2';
 import H3 from '../../components/H3';
 import Img from '../../components/Img';
 import blank from '../../images/MapViewBlank.png';
-
+import messages from './messages';
 import buttonStyles from '../../components/Button/buttonStyles';
 
 const Wrapper = styled.div`
@@ -37,25 +38,29 @@ export default class MapPage extends React.Component {
         <Wrapper>
           <Img src={blank} alt="MapView" />
           <div>
-            <H2> Map data: </H2>
-            <H3> Output: </H3>
+            <H2>
+              <FormattedMessage {...messages.Info} />
+            </H2>
+            <H3>
+              <FormattedMessage {...messages.Flags} />
+            </H3>
             <InputGroup className="mb-3">
               <InputGroup.Prepend>
                 <InputGroup.Checkbox style={{ marginLeft: 10 }} />
                 <InputGroup.Text style={{ marginLeft: 10 }}>
-                  streets
+                  <FormattedMessage {...messages.Streets} />
                 </InputGroup.Text>
               </InputGroup.Prepend>
               <InputGroup.Prepend>
                 <InputGroup.Checkbox style={{ marginLeft: 10 }} />
                 <InputGroup.Text style={{ marginLeft: 10 }}>
-                  houses
+                  <FormattedMessage {...messages.Houses} />
                 </InputGroup.Text>
               </InputGroup.Prepend>
               <InputGroup.Prepend>
                 <InputGroup.Checkbox style={{ marginLeft: 10 }} />
                 <InputGroup.Text style={{ marginLeft: 10 }}>
-                  water objects
+                  <FormattedMessage {...messages.Water} />
                 </InputGroup.Text>
               </InputGroup.Prepend>
             </InputGroup>
@@ -70,10 +75,18 @@ export default class MapPage extends React.Component {
           >
             <StyledButton>+</StyledButton>
             <StyledButton>-</StyledButton>
-            <StyledButton>up</StyledButton>
-            <StyledButton>down</StyledButton>
-            <StyledButton>left</StyledButton>
-            <StyledButton>right</StyledButton>
+            <StyledButton>
+              <FormattedMessage {...messages.Up} />
+            </StyledButton>
+            <StyledButton>
+              <FormattedMessage {...messages.Down} />
+            </StyledButton>
+            <StyledButton>
+              <FormattedMessage {...messages.Left} />
+            </StyledButton>
+            <StyledButton>
+              <FormattedMessage {...messages.Right} />
+            </StyledButton>
           </ButtonGroup>
         </div>
       </div>

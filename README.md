@@ -1,5 +1,5 @@
 # MapViewer
-![](http://www.visit-petersburg.ru//media/uploads/%D0%BC%D0%B0%D1%80%D1%88%D1%80%D1%83%D1%82%D1%8B.jpeg)
+![](https://raw.githubusercontent.com/LanskovNV/MapViewer/master/app/images/mapbanner.png)
 ## Purpose
 Java Script project to work with maps
 ## Limitations

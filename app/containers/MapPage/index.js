@@ -3,9 +3,10 @@
  */
 import React from 'react';
 import styled from 'styled-components';
-import { Button, ButtonGroup } from 'react-bootstrap';
+import { Button, ButtonGroup, InputGroup } from 'react-bootstrap';
 
 import PropTypes from 'prop-types';
+import H2 from '../../components/H2';
 import H3 from '../../components/H3';
 import Img from '../../components/Img';
 import blank from '../../images/MapViewBlank.png';
@@ -35,7 +36,30 @@ export default class MapPage extends React.Component {
       <div>
         <Wrapper>
           <Img src={blank} alt="MapView" />
-          <H3> Map data: </H3>
+          <div>
+            <H2> Map data: </H2>
+            <H3> Output: </H3>
+            <InputGroup className="mb-3">
+              <InputGroup.Prepend>
+                <InputGroup.Checkbox style={{ marginLeft: 10 }} />
+                <InputGroup.Text style={{ marginLeft: 10 }}>
+                  streets
+                </InputGroup.Text>
+              </InputGroup.Prepend>
+              <InputGroup.Prepend>
+                <InputGroup.Checkbox style={{ marginLeft: 10 }} />
+                <InputGroup.Text style={{ marginLeft: 10 }}>
+                  houses
+                </InputGroup.Text>
+              </InputGroup.Prepend>
+              <InputGroup.Prepend>
+                <InputGroup.Checkbox style={{ marginLeft: 10 }} />
+                <InputGroup.Text style={{ marginLeft: 10 }}>
+                  water objects
+                </InputGroup.Text>
+              </InputGroup.Prepend>
+            </InputGroup>
+          </div>
         </Wrapper>
         <div align="center">
           <ButtonGroup

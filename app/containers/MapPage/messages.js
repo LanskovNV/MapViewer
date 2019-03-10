@@ -5,7 +5,7 @@
  */
 import { defineMessages } from 'react-intl';
 
-export const scope = 'boilerplate.containers.MapPage';
+export const scope = 'mapviewer.containers.MapPage';
 
 export default defineMessages({
   header: {

@@ -1,9 +1,9 @@
 {
-  "boilerplate.containers.HomePage.ready.maps": "Показать готовые карты",
-  "boilerplate.components.Footer.author.message": "Сделано с любовью командой {author}.",
-  "boilerplate.components.Header.map": "Карта",
-  "boilerplate.components.Header.home": "Домашняя страница",
-  "boilerplate.containers.LocaleToggle.ru": "Русский(ru)",
-  "boilerplate.containers.LocaleToggle.en": "Английский(eng)",
-  "boilerplate.containers.NotFoundPage.header": "Страница не найдена"
+  "mapviewer.containers.HomePage.ready.maps": "Показать готовые карты",
+  "mapviewer.components.Footer.author.message": "Сделано с любовью командой {author}.",
+  "mapviewer.components.Header.map": "Карта",
+  "mapviewer.components.Header.home": "Домашняя страница",
+  "mapviewer.containers.LocaleToggle.ru": "Русский(ru)",
+  "mapviewer.containers.LocaleToggle.en": "Английский(eng)",
+  "mapviewer.containers.NotFoundPage.header": "Страница не найдена"
 }

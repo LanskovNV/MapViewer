@@ -37,7 +37,7 @@ function cleanRepo(callback) {
       const isClonedRepo =
         typeof data === 'string' &&
         (data.match(/url\s*=/g) || []).length === 1 &&
-        /react-boilerplate\/react-boilerplate\.git/.test(data);
+        /react-mapviewer\/react-mapviewer\.git/.test(data);
       if (isClonedRepo) {
         process.stdout.write('\nDo you want to clear old repository? [Y/n] ');
         process.stdin.resume();

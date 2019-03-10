@@ -1,9 +1,9 @@
 {
-  "boilerplate.containers.HomePage.ready.maps": "Show ready maps",
-  "boilerplate.components.Footer.author.message": "Made with love by {author}.",
-  "boilerplate.components.Header.map": "Map",
-  "boilerplate.components.Header.home": "Home",
-  "boilerplate.containers.LocaleToggle.ru": "ru",
-  "boilerplate.containers.LocaleToggle.en": "en",
-  "boilerplate.containers.NotFoundPage.header": "Page not found"
+  "mapviewer.containers.HomePage.ready.maps": "Show ready maps",
+  "mapviewer.components.Footer.author.message": "Made with love by {author}.",
+  "mapviewer.components.Header.map": "Map",
+  "mapviewer.components.Header.home": "Home",
+  "mapviewer.containers.LocaleToggle.ru": "ru",
+  "mapviewer.containers.LocaleToggle.en": "en",
+  "mapviewer.containers.NotFoundPage.header": "Page not found"
 }

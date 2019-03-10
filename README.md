@@ -3,7 +3,7 @@
 ## Purpose
 Java Script project to work with maps
 ## Limitations
- For now provided only react boilerplate in dev branch
+ For now provided only react mapviewer in dev branch
 ## Prerequisites
  - NodeJS and npm
  - git

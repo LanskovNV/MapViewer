@@ -14,7 +14,7 @@ The application runs on most desktop browsers (ex. Google Chrome, Microsoft Edge
 
 *Now let's move to the map page and research what you can do with the map.*
 
-3. Using buttons ***'left'***, ***'right'***, ***'up'*** and ***'down'*** you can navigate the map.
+3. Using buttons ***'left'*** , ***'right'*** , ***'up'*** and ***'down'*** you can navigate the map.
 4. By clicking on ***'+'*** and ***'-'*** buttons down below or by rotating the mouse wheel, you can ***zoom in / zoom out*** your map.
 5. You can choose all the necessary types of data you want to see now using ***checkboxes***.
 
@@ -28,7 +28,9 @@ The application runs on most desktop browsers (ex. Google Chrome, Microsoft Edge
 To build the application you need
  - NodeJS (at least v.6.10.3) and npm
  If you're not sure, that you have the right version of Node.js you can check it by using
- > node —version 
+ ```
+ node —version 
+ ```
  command.
  - git
  - WebStorm or Visual Studio Code

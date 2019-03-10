@@ -2,8 +2,8 @@
  * MapPage
  */
 import React from 'react';
-
-// import messages from './messages';
+import Img from '../../components/Img';
+import blank from '../../images/MapViewBlank.png';
 
 export default class MapPage extends React.Component {
   shouldComponentUpdate() {
@@ -11,6 +11,6 @@ export default class MapPage extends React.Component {
   }
 
   render() {
-    return <div> </div>;
+    return <Img src={blank} alt="MapView" />;
   }
 }

@@ -2,30 +2,16 @@
  * MapPage
  */
 import React from 'react';
-import styled from 'styled-components';
-import { Button, ButtonGroup, InputGroup } from 'react-bootstrap';
-
-import PropTypes from 'prop-types';
+import { ButtonGroup, InputGroup } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
+
+import { Wrapper } from './wraper';
+import { StyledButton } from './button';
 import H2 from '../../components/H2';
 import H3 from '../../components/H3';
 import Img from '../../components/Img';
 import blank from '../../images/MapViewBlank.png';
 import messages from './messages';
-import buttonStyles from '../../components/Button/buttonStyles';
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-const myButton = ({ className, children }) => (
-  <Button className={className}> {children} </Button>
-);
-
-const StyledButton = styled(myButton)`
-  ${buttonStyles};
-`;
 
 export default class MapPage extends React.Component {
   shouldComponentUpdate() {
@@ -93,8 +79,3 @@ export default class MapPage extends React.Component {
     );
   }
 }
-
-myButton.propTypes = {
-  className: PropTypes.any,
-  children: PropTypes.node.isRequired,
-};

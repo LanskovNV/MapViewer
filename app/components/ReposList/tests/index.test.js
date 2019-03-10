@@ -30,10 +30,10 @@ describe('<ReposList />', () => {
         owner: {
           login: 'mxstbr',
         },
-        html_url: 'https://github.com/react-boilerplate/react-boilerplate',
-        name: 'react-boilerplate',
+        html_url: 'https://github.com/react-mapviewer/react-mapviewer',
+        name: 'react-mapviewer',
         open_issues_count: 20,
-        full_name: 'react-boilerplate/react-boilerplate',
+        full_name: 'react-mapviewer/react-mapviewer',
       },
     ];
     const renderedComponent = shallow(

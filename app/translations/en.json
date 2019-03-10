@@ -1,9 +1,18 @@
 {
-  "boilerplate.containers.HomePage.ready.maps": "Show ready maps",
-  "boilerplate.components.Footer.author.message": "Made with love by {author}.",
-  "boilerplate.components.Header.map": "Map",
-  "boilerplate.components.Header.home": "Home",
-  "boilerplate.containers.LocaleToggle.ru": "ru",
-  "boilerplate.containers.LocaleToggle.en": "en",
-  "boilerplate.containers.NotFoundPage.header": "Page not found"
+  "mapviewer.containers.MapPage.info": "Map Data:",
+  "mapviewer.containers.MapPage.flags": "Output:",
+  "mapviewer.containers.MapPage.checkbox.streets": "streets",
+  "mapviewer.containers.MapPage.checkbox.houses": "houses",
+  "mapviewer.containers.MapPage.checkbox.water": "water objects",
+  "mapviewer.containers.MapPage.up": "up",
+  "mapviewer.containers.MapPage.down": "down",
+  "mapviewer.containers.MapPage.left": "left",
+  "mapviewer.containers.MapPage.right": "right",
+  "mapviewer.containers.HomePage.ready.maps": "Show Ready Maps",
+  "mapviewer.components.Footer.author.message": "Made with love by {author}.",
+  "mapviewer.components.Header.map": "Map",
+  "mapviewer.components.Header.home": "Home",
+  "mapviewer.containers.LocaleToggle.ru": "ru",
+  "mapviewer.containers.LocaleToggle.en": "en",
+  "mapviewer.containers.NotFoundPage.header": "Page not found"
 }

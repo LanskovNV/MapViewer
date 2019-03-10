@@ -1,21 +1,19 @@
 /*
  * MapPage
- *
- * List all the features
  */
 import React from 'react';
-import { Helmet } from 'react-helmet';
+import { ButtonGroup, InputGroup } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
-import H1 from 'components/H1';
+import { Wrapper } from './wraper';
+import { StyledButton } from './button';
+import H2 from '../../components/H2';
+import H3 from '../../components/H3';
+import Img from '../../components/Img';
+import blank from '../../images/MapViewBlank.png';
 import messages from './messages';
-import List from './List';
-import ListItem from './ListItem';
-import ListItemTitle from './ListItemTitle';
 
 export default class MapPage extends React.Component {
-  // Since state and props are static,
-  // there's no need to re-render this component
   shouldComponentUpdate() {
     return false;
   }
@@ -23,59 +21,60 @@ export default class MapPage extends React.Component {
   render() {
     return (
       <div>
-        <Helmet>
-          <title>Map Page</title>
-          <meta name="description" content="Map page of React.js application" />
-        </Helmet>
-        <H1>
-          <FormattedMessage {...messages.header} />
-        </H1>
-        <List>
-          <ListItem>
-            <ListItemTitle>
-              <FormattedMessage {...messages.scaffoldingHeader} />
-            </ListItemTitle>
-            <p>
-              <FormattedMessage {...messages.scaffoldingMessage} />
-            </p>
-          </ListItem>
-
-          <ListItem>
-            <ListItemTitle>
-              <FormattedMessage {...messages.feedbackHeader} />
-            </ListItemTitle>
-            <p>
-              <FormattedMessage {...messages.feedbackMessage} />
-            </p>
-          </ListItem>
-
-          <ListItem>
-            <ListItemTitle>
-              <FormattedMessage {...messages.routingHeader} />
-            </ListItemTitle>
-            <p>
-              <FormattedMessage {...messages.routingMessage} />
-            </p>
-          </ListItem>
-
-          <ListItem>
-            <ListItemTitle>
-              <FormattedMessage {...messages.networkHeader} />
-            </ListItemTitle>
-            <p>
-              <FormattedMessage {...messages.networkMessage} />
-            </p>
-          </ListItem>
-
-          <ListItem>
-            <ListItemTitle>
-              <FormattedMessage {...messages.intlHeader} />
-            </ListItemTitle>
-            <p>
-              <FormattedMessage {...messages.intlMessage} />
-            </p>
-          </ListItem>
-        </List>
+        <Wrapper>
+          <Img src={blank} alt="MapView" />
+          <div>
+            <H2>
+              <FormattedMessage {...messages.Info} />
+            </H2>
+            <H3>
+              <FormattedMessage {...messages.Flags} />
+            </H3>
+            <InputGroup className="mb-3">
+              <InputGroup.Prepend>
+                <InputGroup.Checkbox style={{ marginLeft: 10 }} />
+                <InputGroup.Text style={{ marginLeft: 10 }}>
+                  <FormattedMessage {...messages.Streets} />
+                </InputGroup.Text>
+              </InputGroup.Prepend>
+              <InputGroup.Prepend>
+                <InputGroup.Checkbox style={{ marginLeft: 10 }} />
+                <InputGroup.Text style={{ marginLeft: 10 }}>
+                  <FormattedMessage {...messages.Houses} />
+                </InputGroup.Text>
+              </InputGroup.Prepend>
+              <InputGroup.Prepend>
+                <InputGroup.Checkbox style={{ marginLeft: 10 }} />
+                <InputGroup.Text style={{ marginLeft: 10 }}>
+                  <FormattedMessage {...messages.Water} />
+                </InputGroup.Text>
+              </InputGroup.Prepend>
+            </InputGroup>
+          </div>
+        </Wrapper>
+        <div align="center">
+          <ButtonGroup
+            style={{
+              marginTop: 30,
+              marginBottom: 30,
+            }}
+          >
+            <StyledButton>+</StyledButton>
+            <StyledButton>-</StyledButton>
+            <StyledButton>
+              <FormattedMessage {...messages.Up} />
+            </StyledButton>
+            <StyledButton>
+              <FormattedMessage {...messages.Down} />
+            </StyledButton>
+            <StyledButton>
+              <FormattedMessage {...messages.Left} />
+            </StyledButton>
+            <StyledButton>
+              <FormattedMessage {...messages.Right} />
+            </StyledButton>
+          </ButtonGroup>
+        </div>
       </div>
     );
   }

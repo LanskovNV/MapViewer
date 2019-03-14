@@ -20,22 +20,22 @@ export class RepoListItem extends React.PureComponent {
   render() {
     const { item } = this.props;
 
-    // Put together the content of the repository
-    // TODO Think of the way to load file and navigate to /map at the same time
     const content = (
       <Wrapper>
         <Form onClick={this.props.onClickForm} />
-        <RepoLink href="http://localhost:3000/map">{item}</RepoLink>
+        <RepoLink href="http://localhost:3000/map">
+          {item.map_file_name}
+        </RepoLink>
       </Wrapper>
     );
 
     // Render the content into a list item
-    return <ListItem key={item} item={content} />;
+    return <ListItem key={item.map_ID} item={content} />;
   }
 }
 
 RepoListItem.propTypes = {
-  item: PropTypes.string,
+  item: PropTypes.object,
   onClickForm: PropTypes.func,
 };
 

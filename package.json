@@ -1,5 +1,5 @@
 {
-  "name": "map-viewer",
+  "name": "MapViewer",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

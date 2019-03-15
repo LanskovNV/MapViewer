@@ -21,4 +21,11 @@ Java Script project to work with maps
  ```
  npm start
  ``` 
- 
+ ## Issues
+ If you have problems with jest, do the following:
+ ```
+ sudo npm cache clean -f
+ sudo npm install -g n
+ sudo n stable
+```
+It solves temporary problem with node 11.11.0

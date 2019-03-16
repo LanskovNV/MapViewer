@@ -1,5 +1,5 @@
 # MapViewer
-![](http://www.visit-petersburg.ru//media/uploads/%D0%BC%D0%B0%D1%80%D1%88%D1%80%D1%83%D1%82%D1%8B.jpeg)
+![](https://raw.githubusercontent.com/LanskovNV/MapViewer/develop/public/mapbanner.png)
 ## Purpose
 Java Script project to work with maps
 ## Limitations
@@ -22,10 +22,11 @@ Java Script project to work with maps
  npm start
  ``` 
  ## Issues
- If you have problems with jest, do the following:
+ 1) If you have problems with jest, do the following:
  ```
  sudo npm cache clean -f
  sudo npm install -g n
  sudo n stable
 ```
 It solves temporary problem with node 11.11.0
+2) If you have some problems with eslint - you can remove strange rules from eslint config.

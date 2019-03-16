@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { injectIntl } from 'react-intl';
 
 import MapPage from './containers/MapPage';
 import Header from './components/Header';
@@ -7,7 +8,7 @@ import Footer from './components/Footer';
 
 import GlobalStyle from './global-styles';
 
-const AppWrapper = styled.div`
+const Wrapper = styled.div`
   max-width: calc(1000px + 16px * 2);
   margin: 0 auto;
   display: flex;
@@ -19,14 +20,14 @@ const AppWrapper = styled.div`
 class App extends Component {
   render() {
     return (
-      <AppWrapper>
+      <Wrapper>
         <Header />
         <MapPage />
         <Footer />
         <GlobalStyle />
-      </AppWrapper>
+      </Wrapper>
     );
   }
 }
 
-export default App;
+export default injectIntl(App);

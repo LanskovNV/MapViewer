@@ -3,14 +3,19 @@
  */
 import React from 'react';
 import { ButtonGroup, InputGroup } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
+import styled from 'styled-components';
 
-import { Wrapper } from './wraper';
-import { StyledButton } from './button';
-import blank from '../../../public/MapViewBlank.png';
-import messages from './messages';
+import { StyledButton } from '../components/Button/button';
+import blank from './MapViewBlank.png';
+import messages from '../messages';
 
-export default class MapPage extends React.Component {
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+class MapPage extends React.Component {
   shouldComponentUpdate() {
     return false;
   }
@@ -76,3 +81,5 @@ export default class MapPage extends React.Component {
     );
   }
 }
+
+export default injectIntl(MapPage);

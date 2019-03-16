@@ -2,7 +2,7 @@ import { Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
-import buttonStyles from '../../components/Button/buttonStyles';
+import buttonStyles from './buttonStyles';
 
 const myButton = ({ className, children }) => (
   <Button className={className}> {children} </Button>

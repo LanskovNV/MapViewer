@@ -1,0 +1,15 @@
+{
+  "author.message": "Made with love by {author}.",
+  "checkbox.houses": "houses",
+  "checkbox.streets": "streets",
+  "checkbox.water": "water objects",
+  "down": "down",
+  "flags": "Output:",
+  "home": "Home",
+  "info": "Map data:",
+  "left": "left",
+  "license.message": "This project is licensed under the MIT license.",
+  "map": "Map",
+  "right": "right",
+  "up": "up"
+}

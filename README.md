@@ -1,7 +1,7 @@
 # MapViewer
 ![](https://raw.githubusercontent.com/LanskovNV/MapViewer/develop/public/mapbanner.png)
 ## Purpose
-Java Script project to work with maps
+Java Script project to work with maps. You can load openstreetmap you want and we'll parse streets, houses and water objects for you.
 ### Quick start guide
 
 1. For the very beginning you need to choose one of two languages the application supports: Russian or English. You can do it by using the local toggle situated down below.
@@ -34,8 +34,16 @@ Java Script project to work with maps
  ```
  4) when installation completed, run 
  ```
- npm start
+ npm run start
  ``` 
+ Also our app provide testing 
+ ```
+ npm run test
+ ```
+ and linting
+ ```
+ npm run lint
+ ```
  ## Issues
  1) If you have problems with jest, do the following:
  ```

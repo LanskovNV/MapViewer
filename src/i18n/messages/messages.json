@@ -1,0 +1,67 @@
+[
+  {
+    "id": "home",
+    "defaultMessage": "Home",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "map",
+    "defaultMessage": "Map",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "license.message",
+    "defaultMessage": "This project is licensed under the MIT license.",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "author.message",
+    "defaultMessage": "Made with love by {author}.",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "info",
+    "defaultMessage": "Map data:",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "flags",
+    "defaultMessage": "Output:",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "checkbox.streets",
+    "defaultMessage": "streets",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "checkbox.houses",
+    "defaultMessage": "houses",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "checkbox.water",
+    "defaultMessage": "water objects",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "up",
+    "defaultMessage": "up",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "down",
+    "defaultMessage": "down",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "left",
+    "defaultMessage": "left",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "right",
+    "defaultMessage": "right",
+    "filepath": "src/messages.js"
+  }
+]

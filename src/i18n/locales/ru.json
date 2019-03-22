@@ -1,0 +1,15 @@
+{
+  "author.message": "Сделано с любовью командой {author}.",
+  "checkbox.houses": "дома",
+  "checkbox.streets": "улицы",
+  "checkbox.water": "водные объекты",
+  "down": "вниз",
+  "flags": "Вывод:",
+  "home": "Домой",
+  "info": "Данные карты:",
+  "left": "влево",
+  "license.message": "Лицензия MIT.",
+  "map": "Карта",
+  "right": "вправо",
+  "up": "вверх"
+}

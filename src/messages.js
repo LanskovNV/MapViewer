@@ -6,13 +6,29 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  home: {
-    id: `home`,
-    defaultMessage: 'Home'
+  about: {
+    id: `about`,
+    defaultMessage: 'About'
   },
-  map: {
-    id: `map`,
-    defaultMessage: 'Map'
+  chooseMap: {
+    id: `choose.map`,
+    defaultMessage: 'Choose Map'
+  },
+  map1: {
+    id: `map1`,
+    defaultMessage: 'Map1'
+  },
+  map2: {
+    id: `map2`,
+    defaultMessage: 'Map2'
+  },
+  map3: {
+    id: `map3`,
+    defaultMessage: 'Map3'
+  },
+  uploadMap: {
+    id: `upload.map`,
+    defaultMessage: 'Upload Map'
   },
   licenseMessage: {
     id: `license.message`,

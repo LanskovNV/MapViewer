@@ -74,7 +74,6 @@ module.exports = {
         'eqeqeq': 'off',
         'func-call-spacing': 'error',
         'func-name-matching': 'error',
-        'func-names': 'error',
         'function-paren-newline': 'off',
         'generator-star-spacing': 'error',
         'global-require': 'error',
@@ -96,10 +95,6 @@ module.exports = {
                 'before': true
             }
         ],
-        'linebreak-style': [
-            'error',
-            'unix'
-        ],
         'lines-around-comment': 'error',
         'lines-around-directive': 'error',
         'lines-between-class-members': 'error',
@@ -108,13 +103,11 @@ module.exports = {
         'max-len': 'off',
         'max-lines': 'error',
         'max-nested-callbacks': 'error',
-        'max-params': 'error',
         'max-statements-per-line': 'error',
         'new-cap': 'error',
         'new-parens': 'error',
         'newline-after-var': 'off',
         'newline-per-chained-call': 'error',
-        'no-alert': 'error',
         'no-array-constructor': 'error',
         'no-async-promise-executor': 'error',
         'no-await-in-loop': 'error',
@@ -199,7 +192,6 @@ module.exports = {
         'no-useless-return': 'error',
         'no-var': 'error',
         'no-void': 'error',
-        'no-warning-comments': 'error',
         'no-whitespace-before-property': 'error',
         'no-with': 'error',
         'nonblock-statement-body-position': 'error',
@@ -214,7 +206,6 @@ module.exports = {
         'operator-linebreak': 'error',
         'padded-blocks': 'off',
         'padding-line-between-statements': 'error',
-        'prefer-arrow-callback': 'error',
         'prefer-const': 'error',
         'prefer-destructuring': 'error',
         'prefer-numeric-literals': 'error',

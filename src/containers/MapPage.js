@@ -9,6 +9,9 @@ import styled from 'styled-components';
 import { StyledButton } from '../components/Button/button';
 import blank from './MapViewBlank.png';
 import messages from '../messages';
+import Parser from '../components/Parser';
+import InputLoad from '../components/Input/InputLoad';
+import StyledLabel from '../components/Label/StyledLabel';
 
 const Wrapper = styled.div`
   display: flex;
@@ -76,6 +79,15 @@ class MapPage extends React.Component {
               <FormattedMessage {...messages.Right} />
             </StyledButton>
           </ButtonGroup>
+          <StyledLabel htmlFor="loadedMap" className="btn">
+            Load
+          </StyledLabel>
+          <InputLoad
+            id={'loadedMap'}
+            type={'file'}
+            name={'Load'}
+            onChange={Parser.PickUsefulFromGeoJSONToTXT}
+          />
         </div>
       </div>
     );

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import messages from '../messages';
 
 class About extends React.Component {
@@ -57,4 +57,4 @@ class About extends React.Component {
   }
 }
 
-export default About;
+export default injectIntl(About);

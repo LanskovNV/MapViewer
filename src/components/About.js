@@ -39,6 +39,12 @@ class About extends React.Component {
           </Modal.Header>
           <Modal.Body>
             <FormattedMessage {...messages.aboutText} />
+            <h6>
+              <FormattedMessage {...messages.copyright} />
+            </h6>
+            <h5>
+              <FormattedMessage {...messages.feedback} />
+            </h5>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="outline-info" onClick={this.handleClose}>

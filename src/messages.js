@@ -12,7 +12,7 @@ export default defineMessages({
   },
   chooseMap: {
     id: `choose.map`,
-    defaultMessage: 'Choose Map'
+    defaultMessage: 'Choose Map  '
   },
   map1: {
     id: `map1`,

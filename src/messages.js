@@ -10,6 +10,14 @@ export default defineMessages({
     id: `about`,
     defaultMessage: 'About'
   },
+  aboutText: {
+    id: `about.text`,
+    defaultMessage: ''
+  },
+  close: {
+    id: `close`,
+    defaultMessage: 'Close'
+  },
   chooseMap: {
     id: `choose.map`,
     defaultMessage: 'Choose Map  '

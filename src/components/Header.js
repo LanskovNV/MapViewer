@@ -1,21 +1,23 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import { Dropdown, Badge, Card } from 'react-bootstrap';
+import { Dropdown, Badge, Card, ButtonGroup } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import messages from '../messages';
+import About from './About';
 
 class Header extends React.Component {
   render() {
     return (
-      <div>
-        <Card className="text-center">
-          <Card.Body>
-            <Card.Title>
-              {' '}
-              <h1>
-                Map <Badge variant="info">Viewer</Badge>
-              </h1>{' '}
-            </Card.Title>
+      <Card className="text-center">
+        <Card.Body>
+          <Card.Title>
+            {' '}
+            <h1>
+              Map
+              <Badge variant="info">Viewer</Badge>
+            </h1>{' '}
+          </Card.Title>
+          <ButtonGroup>
             <Dropdown>
               <Dropdown.Toggle split variant="outline-info" id="dropdown-basic">
                 <FormattedMessage {...messages.chooseMap} />
@@ -41,9 +43,10 @@ class Header extends React.Component {
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
-          </Card.Body>
-        </Card>
-      </div>
+            <About />
+          </ButtonGroup>
+        </Card.Body>
+      </Card>
     );
   }
 }

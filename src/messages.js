@@ -6,6 +6,10 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
+  lang: {
+    id: `lang`,
+    defaultMessage: 'Language'
+  },
   about: {
     id: `about`,
     defaultMessage: 'About'

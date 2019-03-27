@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { Dropdown, Badge, Card, ButtonGroup } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import messages from '../messages';
 import About from './About';
 
@@ -51,4 +51,4 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+export default injectIntl(Header);

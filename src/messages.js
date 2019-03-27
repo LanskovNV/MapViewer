@@ -12,7 +12,18 @@ export default defineMessages({
   },
   aboutText: {
     id: `about.text`,
-    defaultMessage: ''
+    defaultMessage:
+      'MapViewer is the top-of-the-line app to work with maps uploaded in XML-format.' +
+      'The application runs on most desktop browsers (ex. Google Chrome, Microsoft Edge, Opera, e.t.c.) and mobile phones. '
+  },
+  feedback: {
+    id: `feedback`,
+    defaultMessage:
+      'If you have any questions or problems, please, report them at leins275@gmail.com'
+  },
+  copyright: {
+    id: `copyright`,
+    defaultMessage: '(c) Designed by MapViewer, Saint-Petersburg, Russia, 2019'
   },
   close: {
     id: `close`,

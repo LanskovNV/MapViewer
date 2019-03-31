@@ -29,6 +29,16 @@ function loading(file, callbackProgress, callbackEnd) {
   let start = 0;
   let end;
   let slice;
+  const extension = file.name.slice(
+    ((file.name.lastIndexOf('.') - 1) >>> 0) + 2
+  );
+  if (file === undefined) {
+    return;
+  }
+  if (extension !== 'json' && extension !== 'geojson') {
+    alert('Wrong extension. Should be .json or .geojson');
+    return;
+  }
   if (file.size === 0) {
     callbackEnd();
   }

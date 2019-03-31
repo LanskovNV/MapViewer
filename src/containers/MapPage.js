@@ -7,9 +7,6 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import styled from 'styled-components';
 import blank from './MapViewBlank.png';
 import messages from '../messages';
-import Parser from '../components/Parser';
-import InputLoad from '../components/Input/InputLoad';
-import StyledLabel from '../components/Label/StyledLabel';
 
 const Wrapper = styled.div`
   display: flex;
@@ -77,15 +74,6 @@ class MapPage extends React.Component {
               <FormattedMessage {...messages.Right} />
             </Button>
           </ButtonGroup>
-          <StyledLabel htmlFor="loadedMap" className="btn">
-            Load
-          </StyledLabel>
-          <InputLoad
-            id={'loadedMap'}
-            type={'file'}
-            name={'Load'}
-            onChange={Parser.PickUsefulFromGeoJSONToTXT}
-          />
         </div>
       </div>
     );

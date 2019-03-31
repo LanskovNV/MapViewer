@@ -4,6 +4,8 @@ import { Dropdown, Badge, Card, ButtonGroup } from 'react-bootstrap';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import messages from '../messages';
 import About from './About';
+import Parser from './Parser';
+import InputLoad from './Input/InputLoad';
 
 class Header extends React.Component {
   render() {
@@ -37,9 +39,15 @@ class Header extends React.Component {
                   <FormattedMessage {...messages.map3} />{' '}
                 </Dropdown.Item>
                 <Dropdown.Divider />
-                <Dropdown.Item hred="#/action-4">
+                <Dropdown.Item as="label" hred="loadedMap">
                   {' '}
-                  <FormattedMessage {...messages.uploadMap} />{' '}
+                  <FormattedMessage {...messages.uploadMap} />
+                  <InputLoad
+                    id={'loadedMap'}
+                    type={'file'}
+                    name={'Load'}
+                    onChange={Parser.PickUsefulFromGeoJSONToTXT}
+                  />{' '}
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>

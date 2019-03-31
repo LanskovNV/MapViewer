@@ -1,15 +1,24 @@
 {
+  "about": "About",
+  "about.text": "MapViewer is the top-of-the-line app to work with maps uploaded in XML-format. The application runs on most desktop browsers (ex. Google Chrome, Microsoft Edge, Opera, e.t.c.) and mobile phones. ",
   "author.message": "Made with love by {author}.",
   "checkbox.houses": "houses",
   "checkbox.streets": "streets",
   "checkbox.water": "water objects",
+  "choose.map": "Choose Map  ",
+  "close": "Close",
+  "copyright": "(c) Designed by MapViewer, Saint-Petersburg, Russia, 2019",
   "down": "down",
+  "feedback": "If you have any questions or problems, please, report them at leins275@gmail.com",
   "flags": "Output:",
-  "home": "Home",
   "info": "Map data:",
+  "lang": "Language",
   "left": "left",
   "license.message": "This project is licensed under the MIT license.",
-  "map": "Map",
+  "map1": "Map1",
+  "map2": "Map2",
+  "map3": "Map3",
   "right": "right",
-  "up": "up"
+  "up": "up",
+  "upload.map": "Upload Map"
 }

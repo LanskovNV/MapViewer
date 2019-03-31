@@ -2,11 +2,9 @@
  * MapPage
  */
 import React from 'react';
-import { ButtonGroup, InputGroup } from 'react-bootstrap';
+import { Button, ButtonGroup, InputGroup } from 'react-bootstrap';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import styled from 'styled-components';
-
-import { StyledButton } from '../components/Button/button';
 import blank from './MapViewBlank.png';
 import messages from '../messages';
 import Parser from '../components/Parser';
@@ -64,20 +62,20 @@ class MapPage extends React.Component {
               marginBottom: 30
             }}
           >
-            <StyledButton>+</StyledButton>
-            <StyledButton>-</StyledButton>
-            <StyledButton>
+            <Button variant="info">+</Button>
+            <Button variant="info">-</Button>
+            <Button variant="info">
               <FormattedMessage {...messages.Up} />
-            </StyledButton>
-            <StyledButton>
+            </Button>
+            <Button variant="info">
               <FormattedMessage {...messages.Down} />
-            </StyledButton>
-            <StyledButton>
+            </Button>
+            <Button variant="info">
               <FormattedMessage {...messages.Left} />
-            </StyledButton>
-            <StyledButton>
+            </Button>
+            <Button variant="info">
               <FormattedMessage {...messages.Right} />
-            </StyledButton>
+            </Button>
           </ButtonGroup>
           <StyledLabel htmlFor="loadedMap" className="btn">
             Load

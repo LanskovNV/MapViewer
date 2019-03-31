@@ -1,12 +1,57 @@
 [
   {
-    "id": "home",
-    "defaultMessage": "Home",
+    "id": "lang",
+    "defaultMessage": "Language",
     "filepath": "src/messages.js"
   },
   {
-    "id": "map",
-    "defaultMessage": "Map",
+    "id": "about",
+    "defaultMessage": "About",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "about.text",
+    "defaultMessage": "MapViewer is the top-of-the-line app to work with maps uploaded in XML-format. The application runs on most desktop browsers (ex. Google Chrome, Microsoft Edge, Opera, e.t.c.) and mobile phones. ",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "feedback",
+    "defaultMessage": "If you have any questions or problems, please, report them at leins275@gmail.com",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "copyright",
+    "defaultMessage": "(c) Designed by MapViewer, Saint-Petersburg, Russia, 2019",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "close",
+    "defaultMessage": "Close",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "choose.map",
+    "defaultMessage": "Choose Map  ",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "map1",
+    "defaultMessage": "Map1",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "map2",
+    "defaultMessage": "Map2",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "map3",
+    "defaultMessage": "Map3",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "upload.map",
+    "defaultMessage": "Upload Map",
     "filepath": "src/messages.js"
   },
   {

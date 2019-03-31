@@ -6,13 +6,52 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  home: {
-    id: `home`,
-    defaultMessage: 'Home'
+  lang: {
+    id: `lang`,
+    defaultMessage: 'Language'
   },
-  map: {
-    id: `map`,
-    defaultMessage: 'Map'
+  about: {
+    id: `about`,
+    defaultMessage: 'About'
+  },
+  aboutText: {
+    id: `about.text`,
+    defaultMessage:
+      'MapViewer is the top-of-the-line app to work with maps uploaded in XML-format.' +
+      'The application runs on most desktop browsers (ex. Google Chrome, Microsoft Edge, Opera, e.t.c.) and mobile phones. '
+  },
+  feedback: {
+    id: `feedback`,
+    defaultMessage:
+      'If you have any questions or problems, please, report them at leins275@gmail.com'
+  },
+  copyright: {
+    id: `copyright`,
+    defaultMessage: '(c) Designed by MapViewer, Saint-Petersburg, Russia, 2019'
+  },
+  close: {
+    id: `close`,
+    defaultMessage: 'Close'
+  },
+  chooseMap: {
+    id: `choose.map`,
+    defaultMessage: 'Choose Map  '
+  },
+  map1: {
+    id: `map1`,
+    defaultMessage: 'Map1'
+  },
+  map2: {
+    id: `map2`,
+    defaultMessage: 'Map2'
+  },
+  map3: {
+    id: `map3`,
+    defaultMessage: 'Map3'
+  },
+  uploadMap: {
+    id: `upload.map`,
+    defaultMessage: 'Upload Map'
   },
   licenseMessage: {
     id: `license.message`,

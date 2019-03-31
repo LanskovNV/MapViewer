@@ -17,8 +17,8 @@ function Footer() {
     <Wrapper>
       <section>
         <Dropdown>
-          <Dropdown.Toggle variant="success" id="dropdown-basic">
-            Lang
+          <Dropdown.Toggle variant="secondary" size="sm" id="dropdown-basic">
+            <FormattedMessage {...messages.lang} />
           </Dropdown.Toggle>
 
           <Dropdown.Menu>

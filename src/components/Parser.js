@@ -29,6 +29,9 @@ function loading(file, callbackProgress, callbackEnd) {
   let start = 0;
   let end;
   let slice;
+  if (file === undefined) {
+    return;
+  }
   if (file.size === 0) {
     callbackEnd();
   }

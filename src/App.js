@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { injectIntl } from 'react-intl';
 
-import MapPage from './containers/MapPage';
+// import MapPage from './containers/MapPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import ThreeContainer from './containers/ThreeRendering/Three';
 
 import GlobalStyle from './global-styles';
 
@@ -22,7 +23,7 @@ class App extends Component {
     return (
       <Wrapper>
         <Header />
-        <MapPage />
+        <ThreeContainer />
         <Footer />
         <GlobalStyle />
       </Wrapper>

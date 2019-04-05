@@ -4,6 +4,8 @@ import { Dropdown, Badge, Card, ButtonGroup } from 'react-bootstrap';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import messages from '../messages';
 import About from './About';
+import Parser from './Parser';
+import InputLoad from './Input/InputLoad';
 
 class Header extends React.Component {
   render() {
@@ -24,22 +26,46 @@ class Header extends React.Component {
               </Dropdown.Toggle>
 
               <Dropdown.Menu alignRight={true}>
-                <Dropdown.Item hred="#/action-1">
+                <Dropdown.Item as="label" hred="preloadMap1">
                   {' '}
                   <FormattedMessage {...messages.map1} />{' '}
+                  <InputLoad
+                    id={'preloadMap1'}
+                    type={'submit'}
+                    name={'Load1'}
+                    onClick={Parser.LoadPreparedMap}
+                  />
                 </Dropdown.Item>
-                <Dropdown.Item hred="#/action-2">
+                <Dropdown.Item as="label" hred="preloadMap2">
                   {' '}
                   <FormattedMessage {...messages.map2} />{' '}
+                  <InputLoad
+                    id={'preloadMap2'}
+                    type={'submit'}
+                    name={'Load2'}
+                    onClick={Parser.LoadPreparedMap}
+                  />
                 </Dropdown.Item>
-                <Dropdown.Item hred="#/action-3">
+                <Dropdown.Item as="label" hred="preloadMap3">
                   {' '}
                   <FormattedMessage {...messages.map3} />{' '}
+                  <InputLoad
+                    id={'preloadMap3'}
+                    type={'submit'}
+                    name={'Load3'}
+                    onClick={Parser.LoadPreparedMap}
+                  />
                 </Dropdown.Item>
                 <Dropdown.Divider />
-                <Dropdown.Item hred="#/action-4">
+                <Dropdown.Item as="label" hred="loadedMap">
                   {' '}
-                  <FormattedMessage {...messages.uploadMap} />{' '}
+                  <FormattedMessage {...messages.uploadMap} />
+                  <InputLoad
+                    id={'loadedMap'}
+                    type={'file'}
+                    name={'Load'}
+                    onChange={Parser.PickUsefulFromGeoJSONToTXT}
+                  />{' '}
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>

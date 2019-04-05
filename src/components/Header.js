@@ -26,17 +26,35 @@ class Header extends React.Component {
               </Dropdown.Toggle>
 
               <Dropdown.Menu alignRight={true}>
-                <Dropdown.Item hred="#/action-1">
+                <Dropdown.Item as="label" hred="preloadMap1">
                   {' '}
                   <FormattedMessage {...messages.map1} />{' '}
+                  <InputLoad
+                    id={'preloadMap1'}
+                    type={'submit'}
+                    name={'Load1'}
+                    onClick={Parser.LoadPreparedMap}
+                  />
                 </Dropdown.Item>
-                <Dropdown.Item hred="#/action-2">
+                <Dropdown.Item as="label" hred="preloadMap2">
                   {' '}
                   <FormattedMessage {...messages.map2} />{' '}
+                  <InputLoad
+                    id={'preloadMap2'}
+                    type={'submit'}
+                    name={'Load2'}
+                    onClick={Parser.LoadPreparedMap}
+                  />
                 </Dropdown.Item>
-                <Dropdown.Item hred="#/action-3">
+                <Dropdown.Item as="label" hred="preloadMap3">
                   {' '}
                   <FormattedMessage {...messages.map3} />{' '}
+                  <InputLoad
+                    id={'preloadMap3'}
+                    type={'submit'}
+                    name={'Load3'}
+                    onClick={Parser.LoadPreparedMap}
+                  />
                 </Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Item as="label" hred="loadedMap">

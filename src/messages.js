@@ -6,6 +6,10 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
+  helpOnChoosing: {
+    id: `helpOnChoosing`,
+    defaultMessage: 'Choose the types of data you want to see.'
+  },
   lang: {
     id: `lang`,
     defaultMessage: 'Language'

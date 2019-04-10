@@ -10,7 +10,7 @@ import InputLoad from './Input/InputLoad';
 class Header extends React.Component {
   render() {
     return (
-      <Card className="text-center">
+      <Card className="text-center" style={{ marginBottom: 10 }}>
         <Card.Body>
           <Card.Title>
             {' '}

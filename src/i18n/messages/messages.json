@@ -108,5 +108,10 @@
     "id": "right",
     "defaultMessage": "right",
     "filepath": "src/messages.js"
+  },
+  {
+    "id": "helpOnChoosing",
+    "defaultMessage": "Choose the types of data you want to see.",
+    "filepath": "src/messages.js"
   }
 ]

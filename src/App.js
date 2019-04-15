@@ -5,6 +5,7 @@ import { injectIntl } from 'react-intl';
 import MapPage from './containers/MapPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import CheckboxBar from './components/OutputData';
 
 import GlobalStyle from './global-styles';
 
@@ -23,6 +24,7 @@ class App extends Component {
       <Wrapper>
         <Header />
         <MapPage />
+        <CheckboxBar />
         <Footer />
         <GlobalStyle />
       </Wrapper>

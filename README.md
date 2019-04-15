@@ -1,7 +1,10 @@
 # MapViewer
 ![](https://raw.githubusercontent.com/LanskovNV/MapViewer/develop/public/mapbanner.png)
+
 ## Purpose
-Java Script project to work with maps. You can load openstreetmap you want and we'll parse streets, houses and water objects for you.
+MapViewer is the JavaScript project designed using ReactJS library to work with maps uploaded in .json format.
+The application runs on most desktop browsers (ex. Google Chrome, Microsoft Edge, Opera, e.t.c.).
+
 ### Quick start guide
 
 1. For the very beginning you need to choose one of two languages the application supports: Russian or English. You can do it by using the local toggle situated down below.
@@ -17,33 +20,7 @@ Java Script project to work with maps. You can load openstreetmap you want and w
 5. You can choose all the necessary types of data you want to see now using ***checkboxes***.
 
 *And now you are ready to start!*
-## Limitations
- For now provided only react mapviewer in dev branch
-## Prerequisites
- - NodeJS and npm
- - git
- - WebStorm *// optional*  
-## Command interface
- To run the projectnpx in WebStorm on localhost:
- 1) Clone project with git
- 2) If you want to work with develop version, check out develop
-    branch and update project
- 3) open built-in terminal and run 
- ```
- npm install
- ```
- 4) when installation completed, run 
- ```
- npm run start
- ``` 
- Also our app provide testing 
- ```
- npm run test
- ```
- and linting
- ```
- npm run lint
- ```
+
  ## Issues
  1) If you have problems with jest, do the following:
  ```
@@ -53,3 +30,32 @@ Java Script project to work with maps. You can load openstreetmap you want and w
 ```
 It solves temporary problem with node 11.11.0
 2) If you have some problems with eslint - you can remove strange rules from eslint config.
+
+## Limitations
+1. You can upload the map ***only*** in ***.json*** format.
+2. In the *show only* mode you can choose only the types of data which are provided (look on the checkhboxes). For example you are not able to see only the forestlands.
+ 
+## Prerequisites
+To build the application you need
+ - NodeJS (at least v.6.10.3) and npm.
+ (If you are not sure, that you have the right version of Node.js, you can check it by using
+ ```
+ node —version 
+ ```
+ command)
+ - git
+ - WebStorm or Visual Studio Code
+ 
+## Command interface
+ To run the application using WebStorm on the localhost:
+ 1. Clone the project with git
+ 2. If you want to work with develop version, check out develop branch and update project
+ 3. Open built-in terminal and run 
+ ```
+ npm install
+ ```
+ 4) when installation is completed, run 
+ ```
+ npm start
+ ``` 
+ to run the application on the localhost.

@@ -1,0 +1,117 @@
+[
+  {
+    "id": "lang",
+    "defaultMessage": "Language",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "about",
+    "defaultMessage": "About",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "about.text",
+    "defaultMessage": "MapViewer is the top-of-the-line app to work with maps uploaded in XML-format. The application runs on most desktop browsers (ex. Google Chrome, Microsoft Edge, Opera, e.t.c.) and mobile phones. ",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "feedback",
+    "defaultMessage": "If you have any questions or problems, please, report them at leins275@gmail.com",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "copyright",
+    "defaultMessage": "(c) Designed by MapViewer, Saint-Petersburg, Russia, 2019",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "close",
+    "defaultMessage": "Close",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "choose.map",
+    "defaultMessage": "Choose Map  ",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "map1",
+    "defaultMessage": "Map1",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "map2",
+    "defaultMessage": "Map2",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "map3",
+    "defaultMessage": "Map3",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "upload.map",
+    "defaultMessage": "Upload Map",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "license.message",
+    "defaultMessage": "This project is licensed under the MIT license.",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "author.message",
+    "defaultMessage": "Made with love by {author}.",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "info",
+    "defaultMessage": "Map data:",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "flags",
+    "defaultMessage": "Output:",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "checkbox.streets",
+    "defaultMessage": "streets",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "checkbox.houses",
+    "defaultMessage": "houses",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "checkbox.water",
+    "defaultMessage": "water objects",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "up",
+    "defaultMessage": "up",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "down",
+    "defaultMessage": "down",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "left",
+    "defaultMessage": "left",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "right",
+    "defaultMessage": "right",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "helpOnChoosing",
+    "defaultMessage": "Choose the types of data you want to see.",
+    "filepath": "src/messages.js"
+  }
+]

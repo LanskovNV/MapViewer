@@ -23,7 +23,6 @@ Java Script project to work with maps. You can load openstreetmap you want and w
  - NodeJS and npm
  - git
  - WebStorm *// optional*  
-(please unpack all in /src/readyMaps directory before start !!!)
 ## Command interface
  To run the projectnpx in WebStorm on localhost:
  1) Clone project with git

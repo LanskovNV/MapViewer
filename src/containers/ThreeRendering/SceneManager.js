@@ -1,13 +1,17 @@
 import * as THREE from 'three';
+import * as d3 from 'd3';
 import SceneSubject from './SceneSubject';
 
 export default canvas => {
   const clock = new THREE.Clock();
-  const origin = new THREE.Vector3(0, 0, 0);
+
+  const fov = 50; // 40;
+  const near = 4; // 10;
+  const far = 100; // 7000;
 
   const screenDimensions = {
     width: canvas.width,
-    height: canvas.height
+    height: canvas.height * 4
   };
 
   const mousePosition = {
@@ -16,13 +20,20 @@ export default canvas => {
   };
 
   const scene = buildScene();
-  const renderer = buildRender(screenDimensions);
+  const zoom = d3
+    .zoom()
+    .scaleExtent([getScaleFromZ(far), getScaleFromZ(near)])
+    .on('zoom', () => {
+      let d3_transform = d3.event.transform;
+      zoomHandler(d3_transform);
+    });
   const camera = buildCamera(screenDimensions);
+  const renderer = buildRender(screenDimensions);
   const sceneSubjects = createSceneSubjects(scene);
 
   function buildScene() {
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color('#FFF');
+    scene.background = new THREE.Color('#60F');
 
     return scene;
   }
@@ -40,25 +51,56 @@ export default canvas => {
     renderer.gammaInput = true;
     renderer.gammaOutput = true;
 
+    const view = d3.select(renderer.domElement);
+    setUpZoom(view);
     return renderer;
   }
 
   function buildCamera({ width, height }) {
     const aspectRatio = width / height;
-    const fieldOfView = 60;
-    const nearPlane = 4;
-    const farPlane = 100;
-    const camera = new THREE.PerspectiveCamera(
-      fieldOfView,
-      aspectRatio,
-      nearPlane,
-      farPlane
-    );
-
-    camera.position.z = 40;
+    const camera = new THREE.PerspectiveCamera(fov, aspectRatio, near, far);
 
     return camera;
   }
+
+  /* Begin Of Zoom */
+  function setUpZoom(view) {
+    view.call(zoom);
+    let initial_scale = getScaleFromZ(far);
+    const initial_transform = d3.zoomIdentity
+      .translate(screenDimensions.width / 2, screenDimensions.height / 2)
+      .scale(initial_scale);
+    zoom.transform(view, initial_transform);
+    camera.position.set(0, 0, far);
+  }
+
+  function zoomHandler(d3_transform) {
+    let scale = d3_transform.k;
+    let x = -(d3_transform.x - screenDimensions.width / 2) / scale;
+    let y = (d3_transform.y - screenDimensions.height / 2) / scale;
+    let z = getZFromScale(scale);
+    camera.position.set(x, y, z);
+  }
+
+  function getScaleFromZ(camera_z_position) {
+    let half_fov = fov / 2;
+    let half_fov_radians = toRadians(half_fov);
+    let half_fov_height = Math.tan(half_fov_radians) * camera_z_position;
+    let fov_height = half_fov_height * 2;
+    return screenDimensions.height / fov_height;
+  }
+
+  function getZFromScale(scale) {
+    let half_fov = fov / 2;
+    let half_fov_radians = toRadians(half_fov);
+    let scale_height = screenDimensions.height / scale;
+    return scale_height / (2 * Math.tan(half_fov_radians));
+  }
+
+  function toRadians(angle) {
+    return angle * (Math.PI / 180);
+  }
+  /* End Of Zoom */
 
   function createSceneSubjects(scene) {
     return new SceneSubject(scene);
@@ -71,15 +113,7 @@ export default canvas => {
       sceneSubjects[i].update(elapsedTime);
     }
 
-    updateCameraPositionRelativeToMouse();
-
     renderer.render(scene, camera);
-  }
-
-  function updateCameraPositionRelativeToMouse() {
-    camera.position.x += (mousePosition.x * 0.01 - camera.position.x) * 0.01;
-    camera.position.y += (-(mousePosition.y * 0.01) - camera.position.y) * 0.01;
-    camera.lookAt(origin);
   }
 
   function onWindowResize() {

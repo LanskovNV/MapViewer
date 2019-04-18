@@ -45,6 +45,12 @@ Java Script project to work with maps. You can load openstreetmap you want and w
  ```
  npm run lint
  ```
+ If you want test production build on local server, do the following:
+ ```
+ npm run build
+ npm install -g serve
+ serve -s build
+ ```
  ## Issues
  1) If you have problems with jest, do the following:
  ```

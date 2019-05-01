@@ -1,4 +1,5 @@
 import { injectIntl } from 'react-intl';
+
 import mapFile1 from '../readyMaps/Davis.osm.geojson';
 import mapFile2 from '../readyMaps/Alexandria.osm.geojson';
 import mapFile3 from '../readyMaps/Cairo.osm.geojson';

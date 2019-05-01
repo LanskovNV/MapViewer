@@ -32,7 +32,6 @@ class Parser {
         alert(err);
       });
   }
-
   static PickUsefulFromGeoJSONToTXT() {
     const FIRST_ELEMENT = 0;
     const file = document.getElementById('loadedMap').files[FIRST_ELEMENT];

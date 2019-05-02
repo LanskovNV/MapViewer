@@ -10,8 +10,8 @@ export default canvas => {
   const far = 100; // 7000;
 
   const screenDimensions = {
-    width: canvas.width,
-    height: canvas.height * 3
+    width: canvas.offsetWidth,
+    height: canvas.offsetHeight * 3
   };
 
   const mousePosition = {
@@ -71,7 +71,7 @@ export default canvas => {
       .translate(screenDimensions.width / 2, screenDimensions.height / 2)
       .scale(initial_scale);
     zoom.transform(view, initial_transform);
-    camera.position.set(0, 0, far);
+    // camera.position.set(0, 0, far);
   }
 
   function zoomHandler(d3_transform) {

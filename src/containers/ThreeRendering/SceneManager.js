@@ -7,7 +7,7 @@ export default canvas => {
 
   const fov = 50; // 40;
   const near = 4; // 10;
-  const far = 100; // 7000;
+  const far = 200; // 7000;
 
   const screenDimensions = {
     width: canvas.offsetWidth,

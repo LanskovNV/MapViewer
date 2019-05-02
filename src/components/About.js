@@ -15,15 +15,12 @@ class About extends React.Component {
       show: false
     };
   }
-
   handleClose() {
     this.setState({ show: false });
   }
-
   handleShow() {
     this.setState({ show: true });
   }
-
   render() {
     return (
       <>

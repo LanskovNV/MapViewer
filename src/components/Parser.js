@@ -3,7 +3,7 @@ import mapFile1 from '../readyMaps/Davis.osm.geojson';
 import mapFile2 from '../readyMaps/Alexandria.osm.geojson';
 import mapFile3 from '../readyMaps/Cairo.osm.geojson';
 
-const KByte100 = 100 * 1024;
+const KByte100 = 10 * 1024;
 
 function status(response) {
   if (response.status !== 200) {
@@ -40,15 +40,10 @@ class Parser {
     const FIRST_ELEMENT = 0;
     const file = document.getElementById('loadedMap').files[FIRST_ELEMENT];
 
-    let sampleBytes = '';
-    let restBytes = '';
-
     // TODO handle previously saved map when replace map
 
-    saveByteArray([sampleBytes], 'temp1.txt', 'temp1ProcFile');
-    saveByteArray([restBytes], 'rest.txt', 'restProcFile');
+    saveByteArray([''], 'rest.txt', 'restProcFile');
     loading(file, callbackDataProcess, callbackEnd);
-    //window.URL.revokeObjectURL(tempFile.href);
   }
 }
 
@@ -62,19 +57,47 @@ function saveByteArray(data, name, idName) {
   a.id = idName;
 }
 
-function handleTemp(n, buf_rest) {
-  let tempFile = document.getElementById('temp' + n + 'ProcFile');
+function PickStreets(json_data) {
+  return json_data;
+}
+
+function PickHouses(json_data) {
+  return json_data;
+}
+
+function PickWater(json_data) {
+  return json_data;
+}
+
+function HandleFile(n, buf_rest, file_name) {
+  //console.log(file_name, "\t",n);
+  let tempFile = document.getElementById(file_name + n + 'ProcFile');
   if (tempFile === null) {
-    saveByteArray([''], 'temp' + n + '.txt', 'temp' + n + 'ProcFile');
-    tempFile = document.getElementById('temp' + n + 'ProcFile');
+    saveByteArray([''], file_name + n + '.json', file_name + n + 'ProcFile');
+    tempFile = document.getElementById(file_name + n + 'ProcFile');
   }
   fetch(tempFile.href)
     .then(status)
     .then(function(data_temp) {
+      //console.log("byte: ", data_temp.byteLength, "n: ", n, file_name);
       if (data_temp.byteLength < KByte100) {
         window.URL.revokeObjectURL(tempFile.href);
-        let buf =
-          String.fromCharCode.apply(null, new Uint8Array(data_temp)) + buf_rest;
+        let data_str = String.fromCharCode.apply(
+          null,
+          new Uint8Array(data_temp)
+        );
+        let buf_rest_json = JSON.stringify(buf_rest);
+        let buf;
+
+        if (data_str.length < 2) {
+          buf = buf_rest_json.substr(0, buf_rest_json.length);
+        } else {
+          buf =
+            data_str.substr(0, data_temp.byteLength - 2) +
+            ',' +
+            buf_rest_json.substr(11, buf_rest_json.length - 11);
+        }
+
         let blob = new Blob([buf], { type: 'text/json' }),
           f = new File([blob], tempFile.download, { type: 'text/json' }),
           url = window.URL.createObjectURL(f);
@@ -83,8 +106,8 @@ function handleTemp(n, buf_rest) {
         f = null;
         blob = null;
         url = null;
-      } else if (tempFile !== null) {
-        handleTemp(++n, buf_rest);
+      } else {
+        HandleFile(++n, buf_rest, file_name);
       }
     })
     .catch(function(err) {
@@ -106,9 +129,28 @@ function callbackDataProcess(data) {
       const buf_rest =
         String.fromCharCode.apply(null, new Uint8Array(data_rest)) +
         str_valid_json;
-      let n = 1;
+      let json_temp;
 
-      handleTemp(n, buf_rest);
+      if (buf_rest.indexOf('FeatureCollection') > 0) {
+        let str_json =
+          '{"points":[' +
+          buf_rest.substr(42, buf_rest.lastIndexOf(',') - 42) +
+          ']}';
+        json_temp = JSON.parse(str_json);
+      } else {
+        let str_json =
+          '{"points":[' +
+          buf_rest.substr(2, buf_rest.lastIndexOf(',') - 2) +
+          ']}';
+        json_temp = JSON.parse(str_json);
+      }
+
+      let streets = PickStreets(json_temp),
+        houses = PickHouses(json_temp),
+        water = PickWater(json_temp);
+      HandleFile(1, streets, 'streets');
+      HandleFile(1, houses, 'houses');
+      HandleFile(1, water, 'water');
 
       const blob = new Blob([str_rest], { type: 'text/json' }),
         f = new File([blob], restFile.download, { type: 'text/json' });
@@ -130,16 +172,22 @@ async function callbackEnd(data) {
       window.URL.revokeObjectURL(restFile.href);
       const buf_rest =
         String.fromCharCode.apply(null, new Uint8Array(data_rest)) + str_data;
-      let n = 1;
+      let str_json = '{"points":[' + buf_rest.substr(3, buf_rest.length - 3);
+      let json_temp = JSON.parse(str_json);
+      let streets = PickStreets(json_temp),
+        houses = PickHouses(json_temp),
+        water = PickWater(json_temp);
 
-      handleTemp(n, buf_rest);
+      HandleFile(1, streets, 'streets');
+      HandleFile(1, houses, 'houses');
+      HandleFile(1, water, 'water');
     })
     .catch(function(err) {
       alert(err);
     });
   document.head.removeChild(document.getElementById('restProcFile'));
 
-  alert('End. All data successfully read');
+  //alert('End. All data successfully read');
 }
 
 function min(a, b) {

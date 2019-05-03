@@ -1,8 +1,9 @@
 import { injectIntl } from 'react-intl';
-import { status, saveByteArray, HandleFile, ClearFiles } from './Handle';
+
 import mapFile1 from '../readyMaps/Davis.osm.geojson';
 import mapFile2 from '../readyMaps/Alexandria.osm.geojson';
 import mapFile3 from '../readyMaps/Cairo.osm.geojson';
+import { status, saveByteArray, HandleFile, ClearFiles } from './Handle';
 
 class Parser {
   static LoadPreparedMap(e) {

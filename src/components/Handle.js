@@ -1,7 +1,5 @@
 const KByte50 = 50 * 1024;
-let streets_file_count = 1,
-  houses_file_count = 1,
-  water_file_count = 1;
+let file_counts = [1, 1, 1];
 
 function status(response) {
   if (response.status !== 200) {
@@ -26,13 +24,13 @@ function HandleFile(buf_rest, file_name) {
   let n;
   switch (file_name) {
     case 'streets':
-      n = streets_file_count;
+      n = file_counts[0];
       break;
     case 'houses':
-      n = houses_file_count;
+      n = file_counts[1];
       break;
     case 'water':
-      n = water_file_count;
+      n = file_counts[2];
       break;
     default:
   }
@@ -49,7 +47,7 @@ function HandleFile(buf_rest, file_name) {
       let buf_rest_json = JSON.stringify(buf_rest);
       let buf;
 
-      if (data_str.length < 2 && n === 1) {
+      if (data_str.length < 2) {
         buf = buf_rest_json.substr(0, buf_rest_json.length);
       } else {
         buf =
@@ -65,13 +63,13 @@ function HandleFile(buf_rest, file_name) {
       if (buf.length > KByte50) {
         switch (file_name) {
           case 'streets':
-            streets_file_count++;
+            file_counts[0]++;
             break;
           case 'houses':
-            houses_file_count++;
+            file_counts[1]++;
             break;
           case 'water':
-            water_file_count++;
+            file_counts[2]++;
             break;
           default:
         }
@@ -86,4 +84,19 @@ function HandleFile(buf_rest, file_name) {
     });
 }
 
-export { status, saveByteArray, HandleFile };
+function ClearFiles() {
+  const file_names = ['streets', 'houses', 'water'];
+  for (let i = 0; i < file_names.length; i++) {
+    for (let j = 1; j <= file_counts[i]; j++) {
+      let doc = document.getElementById(file_names[i] + j + 'ProcFile');
+      if (doc !== null) {
+        window.URL.revokeObjectURL(doc.href);
+        document.head.removeChild(doc);
+      }
+    }
+    file_counts[i] = 1;
+  }
+  document.head.removeChild(document.getElementById('restProcFile'));
+}
+
+export { status, saveByteArray, HandleFile, ClearFiles };

@@ -1,5 +1,5 @@
 import { injectIntl } from 'react-intl';
-import { status, saveByteArray, HandleFile } from './Handle';
+import { status, saveByteArray, HandleFile, ClearFiles } from './Handle';
 import mapFile1 from '../readyMaps/Davis.osm.geojson';
 import mapFile2 from '../readyMaps/Alexandria.osm.geojson';
 import mapFile3 from '../readyMaps/Cairo.osm.geojson';
@@ -30,7 +30,9 @@ class Parser {
     const FIRST_ELEMENT = 0;
     const file = document.getElementById('loadedMap').files[FIRST_ELEMENT];
 
-    // TODO handle previously saved map when replace map
+    if (document.getElementById('restProcFile') !== null) {
+      ClearFiles();
+    }
 
     saveByteArray([''], 'rest.txt', 'restProcFile');
     loading(file, callbackDataProcess, callbackEnd);
@@ -126,7 +128,6 @@ function callbackEnd(data) {
     .catch(function(err) {
       alert(err);
     });
-  document.head.removeChild(document.getElementById('restProcFile'));
 
   //alert('End. All data successfully read');
 }

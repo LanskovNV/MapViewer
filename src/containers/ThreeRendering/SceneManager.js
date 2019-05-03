@@ -33,7 +33,7 @@ export default canvas => {
 
   function buildScene() {
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color('#60F');
+    scene.background = new THREE.Color('#AFF');
 
     return scene;
   }

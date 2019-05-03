@@ -10,7 +10,6 @@ class OutputData extends React.Component {
   shouldComponentUpdate() {
     return false;
   }
-
   render() {
     return (
       <div style={{ marginTop: 10, marginBottom: 20 }}>

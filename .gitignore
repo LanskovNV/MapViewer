@@ -4,12 +4,14 @@
 /node_modules
 /.pnp
 .pnp.js
+package-lock.json
 
 # testing
 /coverage
 
 # production
 /build
+/src/readyMaps/*
 
 # misc
 .DS_Store
@@ -24,3 +26,5 @@ yarn-error.log*
 
 # WebStorm
 .idea/*
+
+

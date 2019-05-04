@@ -1,4 +1,5 @@
 import { injectIntl } from 'react-intl';
+
 import mapFile1 from '../readyMaps/Davis.osm.geojson';
 import mapFile2 from '../readyMaps/Alexandria.osm.geojson';
 import mapFile3 from '../readyMaps/Cairo.osm.geojson';
@@ -31,7 +32,6 @@ class Parser {
         alert(err);
       });
   }
-
   static PickUsefulFromGeoJSONToTXT() {
     const FIRST_ELEMENT = 0;
     const file = document.getElementById('loadedMap').files[FIRST_ELEMENT];

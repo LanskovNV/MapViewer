@@ -4,6 +4,7 @@ import mapFile1 from '../readyMaps/Davis.osm.geojson';
 import mapFile2 from '../readyMaps/Alexandria.osm.geojson';
 import mapFile3 from '../readyMaps/Cairo.osm.geojson';
 import { status, saveByteArray, HandleFile, ClearFiles } from './Handle';
+import { PickStreets, PickHouses, PickWater } from './DataFilter';
 
 class Parser {
   static LoadPreparedMap(e) {
@@ -37,18 +38,6 @@ class Parser {
     saveByteArray([''], 'rest.txt', 'restProcFile');
     loading(file, callbackDataProcess, callbackEnd);
   }
-}
-
-function PickStreets(json_data) {
-  return json_data;
-}
-
-function PickHouses(json_data) {
-  return json_data;
-}
-
-function PickWater(json_data) {
-  return json_data;
 }
 
 function callbackDataProcess(data) {
@@ -90,7 +79,9 @@ function callbackDataProcess(data) {
         houses = PickHouses(json_temp),
         water = PickWater(json_temp);
 
-      HandleFile(streets, 'streets');
+      if (streets.points.length > 0) {
+        HandleFile(streets, 'streets');
+      }
       HandleFile(houses, 'houses');
       HandleFile(water, 'water');
 

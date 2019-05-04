@@ -6,6 +6,7 @@ import mapFile3 from '../readyMaps/Cairo.osm.geojson';
 import { status, saveByteArray, HandleFile, ClearFiles } from './Handle';
 import { PickStreets, PickHouses, PickWater } from './DataFilter';
 import { FilterStreets, FilterHouses, FilterWater } from './ItemsFilter';
+import { ConvertCoordinates } from './CoordinatesConversion';
 
 class Parser {
   static LoadPreparedMap(e) {
@@ -38,6 +39,7 @@ class Parser {
 
     saveByteArray([''], 'rest.txt', 'restProcFile');
     loading(file, callbackDataProcess, callbackEnd);
+    ConvertCoordinates(['streets', 'houses', 'water']);
   }
 }
 
@@ -109,6 +111,7 @@ function callbackEnd(data) {
         String.fromCharCode.apply(null, new Uint8Array(data_rest)) + str_data;
       let str_json = '{"points":[' + buf_rest.substr(1, buf_rest.length - 1);
       let json_temp = JSON.parse(str_json);
+
       let streets = FilterStreets(PickStreets(json_temp)),
         houses = FilterHouses(PickHouses(json_temp)),
         water = FilterWater(PickWater(json_temp));

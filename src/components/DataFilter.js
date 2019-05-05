@@ -48,7 +48,22 @@ function PickHouses(json_data) {
 }
 
 function PickWater(json_data) {
-  return json_data;
+  let result = JSON.parse('{"points":[]}');
+  for (let i = 0; i < json_data.points.length; i++) {
+    if (
+      json_data.points[i] &&
+      json_data.points[i].properties &&
+      ((json_data.points[i].properties.waterway &&
+        (json_data.points[i].properties.waterway === 'river' ||
+          json_data.points[i].properties.waterway === 'canal' ||
+          json_data.points[i].properties.waterway === 'riverbank')) ||
+        (json_data.points[i].properties.natural &&
+          json_data.points[i].properties.natural === 'water'))
+    ) {
+      result.points.push(json_data.points[i]);
+    }
+  }
+  return result;
 }
 
 export { PickStreets, PickHouses, PickWater };

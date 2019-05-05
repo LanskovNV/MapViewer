@@ -78,7 +78,7 @@ function callbackDataProcess(data) {
       }
 
       let streets = PickStreets(json_temp),
-        houses = PickStreets(json_temp), //PickHouses(json_temp),
+        houses = PickHouses(json_temp),
         water = PickStreets(json_temp); //PickWater(json_temp);
 
       if (streets.points.length > 0) {
@@ -86,7 +86,7 @@ function callbackDataProcess(data) {
         HandleFile(streets, 'streets');
       }
       if (houses.points.length > 0) {
-        houses = FilterStreets(houses); //FilterHouses(houses);
+        houses = FilterHouses(houses);
         HandleFile(houses, 'houses');
       }
       if (water.points.length > 0) {
@@ -119,7 +119,7 @@ function callbackEnd(data) {
       let json_temp = JSON.parse(str_json);
 
       let streets = PickStreets(json_temp),
-        houses = PickStreets(json_temp), //PickHouses(json_temp),
+        houses = PickHouses(json_temp),
         water = PickStreets(json_temp); //PickWater(json_temp);
 
       if (streets.points.length > 0) {
@@ -127,7 +127,7 @@ function callbackEnd(data) {
         HandleFile(streets, 'streets');
       }
       if (houses.points.length > 0) {
-        houses = FilterStreets(streets); //FilterHouses(houses);
+        houses = FilterHouses(houses);
         HandleFile(houses, 'houses');
       }
       if (water.points.length > 0) {

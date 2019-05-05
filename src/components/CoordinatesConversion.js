@@ -104,9 +104,10 @@ function GetBounds(arr_of_file_names) {
 
 function ConvertCoordinatesOneFile(json_data, left, right, up, down) {
   //TODO set corresponding parameters
-  const scale = 10000;
+  const scale = 1000;
   const width = (right - left) * scale,
     height = (up - down) * scale;
+  console.log(left, right, up, down, width, height);
   for (let j = 0; j < json_data.points.length; j++) {
     switch (json_data.points[j].type) {
       case 'LineString':
@@ -163,6 +164,7 @@ function ConvertCoordinates(arr_of_file_names) {
             let json_data = JSON.parse(
               String.fromCharCode.apply(null, new Uint8Array(data))
             );
+            console.log(json_data);
             json_data = ConvertCoordinatesOneFile(
               json_data,
               arr_bounds[0],

@@ -79,7 +79,7 @@ function callbackDataProcess(data) {
 
       let streets = PickStreets(json_temp),
         houses = PickHouses(json_temp),
-        water = PickStreets(json_temp); //PickWater(json_temp);
+        water = PickWater(json_temp);
 
       if (streets.points.length > 0) {
         streets = FilterStreets(streets);
@@ -90,7 +90,7 @@ function callbackDataProcess(data) {
         HandleFile(houses, 'houses');
       }
       if (water.points.length > 0) {
-        water = FilterStreets(water); //FilterWater(water);
+        water = FilterWater(water);
         HandleFile(water, 'water');
       }
 
@@ -120,7 +120,7 @@ function callbackEnd(data) {
 
       let streets = PickStreets(json_temp),
         houses = PickHouses(json_temp),
-        water = PickStreets(json_temp); //PickWater(json_temp);
+        water = PickWater(json_temp);
 
       if (streets.points.length > 0) {
         streets = FilterStreets(streets);
@@ -131,15 +131,16 @@ function callbackEnd(data) {
         HandleFile(houses, 'houses');
       }
       if (water.points.length > 0) {
-        water = FilterStreets(streets); //FilterWater(water);
+        water = FilterWater(water);
         HandleFile(water, 'water');
       }
+    })
+    .then(function() {
+      ConvertCoordinates(['streets', 'houses', 'water']);
     })
     .catch(function(err) {
       alert(err);
     });
-
-  ConvertCoordinates(['streets', 'houses', 'water']);
 
   //alert('End. All data successfully read');
 }

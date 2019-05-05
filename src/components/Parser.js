@@ -78,19 +78,19 @@ function callbackDataProcess(data) {
       }
 
       let streets = PickStreets(json_temp),
-        houses = PickHouses(json_temp),
-        water = PickWater(json_temp);
+        houses = PickStreets(json_temp), //PickHouses(json_temp),
+        water = PickStreets(json_temp); //PickWater(json_temp);
 
       if (streets.points.length > 0) {
         streets = FilterStreets(streets);
         HandleFile(streets, 'streets');
       }
       if (houses.points.length > 0) {
-        houses = FilterHouses(houses);
+        houses = FilterStreets(houses); //FilterHouses(houses);
         HandleFile(houses, 'houses');
       }
       if (water.points.length > 0) {
-        water = FilterWater(water);
+        water = FilterStreets(water); //FilterWater(water);
         HandleFile(water, 'water');
       }
 
@@ -119,19 +119,19 @@ function callbackEnd(data) {
       let json_temp = JSON.parse(str_json);
 
       let streets = PickStreets(json_temp),
-        houses = PickHouses(json_temp),
-        water = PickWater(json_temp);
+        houses = PickStreets(json_temp), //PickHouses(json_temp),
+        water = PickStreets(json_temp); //PickWater(json_temp);
 
       if (streets.points.length > 0) {
         streets = FilterStreets(streets);
         HandleFile(streets, 'streets');
       }
       if (houses.points.length > 0) {
-        houses = FilterHouses(houses);
+        houses = FilterStreets(streets); //FilterHouses(houses);
         HandleFile(houses, 'houses');
       }
       if (water.points.length > 0) {
-        water = FilterWater(water);
+        water = FilterStreets(streets); //FilterWater(water);
         HandleFile(water, 'water');
       }
     })
@@ -139,7 +139,7 @@ function callbackEnd(data) {
       alert(err);
     });
 
-  //ConvertCoordinates(['streets', 'houses', 'water']);
+  ConvertCoordinates(['streets', 'houses', 'water']);
 
   //alert('End. All data successfully read');
 }

@@ -39,7 +39,6 @@ class Parser {
 
     saveByteArray([''], 'rest.txt', 'restProcFile');
     loading(file, callbackDataProcess, callbackEnd);
-    ConvertCoordinates(['streets', 'houses', 'water']);
   }
 }
 
@@ -78,15 +77,22 @@ function callbackDataProcess(data) {
         json_temp = JSON.parse(str_json);
       }
 
-      let streets = FilterStreets(PickStreets(json_temp)),
-        houses = FilterHouses(PickHouses(json_temp)),
-        water = FilterWater(PickWater(json_temp));
+      let streets = PickStreets(json_temp),
+        houses = PickHouses(json_temp),
+        water = PickWater(json_temp);
 
       if (streets.points.length > 0) {
+        streets = FilterStreets(streets);
         HandleFile(streets, 'streets');
       }
-      HandleFile(houses, 'houses');
-      HandleFile(water, 'water');
+      if (houses.points.length > 0) {
+        houses = FilterHouses(houses);
+        HandleFile(houses, 'houses');
+      }
+      if (water.points.length > 0) {
+        water = FilterWater(water);
+        HandleFile(water, 'water');
+      }
 
       const blob = new Blob([str_rest], { type: 'text/json' }),
         f = new File([blob], restFile.download, { type: 'text/json' });
@@ -112,19 +118,28 @@ function callbackEnd(data) {
       let str_json = '{"points":[' + buf_rest.substr(1, buf_rest.length - 1);
       let json_temp = JSON.parse(str_json);
 
-      let streets = FilterStreets(PickStreets(json_temp)),
-        houses = FilterHouses(PickHouses(json_temp)),
-        water = FilterWater(PickWater(json_temp));
+      let streets = PickStreets(json_temp),
+        houses = PickHouses(json_temp),
+        water = PickWater(json_temp);
 
       if (streets.points.length > 0) {
+        streets = FilterStreets(streets);
         HandleFile(streets, 'streets');
       }
-      HandleFile(houses, 'houses');
-      HandleFile(water, 'water');
+      if (houses.points.length > 0) {
+        houses = FilterHouses(houses);
+        HandleFile(houses, 'houses');
+      }
+      if (water.points.length > 0) {
+        water = FilterWater(water);
+        HandleFile(water, 'water');
+      }
     })
     .catch(function(err) {
       alert(err);
     });
+
+  //ConvertCoordinates(['streets', 'houses', 'water']);
 
   //alert('End. All data successfully read');
 }

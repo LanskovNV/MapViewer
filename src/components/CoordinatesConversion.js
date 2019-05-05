@@ -58,7 +58,7 @@ function GetBoundsOneFile(json_data) {
   return arr_bounds;
 }
 
-function GetBounds(arr_of_file_names) {
+async function GetBounds(arr_of_file_names) {
   let arr_bounds = new Array(4);
   const file_counts = GetFileCounts();
   for (let i = 0; i < file_counts.length; i++) {
@@ -103,8 +103,7 @@ function GetBounds(arr_of_file_names) {
 }
 
 function ConvertCoordinatesOneFile(json_data, left, right, up, down) {
-  //TODO set corresponding parameters
-  const scale = 1000;
+  const scale = 10000;
   const width = (right - left) * scale,
     height = (up - down) * scale;
   console.log(left, right, up, down, width, height);
@@ -151,39 +150,51 @@ function ConvertCoordinatesOneFile(json_data, left, right, up, down) {
 }
 
 function ConvertCoordinates(arr_of_file_names) {
-  let arr_bounds = GetBounds(arr_of_file_names),
-    file_counts = GetFileCounts();
-  for (let i = 0; i < file_counts.length; i++) {
-    for (let j = 1; j <= file_counts[i]; j++) {
-      let doc = document.getElementById(arr_of_file_names[i] + j + 'ProcFile');
-      if (doc !== null) {
-        fetch(doc.href)
-          .then(status)
-          .then(function(data) {
-            window.URL.revokeObjectURL(doc.href);
-            let json_data = JSON.parse(
-              String.fromCharCode.apply(null, new Uint8Array(data))
-            );
-            console.log(json_data);
-            json_data = ConvertCoordinatesOneFile(
-              json_data,
-              arr_bounds[0],
-              arr_bounds[1],
-              arr_bounds[2],
-              arr_bounds[3]
-            );
-            const blob = new Blob([JSON.stringify(json_data)], {
-                type: 'text/json'
-              }),
-              f = new File([blob], doc.download, { type: 'text/json' });
-            doc.href = window.URL.createObjectURL(f);
-          })
-          .catch(function(err) {
-            alert(err);
-          });
+  let file_counts = GetFileCounts();
+  GetBounds(arr_of_file_names)
+    .then(function(arr_bounds) {
+      for (let i = 0; i < file_counts.length; i++) {
+        for (let j = 1; j <= file_counts[i]; j++) {
+          let doc = document.getElementById(
+            arr_of_file_names[i] + j + 'ProcFile'
+          );
+          if (doc !== null) {
+            fetch(doc.href)
+              .then(status)
+              .then(function(data) {
+                window.URL.revokeObjectURL(doc.href);
+                let json_data = JSON.parse(
+                  String.fromCharCode.apply(null, new Uint8Array(data))
+                );
+                console.log(
+                  arr_bounds[0],
+                  arr_bounds[1],
+                  arr_bounds[2],
+                  arr_bounds[3]
+                );
+                json_data = ConvertCoordinatesOneFile(
+                  json_data,
+                  arr_bounds[0],
+                  arr_bounds[1],
+                  arr_bounds[2],
+                  arr_bounds[3]
+                );
+                const blob = new Blob([JSON.stringify(json_data)], {
+                    type: 'text/json'
+                  }),
+                  f = new File([blob], doc.download, { type: 'text/json' });
+                doc.href = window.URL.createObjectURL(f);
+              })
+              .catch(function(err) {
+                alert(err);
+              });
+          }
+        }
       }
-    }
-  }
+    })
+    .catch(function(err) {
+      alert(err);
+    });
 }
 
 export { ConvertCoordinates };

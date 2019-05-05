@@ -152,7 +152,6 @@ function ConvertCoordinatesOneFile(json_data, left, right, up, down) {
 function ConvertCoordinates(arr_of_file_names) {
   let arr_bounds = GetBounds(arr_of_file_names),
     file_counts = GetFileCounts();
-  console.log('-----', arr_bounds);
   for (let i = 0; i < file_counts.length; i++) {
     for (let j = 1; j <= file_counts[i]; j++) {
       let doc = document.getElementById(arr_of_file_names[i] + j + 'ProcFile');

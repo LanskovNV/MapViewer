@@ -1,6 +1,10 @@
 const KByte50 = 50 * 1024;
 let file_counts = [1, 1, 1];
 
+function GetFileCounts() {
+  return file_counts;
+}
+
 function status(response) {
   if (response.status !== 200) {
     alert('Looks like there was a problem.');
@@ -99,4 +103,4 @@ function ClearFiles() {
   document.head.removeChild(document.getElementById('restProcFile'));
 }
 
-export { status, saveByteArray, HandleFile, ClearFiles };
+export { status, saveByteArray, HandleFile, ClearFiles, GetFileCounts };

@@ -33,12 +33,14 @@ class Parser {
     const FIRST_ELEMENT = 0;
     const file = document.getElementById('loadedMap').files[FIRST_ELEMENT];
 
-    if (document.getElementById('restProcFile') !== null) {
-      ClearFiles();
-    }
+    if (file !== undefined) {
+      if (document.getElementById('restProcFile') !== null) {
+        ClearFiles();
+      }
 
-    saveByteArray([''], 'rest.txt', 'restProcFile');
-    loading(file, callbackDataProcess, callbackEnd);
+      saveByteArray([''], 'rest.txt', 'restProcFile');
+      loading(file, callbackDataProcess, callbackEnd);
+    }
   }
 }
 

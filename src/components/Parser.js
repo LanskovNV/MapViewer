@@ -53,6 +53,9 @@ function callbackDataProcess(data) {
       str_data.length - str_data.lastIndexOf('\n')
     );
 
+  if (str_valid_json.length === 0) {
+    return;
+  }
   //Get rest part from previous chunk and save new rest part
   fetch(restFile.href)
     .then(status)

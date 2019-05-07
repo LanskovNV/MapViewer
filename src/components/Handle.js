@@ -57,7 +57,7 @@ function HandleFile(buf_rest, file_name) {
         buf =
           data_str.substr(0, data_temp.byteLength - 2) +
           ',' +
-          buf_rest_json.substr(11, buf_rest_json.length - 11);
+          buf_rest_json.substr(10, buf_rest_json.length - 10);
       }
 
       let blob = new Blob([buf], { type: 'text/json' }),

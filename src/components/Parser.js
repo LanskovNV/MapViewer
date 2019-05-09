@@ -3,7 +3,9 @@ import { injectIntl } from 'react-intl';
 import mapFile11 from '../readyMaps/Davis/streets';
 import mapFile12 from '../readyMaps/Davis/houses';
 import mapFile13 from '../readyMaps/Davis/water';
-import mapFile2 from '../readyMaps/Alexandria.osm.geojson';
+import mapFile21 from '../readyMaps/Cairo/streets';
+import mapFile22 from '../readyMaps/Cairo/houses';
+import mapFile23 from '../readyMaps/Cairo/water';
 import mapFile3 from '../readyMaps/Cairo.osm.geojson';
 import {
   status,
@@ -26,7 +28,9 @@ class Parser {
       files[1] = mapFile12;
       files[2] = mapFile13;
     } else if (name === 'preloadMap2') {
-      files[0] = mapFile2;
+      files[0] = mapFile21;
+      files[1] = mapFile22;
+      files[2] = mapFile23;
     } else if (name === 'preloadMap3') {
       files[0] = mapFile3;
     }
@@ -39,7 +43,6 @@ class Parser {
     saveByteArray([JSON.stringify(files[1])], 'houses.json', 'housesProcFile');
     saveByteArray([JSON.stringify(files[2])], 'water.json', 'waterProcFile');
   }
-
   static PickUsefulFromGeoJSONToTXT() {
     const FIRST_ELEMENT = 0;
     const file = document.getElementById('loadedMap').files[FIRST_ELEMENT];

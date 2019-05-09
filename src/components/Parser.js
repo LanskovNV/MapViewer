@@ -5,10 +5,17 @@ import mapFile12 from '../readyMaps/Davis/houses';
 import mapFile13 from '../readyMaps/Davis/water';
 import mapFile2 from '../readyMaps/Alexandria.osm.geojson';
 import mapFile3 from '../readyMaps/Cairo.osm.geojson';
-import { status, saveByteArray, HandleFile, ClearFiles } from './Handle';
+import {
+  status,
+  saveByteArray,
+  HandleFile,
+  ClearTempFiles,
+  ClearFiles
+} from './Handle';
 import { PickStreets, PickHouses, PickWater } from './DataFilter';
 import { FilterStreets, FilterHouses, FilterWater } from './ItemsFilter';
 import { ConvertCoordinates } from './CoordinatesConversion';
+import { Assemble } from './FilesAssembler';
 
 class Parser {
   static LoadPreparedMap(e) {
@@ -23,14 +30,26 @@ class Parser {
     } else if (name === 'preloadMap3') {
       files[0] = mapFile3;
     }
-    //TODO 'files' contains jsons ready for display, need to send them to corresponding function
+
+    saveByteArray(
+      [JSON.stringify(files[0])],
+      'streets.json',
+      'streetsProcFile'
+    );
+    saveByteArray([JSON.stringify(files[1])], 'houses.json', 'housesProcFile');
+    saveByteArray([JSON.stringify(files[2])], 'water.json', 'waterProcFile');
   }
+
   static PickUsefulFromGeoJSONToTXT() {
     const FIRST_ELEMENT = 0;
     const file = document.getElementById('loadedMap').files[FIRST_ELEMENT];
 
     if (file !== undefined) {
-      if (document.getElementById('restProcFile') !== null) {
+      if (
+        document.getElementById('streetsProcFile') !== null ||
+        document.getElementById('housesProcFile') !== null ||
+        document.getElementById('waterProcFile') !== null
+      ) {
         ClearFiles();
       }
 
@@ -136,9 +155,9 @@ function callbackEnd(data) {
         HandleFile(water, 'water');
       }
     })
-    .then(function() {
-      ConvertCoordinates(['streets', 'houses', 'water']);
-    })
+    .then(ConvertCoordinates)
+    .then(Assemble)
+    .then(ClearTempFiles)
     .catch(function(err) {
       alert(err);
     });

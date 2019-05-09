@@ -2,57 +2,21 @@ import { status, GetFileCounts } from './Handle';
 
 function GetBoundsOneFile(json_data) {
   let arr_bounds = new Array(4);
-  switch (json_data.points[0].type) {
-    case 'LineString':
-      arr_bounds[0] = json_data.points[0].coordinates[0][0];
-      arr_bounds[1] = arr_bounds[0];
-      arr_bounds[2] = json_data.points[0].coordinates[0][1];
-      arr_bounds[3] = arr_bounds[2];
-      break;
-    case 'MultiPolygon':
-      arr_bounds[0] = json_data.points[0].coordinates[0][0][0][0];
-      arr_bounds[1] = arr_bounds[2];
-      arr_bounds[2] = json_data.points[0].coordinates[0][0][0][1];
-      arr_bounds[3] = arr_bounds[2];
-      break;
-    default:
-  }
+  arr_bounds[0] = json_data.items[0].coordinates[0][0];
+  arr_bounds[1] = arr_bounds[0];
+  arr_bounds[2] = json_data.items[0].coordinates[0][1];
+  arr_bounds[3] = arr_bounds[2];
 
-  for (let j = 0; j < json_data.points.length; j++) {
-    switch (json_data.points[j].type) {
-      case 'LineString':
-        for (let k = 0; k < json_data.points[j].coordinates.length; k++) {
-          if (json_data.points[j].coordinates[k][0] < arr_bounds[0])
-            arr_bounds[0] = json_data.points[j].coordinates[k][0];
-          if (json_data.points[j].coordinates[k][0] > arr_bounds[1])
-            arr_bounds[1] = json_data.points[j].coordinates[k][0];
-          if (json_data.points[j].coordinates[k][1] > arr_bounds[2])
-            arr_bounds[2] = json_data.points[j].coordinates[k][1];
-          if (json_data.points[j].coordinates[k][1] < arr_bounds[3])
-            arr_bounds[3] = json_data.points[j].coordinates[k][1];
-        }
-        break;
-      case 'MultiPolygon':
-        for (let l = 0; l < json_data.points[j].coordinates.length; l++) {
-          for (let m = 0; m < json_data.points[j].coordinates[l].length; m++) {
-            for (
-              let k = 0;
-              k < json_data.points[j].coordinates[l][m].length;
-              k++
-            ) {
-              if (json_data.points[j].coordinates[l][m][k][0] < arr_bounds[0])
-                arr_bounds[0] = json_data.points[j].coordinates[l][m][k][0];
-              if (json_data.points[j].coordinates[l][m][k][0] > arr_bounds[1])
-                arr_bounds[1] = json_data.points[j].coordinates[l][m][k][0];
-              if (json_data.points[j].coordinates[l][m][k][1] > arr_bounds[2])
-                arr_bounds[2] = json_data.points[j].coordinates[l][m][k][1];
-              if (json_data.points[j].coordinates[l][m][k][1] < arr_bounds[3])
-                arr_bounds[3] = json_data.points[j].coordinates[l][m][k][1];
-            }
-          }
-        }
-        break;
-      default:
+  for (let j = 0; j < json_data.items.length; j++) {
+    for (let k = 0; k < json_data.items[j].coordinates.length; k++) {
+      if (json_data.items[j].coordinates[k][0] < arr_bounds[0])
+        arr_bounds[0] = json_data.items[j].coordinates[k][0];
+      if (json_data.items[j].coordinates[k][0] > arr_bounds[1])
+        arr_bounds[1] = json_data.items[j].coordinates[k][0];
+      if (json_data.items[j].coordinates[k][1] > arr_bounds[2])
+        arr_bounds[2] = json_data.items[j].coordinates[k][1];
+      if (json_data.items[j].coordinates[k][1] < arr_bounds[3])
+        arr_bounds[3] = json_data.items[j].coordinates[k][1];
     }
   }
   return arr_bounds;
@@ -106,44 +70,14 @@ function ConvertCoordinatesOneFile(json_data, left, right, up, down) {
   const scale = 10000;
   const width = (right - left) * scale,
     height = (up - down) * scale;
-  console.log(left, right, up, down, width, height);
-  for (let j = 0; j < json_data.points.length; j++) {
-    switch (json_data.points[j].type) {
-      case 'LineString':
-        for (let k = 0; k < json_data.points[j].coordinates.length; k++) {
-          json_data.points[j].coordinates[k][0] = Math.round(
-            ((json_data.points[j].coordinates[k][0] - left) / (right - left)) *
-              width
-          );
-          json_data.points[j].coordinates[k][1] = Math.round(
-            ((json_data.points[j].coordinates[k][1] - down) / (up - down)) *
-              height
-          );
-        }
-        break;
-      case 'MultiPolygon':
-        for (let l = 0; l < json_data.points[j].coordinates.length; l++) {
-          for (let m = 0; m < json_data.points[j].coordinates[l].length; m++) {
-            for (
-              let k = 0;
-              k < json_data.points[j].coordinates[l][m].length;
-              k++
-            ) {
-              json_data.points[j].coordinates[l][m][k][0] = Math.round(
-                ((json_data.points[j].coordinates[l][m][k][0] - left) /
-                  (right - left)) *
-                  width
-              );
-              json_data.points[j].coordinates[l][m][k][1] = Math.round(
-                ((json_data.points[j].coordinates[l][m][k][1] - down) /
-                  (up - down)) *
-                  height
-              );
-            }
-          }
-        }
-        break;
-      default:
+  for (let j = 0; j < json_data.items.length; j++) {
+    for (let k = 0; k < json_data.items[j].coordinates.length; k++) {
+      json_data.items[j].coordinates[k][0] = Math.round(
+        ((json_data.items[j].coordinates[k][0] - left) / (right - left)) * width
+      );
+      json_data.items[j].coordinates[k][1] = Math.round(
+        ((json_data.items[j].coordinates[k][1] - down) / (up - down)) * height
+      );
     }
   }
   return json_data;
@@ -152,25 +86,19 @@ function ConvertCoordinatesOneFile(json_data, left, right, up, down) {
 function ConvertCoordinates(arr_of_file_names) {
   let file_counts = GetFileCounts();
   GetBounds(arr_of_file_names)
-    .then(function(arr_bounds) {
+    .then(async function(arr_bounds) {
       for (let i = 0; i < file_counts.length; i++) {
         for (let j = 1; j <= file_counts[i]; j++) {
           let doc = document.getElementById(
             arr_of_file_names[i] + j + 'ProcFile'
           );
           if (doc !== null) {
-            fetch(doc.href)
+            await fetch(doc.href)
               .then(status)
               .then(function(data) {
                 window.URL.revokeObjectURL(doc.href);
                 let json_data = JSON.parse(
                   String.fromCharCode.apply(null, new Uint8Array(data))
-                );
-                console.log(
-                  arr_bounds[0],
-                  arr_bounds[1],
-                  arr_bounds[2],
-                  arr_bounds[3]
                 );
                 json_data = ConvertCoordinatesOneFile(
                   json_data,

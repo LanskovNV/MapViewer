@@ -53,6 +53,9 @@ function callbackDataProcess(data) {
       str_data.length - str_data.lastIndexOf('\n')
     );
 
+  if (str_valid_json.length === 0) {
+    return;
+  }
   //Get rest part from previous chunk and save new rest part
   fetch(restFile.href)
     .then(status)
@@ -67,13 +70,13 @@ function callbackDataProcess(data) {
 
       if (buf_rest.indexOf('FeatureCollection') > 0) {
         let str_json =
-          '{"points":[' +
+          '{"items":[' +
           buf_rest.substr(41, buf_rest.lastIndexOf(',') - 41) +
           ']}';
         json_temp = JSON.parse(str_json);
       } else {
         let str_json =
-          '{"points":[' +
+          '{"items":[' +
           buf_rest.substr(1, buf_rest.lastIndexOf(',') - 1) +
           ']}';
         json_temp = JSON.parse(str_json);
@@ -83,15 +86,15 @@ function callbackDataProcess(data) {
         houses = PickHouses(json_temp),
         water = PickWater(json_temp);
 
-      if (streets.points.length > 0) {
+      if (streets.items.length > 0) {
         streets = FilterStreets(streets);
         HandleFile(streets, 'streets');
       }
-      if (houses.points.length > 0) {
+      if (houses.items.length > 0) {
         houses = FilterHouses(houses);
         HandleFile(houses, 'houses');
       }
-      if (water.points.length > 0) {
+      if (water.items.length > 0) {
         water = FilterWater(water);
         HandleFile(water, 'water');
       }
@@ -117,22 +120,22 @@ function callbackEnd(data) {
 
       const buf_rest =
         String.fromCharCode.apply(null, new Uint8Array(data_rest)) + str_data;
-      let str_json = '{"points":[' + buf_rest.substr(1, buf_rest.length - 1);
+      let str_json = '{"items":[' + buf_rest.substr(1, buf_rest.length - 1);
       let json_temp = JSON.parse(str_json);
 
       let streets = PickStreets(json_temp),
         houses = PickHouses(json_temp),
         water = PickWater(json_temp);
 
-      if (streets.points.length > 0) {
+      if (streets.items.length > 0) {
         streets = FilterStreets(streets);
         HandleFile(streets, 'streets');
       }
-      if (houses.points.length > 0) {
+      if (houses.items.length > 0) {
         houses = FilterHouses(houses);
         HandleFile(houses, 'houses');
       }
-      if (water.points.length > 0) {
+      if (water.items.length > 0) {
         water = FilterWater(water);
         HandleFile(water, 'water');
       }

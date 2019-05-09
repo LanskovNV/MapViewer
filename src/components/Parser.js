@@ -1,6 +1,8 @@
 import { injectIntl } from 'react-intl';
 
-import mapFile1 from '../readyMaps/Davis.osm.geojson';
+import mapFile11 from '../readyMaps/Davis/streets';
+import mapFile12 from '../readyMaps/Davis/houses';
+import mapFile13 from '../readyMaps/Davis/water';
 import mapFile2 from '../readyMaps/Alexandria.osm.geojson';
 import mapFile3 from '../readyMaps/Cairo.osm.geojson';
 import { status, saveByteArray, HandleFile, ClearFiles } from './Handle';
@@ -10,24 +12,18 @@ import { ConvertCoordinates } from './CoordinatesConversion';
 
 class Parser {
   static LoadPreparedMap(e) {
-    let file;
+    let files = new Array(3);
     const name = e.target.id;
     if (name === 'preloadMap1') {
-      file = mapFile1;
+      files[0] = mapFile11;
+      files[1] = mapFile12;
+      files[2] = mapFile13;
     } else if (name === 'preloadMap2') {
-      file = mapFile2;
+      files[0] = mapFile2;
     } else if (name === 'preloadMap3') {
-      file = mapFile3;
+      files[0] = mapFile3;
     }
-    fetch(file)
-      .then(status)
-      .then(function(data) {
-        // TODO Have ArrayBuffer, need to process it
-        alert(data.byteLength);
-      })
-      .catch(function(err) {
-        alert(err);
-      });
+    //TODO 'files' contains jsons ready for display, need to send them to corresponding function
   }
   static PickUsefulFromGeoJSONToTXT() {
     const FIRST_ELEMENT = 0;

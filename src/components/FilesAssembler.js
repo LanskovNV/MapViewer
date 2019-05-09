@@ -32,7 +32,7 @@ async function Assemble() {
               .then(statusJSON)
               .then(function(json_save_data) {
                 for (let k = 0; k < json_data.items.length; k++) {
-                  json_save_data.items.push(json_data.items[i]);
+                  json_save_data.items.push(json_data.items[k]);
                 }
                 const blob = new Blob([JSON.stringify(json_save_data)], {
                     type: 'text/json'

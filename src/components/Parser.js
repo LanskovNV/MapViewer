@@ -6,7 +6,9 @@ import mapFile13 from '../readyMaps/Davis/water';
 import mapFile21 from '../readyMaps/Cairo/streets';
 import mapFile22 from '../readyMaps/Cairo/houses';
 import mapFile23 from '../readyMaps/Cairo/water';
-import mapFile3 from '../readyMaps/Cairo.osm.geojson';
+import mapFile31 from '../readyMaps/Alexandria/streets';
+import mapFile32 from '../readyMaps/Alexandria/houses';
+import mapFile33 from '../readyMaps/Alexandria/water';
 import {
   status,
   saveByteArray,
@@ -32,7 +34,9 @@ class Parser {
       files[1] = mapFile22;
       files[2] = mapFile23;
     } else if (name === 'preloadMap3') {
-      files[0] = mapFile3;
+      files[0] = mapFile31;
+      files[1] = mapFile32;
+      files[2] = mapFile33;
     }
 
     saveByteArray(

@@ -83,9 +83,10 @@ function ConvertCoordinatesOneFile(json_data, left, right, up, down) {
   return json_data;
 }
 
-function ConvertCoordinates(arr_of_file_names) {
-  let file_counts = GetFileCounts();
-  GetBounds(arr_of_file_names)
+async function ConvertCoordinates() {
+  const file_counts = GetFileCounts(),
+    arr_of_file_names = ['streets', 'houses', 'water'];
+  await GetBounds(arr_of_file_names)
     .then(async function(arr_bounds) {
       for (let i = 0; i < file_counts.length; i++) {
         for (let j = 1; j <= file_counts[i]; j++) {

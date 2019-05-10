@@ -5,9 +5,9 @@ import SceneSubject from './SceneSubject';
 export default canvas => {
   const clock = new THREE.Clock();
 
-  const fov = 50; // 40;
-  const near = 4; // 10;
-  const far = 100; // 7000;
+  const fov = 500;
+  const near = 40;
+  const far = 100000;
 
   const screenDimensions = {
     width: canvas.width,
@@ -33,7 +33,7 @@ export default canvas => {
 
   function buildScene() {
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color('#60F');
+    scene.background = new THREE.Color('#FFF');
 
     return scene;
   }
@@ -71,7 +71,7 @@ export default canvas => {
       .translate(screenDimensions.width / 2, screenDimensions.height / 2)
       .scale(initial_scale);
     zoom.transform(view, initial_transform);
-    camera.position.set(0, 0, far);
+    // camera.position.set(0, 0, far);
   }
 
   function zoomHandler(d3_transform) {

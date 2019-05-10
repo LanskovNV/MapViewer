@@ -39,6 +39,14 @@ class Parser {
       files[2] = mapFile33;
     }
 
+    if (
+      document.getElementById('streetsProcFile') !== null ||
+      document.getElementById('housesProcFile') !== null ||
+      document.getElementById('waterProcFile') !== null
+    ) {
+      ClearFiles();
+    }
+
     saveByteArray(
       [JSON.stringify(files[0])],
       'streets.json',

@@ -2,15 +2,17 @@ import * as THREE from 'three';
 import ConvertCoordinates from '../../components/Converter';
 
 export default scene => {
-  const material = new THREE.MeshBasicMaterial({ color: '#00F' });
+  const material = new THREE.MeshBasicMaterial({ color: '#000' });
   const holesMaterial = new THREE.MeshBasicMaterial({ color: '#FFF' });
-  const linesMaterial = new THREE.MeshBasicMaterial({ color: '#00F' });
-  const mapJson = require('../../readyMaps/Cairo/water.json');
-  const mapJson1 = require('../../readyMaps/Cairo/houses.json');
+  const linesMaterial = new THREE.MeshBasicMaterial({ color: '#000' });
+  const mapJson = require('../../readyMaps/Davis/water.json');
+  const mapJson1 = require('../../readyMaps/Davis/houses.json');
+  const mapJson2 = require('../../readyMaps/Davis/streets.json');
 
   let objects = [];
   let holes = [];
   let lines = [];
+
   mapJson.items.forEach(feature => {
     const geom = new THREE.Geometry();
     feature.coordinates.forEach(coord => {
@@ -23,6 +25,17 @@ export default scene => {
   });
 
   mapJson1.items.forEach(feature => {
+    const geom = new THREE.Geometry();
+    feature.coordinates.forEach(coord => {
+      coord = ConvertCoordinates(coord);
+      geom.vertices.push(new THREE.Vector3(coord[0], coord[1], 0));
+    });
+    if (feature.fill === 'no') holes.push(geom);
+    else if (feature.fill === 'yes') objects.push(geom);
+    else lines.push(geom);
+  });
+
+  mapJson2.items.forEach(feature => {
     const geom = new THREE.Geometry();
     feature.coordinates.forEach(coord => {
       coord = ConvertCoordinates(coord);
@@ -68,7 +81,7 @@ export default scene => {
   }
 
   const group = new THREE.Group();
-  // group.add(lineMeshes);
+  group.add(lineMeshes);
   group.add(meshes);
   group.add(holeMeshes);
 

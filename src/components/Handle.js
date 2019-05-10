@@ -14,6 +14,15 @@ function status(response) {
   return response.arrayBuffer();
 }
 
+function statusJSON(response) {
+  if (response.status !== 200) {
+    alert('Looks like there was a problem.');
+  }
+
+  // Examine the text in the response
+  return response.json();
+}
+
 function saveByteArray(data, name, idName) {
   let a = document.createElement('a');
   document.head.appendChild(a);
@@ -88,7 +97,7 @@ function HandleFile(buf_rest, file_name) {
     });
 }
 
-function ClearFiles() {
+function ClearTempFiles() {
   const file_names = ['streets', 'houses', 'water'];
   for (let i = 0; i < file_names.length; i++) {
     for (let j = 1; j <= file_counts[i]; j++) {
@@ -103,4 +112,23 @@ function ClearFiles() {
   document.head.removeChild(document.getElementById('restProcFile'));
 }
 
-export { status, saveByteArray, HandleFile, ClearFiles, GetFileCounts };
+function ClearFiles() {
+  const file_names = ['streets', 'houses', 'water'];
+  for (let i = 0; i < file_names.length; i++) {
+    let doc = document.getElementById(file_names[i] + 'ProcFile');
+    if (doc !== null) {
+      window.URL.revokeObjectURL(doc.href);
+      document.head.removeChild(doc);
+    }
+  }
+}
+
+export {
+  status,
+  statusJSON,
+  saveByteArray,
+  HandleFile,
+  ClearTempFiles,
+  ClearFiles,
+  GetFileCounts
+};

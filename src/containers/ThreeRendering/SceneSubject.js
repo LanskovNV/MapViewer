@@ -1,61 +1,64 @@
 import * as THREE from 'three';
-import alphaTexture from './stripes_gradient.jpg';
+import ConvertCoordinates from '../../components/Converter';
 
 export default scene => {
-  const group = new THREE.Group();
+  const material = new THREE.MeshBasicMaterial({ color: '#00F' });
+  const holesMaterial = new THREE.MeshBasicMaterial({ color: '#FFF' });
+  const linesMaterial = new THREE.MeshBasicMaterial({ color: '#00F' });
+  const mapJson = require('../../readyMaps/water.json');
 
-  const subjectGeometry = deformGeometry(new THREE.IcosahedronGeometry(10, 2));
-
-  const subjectMaterial = new THREE.MeshStandardMaterial({
-    color: '#000',
-    transparent: true,
-    side: THREE.DoubleSide,
-    alphaTest: 0.5
+  let objects = [];
+  let holes = [];
+  let lines = [];
+  mapJson.items.forEach(feature => {
+    const geom = new THREE.Geometry();
+    feature.coordinates.forEach(coord => {
+      coord = ConvertCoordinates(coord);
+      geom.vertices.push(new THREE.Vector3(coord[0], coord[1], 0));
+    });
+    if (feature.fill === 'no') holes.push(geom);
+    else if (feature.fill === 'yes') objects.push(geom);
+    else lines.push(geom);
   });
-  subjectMaterial.alphaMap = new THREE.TextureLoader().load(alphaTexture);
-  subjectMaterial.alphaMap.magFilter = THREE.NearestFilter;
-  subjectMaterial.alphaMap.wrapT = THREE.RepeatWrapping;
-  subjectMaterial.alphaMap.repeat.y = 1;
 
-  const subjectMesh = new THREE.Mesh(subjectGeometry, subjectMaterial);
+  let meshes = new THREE.Group();
+  let holeMeshes = new THREE.Group();
+  let lineMeshes = new THREE.Group();
 
-  const subjectWireframe = new THREE.LineSegments(
-    new THREE.EdgesGeometry(subjectGeometry),
-    new THREE.LineBasicMaterial()
-  );
-
-  group.add(subjectMesh);
-  group.add(subjectWireframe);
-  scene.add(group);
-
-  group.rotation.z = Math.PI / 4;
-
-  const speed = 0.02;
-  const textureOffsetSpeed = 0.02;
-
-  function deformGeometry(geometry) {
-    for (let i = 0; i < geometry.vertices.length; i += 2) {
-      const scalar = 1 + Math.random() * 0.8;
-      geometry.vertices[i].multiplyScalar(scalar);
+  for (let i = 0; i < objects.length; i++) {
+    const triangles = THREE.ShapeUtils.triangulateShape(
+      objects[i].vertices,
+      []
+    );
+    for (let j = 0; j < triangles.length; j++) {
+      objects[i].faces.push(
+        new THREE.Face3(triangles[j][0], triangles[j][1], triangles[j][2])
+      );
     }
-
-    return geometry;
+    const mesh = new THREE.Mesh(objects[i], material);
+    meshes.add(mesh);
   }
 
-  function update(time) {
-    const angle = time * speed;
-
-    group.rotation.y = angle;
-
-    subjectMaterial.alphaMap.offset.y = 0.55 + time * textureOffsetSpeed;
-
-    subjectWireframe.material.color.setHSL(Math.sin(angle * 2), 0.5, 0.5);
-
-    const scale = (Math.sin(angle * 8) + 6.4) / 5;
-    subjectWireframe.scale.set(scale, scale, scale);
+  for (let i = 0; i < holes.length; i++) {
+    const triangles1 = THREE.ShapeUtils.triangulateShape(holes[i].vertices, []);
+    for (let j = 0; j < triangles1.length; j++) {
+      holes[i].faces.push(
+        new THREE.Face3(triangles1[j][0], triangles1[j][1], triangles1[j][2])
+      );
+    }
+    const mesh1 = new THREE.Mesh(holes[i], holesMaterial);
+    holeMeshes.add(mesh1);
   }
 
-  return {
-    update
-  };
+  for (let i = 0; i < lines.length; i++) {
+    const line = new THREE.Line(lines[i], linesMaterial);
+    lineMeshes.add(line);
+  }
+
+  const group = new THREE.Group();
+  group.add(lineMeshes);
+  group.add(meshes);
+  group.add(holeMeshes);
+
+  scene.add(group);
 };

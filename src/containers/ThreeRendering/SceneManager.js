@@ -10,8 +10,8 @@ export default canvas => {
   const far = 100000;
 
   const screenDimensions = {
-    width: canvas.offsetWidth,
-    height: canvas.offsetHeight * 3
+    width: canvas.width,
+    height: canvas.height * 3
   };
 
   const mousePosition = {

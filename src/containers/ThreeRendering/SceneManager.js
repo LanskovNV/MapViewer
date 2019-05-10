@@ -5,9 +5,9 @@ import SceneSubject from './SceneSubject';
 export default canvas => {
   const clock = new THREE.Clock();
 
-  const fov = 50;
-  const near = 4;
-  const far = 200;
+  const fov = 500;
+  const near = 40;
+  const far = 100000;
 
   const screenDimensions = {
     width: canvas.offsetWidth,
@@ -33,7 +33,7 @@ export default canvas => {
 
   function buildScene() {
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color('#AFF');
+    scene.background = new THREE.Color('#FFF');
 
     return scene;
   }

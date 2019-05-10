@@ -2,10 +2,11 @@ import SceneManager from './SceneManager';
 
 export default container => {
   const canvas = createCanvas(document, container);
+  canvasInit();
   const sceneManager = new SceneManager(canvas);
 
-  let canvasHalfWidth;
-  let canvasHalfHeight;
+  let canvasHalfWidth = 0;
+  let canvasHalfHeight = 0;
 
   bindEventListeners();
   render();
@@ -22,12 +23,14 @@ export default container => {
     resizeCanvas();
   }
 
-  function resizeCanvas() {
+  function canvasInit() {
     canvas.style.width = '100%';
     canvas.style.height = '100%';
-
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
+  }
+  function resizeCanvas() {
+    canvasInit();
 
     canvasHalfWidth = Math.round(canvas.offsetWidth / 2);
     canvasHalfHeight = Math.round(canvas.offsetHeight / 2);

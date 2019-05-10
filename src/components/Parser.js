@@ -83,19 +83,23 @@ function callbackDataProcess(data) {
       str_data.length - str_data.lastIndexOf('\n')
     );
 
-  if (str_valid_json.length === 0) {
-    return;
-  }
   //Get rest part from previous chunk and save new rest part
   fetch(restFile.href)
     .then(status)
     .then(function(data_rest) {
       window.URL.revokeObjectURL(restFile.href);
       const str_data_rest = String.fromCharCode.apply(
-          null,
-          new Uint8Array(data_rest)
-        ),
-        buf_rest = str_data_rest + str_valid_json;
+        null,
+        new Uint8Array(data_rest)
+      );
+      if (str_valid_json.length === 0) {
+        let str_rest_prolong = str_data_rest + str_data;
+        const blob = new Blob([str_rest_prolong], { type: 'text/json' }),
+          f = new File([blob], restFile.download, { type: 'text/json' });
+        restFile.href = window.URL.createObjectURL(f);
+        return;
+      }
+      const buf_rest = str_data_rest + str_valid_json;
       let json_temp;
 
       if (buf_rest.indexOf('FeatureCollection') > 0) {

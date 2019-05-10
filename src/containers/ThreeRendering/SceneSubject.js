@@ -3,9 +3,9 @@ import ConvertCoordinates from '../../components/Converter';
 
 export default scene => {
   const material = new THREE.MeshBasicMaterial({ color: '#00F' });
-  const holesMaterial = new THREE.MeshBasicMaterial({ color: '#F00' });
+  const holesMaterial = new THREE.MeshBasicMaterial({ color: '#FFF' });
   const linesMaterial = new THREE.MeshBasicMaterial({ color: '#00F' });
-  const mapJson = require('../../readyMaps/streets.json');
+  const mapJson = require('../../readyMaps/water.json');
 
   let objects = [];
   let holes = [];
@@ -16,8 +16,8 @@ export default scene => {
       coord = ConvertCoordinates(coord);
       geom.vertices.push(new THREE.Vector3(coord[0], coord[1], 0));
     });
-    if (feature.fill === 'yes') holes.push(geom);
-    else if (feature.fill === 'no') objects.push(geom);
+    if (feature.fill === 'no') holes.push(geom);
+    else if (feature.fill === 'yes') objects.push(geom);
     else lines.push(geom);
   });
 
@@ -57,8 +57,8 @@ export default scene => {
 
   const group = new THREE.Group();
   group.add(lineMeshes);
-  // group.add(meshes);
-  // group.add(holeMeshes);
+  group.add(meshes);
+  group.add(holeMeshes);
 
   scene.add(group);
 };

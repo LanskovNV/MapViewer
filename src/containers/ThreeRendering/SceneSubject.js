@@ -4,63 +4,45 @@ import ConvertCoordinates from '../../components/Converter';
 export default scene => {
   const material = new THREE.MeshBasicMaterial({ color: '#000' });
   const holesMaterial = new THREE.MeshBasicMaterial({ color: '#FFF' });
-  const linesMaterial = new THREE.MeshBasicMaterial({ color: '#000' });
-  const mapJson = require('../../readyMaps/Davis/water.json');
-  const mapJson1 = require('../../readyMaps/Davis/houses.json');
-  const mapJson2 = require('../../readyMaps/Davis/streets.json');
+  let mapJson = [];
 
-  let objects = [];
+  const water = require('../../readyMaps/Davis/water.json');
+  const houses = require('../../readyMaps/Davis/houses.json');
+  const streets = require('../../readyMaps/Davis/streets.json');
+
+  mapJson.push(houses, streets, water);
+
+  let polygons = [];
   let holes = [];
   let lines = [];
-
-  mapJson.items.forEach(feature => {
-    const geom = new THREE.Geometry();
-    feature.coordinates.forEach(coord => {
-      coord = ConvertCoordinates(coord);
-      geom.vertices.push(new THREE.Vector3(coord[0], coord[1], 0));
+  for (let i = 0; i < 3; i++) {
+    mapJson[i].items.forEach(feature => {
+      const geom = new THREE.Geometry();
+      feature.coordinates.forEach(coord => {
+        coord = ConvertCoordinates(coord);
+        geom.vertices.push(new THREE.Vector3(coord[0], coord[1], 0));
+      });
+      if (feature.fill === 'no') holes.push(geom);
+      else if (feature.fill === 'yes') polygons.push(geom);
+      else lines.push(geom);
     });
-    if (feature.fill === 'no') holes.push(geom);
-    else if (feature.fill === 'yes') objects.push(geom);
-    else lines.push(geom);
-  });
-
-  mapJson1.items.forEach(feature => {
-    const geom = new THREE.Geometry();
-    feature.coordinates.forEach(coord => {
-      coord = ConvertCoordinates(coord);
-      geom.vertices.push(new THREE.Vector3(coord[0], coord[1], 0));
-    });
-    if (feature.fill === 'no') holes.push(geom);
-    else if (feature.fill === 'yes') objects.push(geom);
-    else lines.push(geom);
-  });
-
-  mapJson2.items.forEach(feature => {
-    const geom = new THREE.Geometry();
-    feature.coordinates.forEach(coord => {
-      coord = ConvertCoordinates(coord);
-      geom.vertices.push(new THREE.Vector3(coord[0], coord[1], 0));
-    });
-    if (feature.fill === 'no') holes.push(geom);
-    else if (feature.fill === 'yes') objects.push(geom);
-    else lines.push(geom);
-  });
+  }
 
   let meshes = new THREE.Group();
   let holeMeshes = new THREE.Group();
   let lineMeshes = new THREE.Group();
 
-  for (let i = 0; i < objects.length; i++) {
+  for (let i = 0; i < polygons.length; i++) {
     const triangles = THREE.ShapeUtils.triangulateShape(
-      objects[i].vertices,
+      polygons[i].vertices,
       []
     );
     for (let j = 0; j < triangles.length; j++) {
-      objects[i].faces.push(
+      polygons[i].faces.push(
         new THREE.Face3(triangles[j][0], triangles[j][1], triangles[j][2])
       );
     }
-    const mesh = new THREE.Mesh(objects[i], material);
+    const mesh = new THREE.Mesh(polygons[i], material);
     meshes.add(mesh);
   }
 
@@ -76,7 +58,7 @@ export default scene => {
   }
 
   for (let i = 0; i < lines.length; i++) {
-    const line = new THREE.Line(lines[i], linesMaterial);
+    const line = new THREE.Line(lines[i], material);
     lineMeshes.add(line);
   }
 

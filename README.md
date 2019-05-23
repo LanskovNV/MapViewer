@@ -18,11 +18,12 @@ Java Script project to work with maps. You can load openstreetmap you want and w
 
 *And now you are ready to start!*
 ## Limitations
- For now provided only react mapviewer in dev branch
+ Now we can work with json files (read and open) and show Map view with threejs+webglrender
 ## Prerequisites
  - NodeJS and npm
  - git
  - WebStorm *// optional*  
+ (please, unzip preload maps in src/readyMaps before start)
 ## Command interface
  To run the projectnpx in WebStorm on localhost:
  1) Clone project with git
@@ -43,6 +44,12 @@ Java Script project to work with maps. You can load openstreetmap you want and w
  and linting
  ```
  npm run lint
+ ```
+ If you want test production build on local server, do the following:
+ ```
+ npm run build
+ npm install -g serve
+ serve -s build
  ```
  ## Issues
  1) If you have problems with jest, do the following:

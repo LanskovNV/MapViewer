@@ -1,5 +1,5 @@
 # MapViewer
-![](https://raw.githubusercontent.com/LanskovNV/MapViewer/develop/public/mapbanner.png)
+![](https://raw.githubusercontent.com/LanskovNV/MapViewer/master/public/mapbanner.png)
 ## Purpose
 Java Script project to work with maps. You can load openstreetmap you want and we'll parse streets, houses and water objects for you.
 ### Quick start guide

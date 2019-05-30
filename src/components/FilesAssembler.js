@@ -1,5 +1,9 @@
 import { statusJSON, GetFileCounts, saveByteArray } from './Handle';
 
+/*
+ * @desc assembles multiple files "fileName##index" into single file "fileName",
+ *       files to assemble: ["streets##index", "houses##index", "water##index"]
+ */
 async function Assemble() {
   const arr_names = ['streets', 'houses', 'water'],
     arr_counts = GetFileCounts();

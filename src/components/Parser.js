@@ -17,7 +17,7 @@ import {
   ClearFiles
 } from './Handle';
 import { PickStreets, PickHouses, PickWater } from './DataFilter';
-import { FilterStreets, FilterHouses, FilterWater } from './ItemsFilter';
+import { FilterFile } from './ItemsFilter';
 import { ConvertCoordinates } from './CoordinatesConversion';
 import { Assemble } from './FilesAssembler';
 
@@ -121,15 +121,15 @@ function callbackDataProcess(data) {
         water = PickWater(json_temp);
 
       if (streets.items.length > 0) {
-        streets = FilterStreets(streets);
+        streets = FilterFile(streets);
         HandleFile(streets, 'streets');
       }
       if (houses.items.length > 0) {
-        houses = FilterHouses(houses);
+        houses = FilterFile(houses);
         HandleFile(houses, 'houses');
       }
       if (water.items.length > 0) {
-        water = FilterWater(water);
+        water = FilterFile(water);
         HandleFile(water, 'water');
       }
 
@@ -162,15 +162,15 @@ function callbackEnd(data) {
         water = PickWater(json_temp);
 
       if (streets.items.length > 0) {
-        streets = FilterStreets(streets);
+        streets = FilterFile(streets);
         HandleFile(streets, 'streets');
       }
       if (houses.items.length > 0) {
-        houses = FilterHouses(houses);
+        houses = FilterFile(houses);
         HandleFile(houses, 'houses');
       }
       if (water.items.length > 0) {
-        water = FilterWater(water);
+        water = FilterFile(water);
         HandleFile(water, 'water');
       }
     })
@@ -180,8 +180,6 @@ function callbackEnd(data) {
     .catch(function(err) {
       alert(err);
     });
-
-  //alert('End. All data successfully read');
 }
 
 function min(a, b) {

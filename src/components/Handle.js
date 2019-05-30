@@ -1,10 +1,19 @@
 const KByte50 = 50 * 1024;
-let file_counts = [1, 1, 1];
+let file_counts = [1, 1, 1]; // Counts for streets, houses and water files
 
+/*
+ * @desc gets files' counts
+ * @return file_counts - files' counts
+ */
 function GetFileCounts() {
   return file_counts;
 }
 
+/*
+ * @desc processes fetch response into arrayBuffer
+ * @param response - response get from fetch
+ * @return response.arrayBuffer() - request result as arrayBuffer
+ */
 function status(response) {
   if (response.status !== 200) {
     alert('Looks like there was a problem.');
@@ -14,6 +23,11 @@ function status(response) {
   return response.arrayBuffer();
 }
 
+/*
+ * @desc processes fetch response into json
+ * @param response - response get from fetch
+ * @return response.json() - request result as json
+ */
 function statusJSON(response) {
   if (response.status !== 200) {
     alert('Looks like there was a problem.');
@@ -23,6 +37,12 @@ function statusJSON(response) {
   return response.json();
 }
 
+/*
+ * @desc creates a File and appends it to the header via link
+ * @param data - initial data that will be recorded in file
+ * @param name - file name
+ * @param idName - link id
+ */
 function saveByteArray(data, name, idName) {
   let a = document.createElement('a');
   document.head.appendChild(a);
@@ -33,6 +53,11 @@ function saveByteArray(data, name, idName) {
   a.id = idName;
 }
 
+/*
+ * @desc appends new data to corresponding file
+ * @param buf_rest - data to append
+ * @param file_name - file's name to which it is needed to append
+ */
 function HandleFile(buf_rest, file_name) {
   let n;
   switch (file_name) {
@@ -49,6 +74,7 @@ function HandleFile(buf_rest, file_name) {
   }
   let tempFile = document.getElementById(file_name + n + 'ProcFile');
   if (tempFile === null) {
+    // File to write is not created
     saveByteArray([''], file_name + n + '.json', file_name + n + 'ProcFile');
     tempFile = document.getElementById(file_name + n + 'ProcFile');
   }
@@ -61,6 +87,7 @@ function HandleFile(buf_rest, file_name) {
       let buf;
 
       if (data_str.length < 2) {
+        // Empty file
         buf = buf_rest_json.substr(0, buf_rest_json.length);
       } else {
         buf =
@@ -74,6 +101,7 @@ function HandleFile(buf_rest, file_name) {
         url = window.URL.createObjectURL(f);
       tempFile.href = url;
       if (buf.length > KByte50) {
+        // Reached file's size restriction (set by Map-Viewer's developers)
         switch (file_name) {
           case 'streets':
             file_counts[0]++;
@@ -97,6 +125,9 @@ function HandleFile(buf_rest, file_name) {
     });
 }
 
+/*
+ * @desc clears all temporary files
+ */
 function ClearTempFiles() {
   const file_names = ['streets', 'houses', 'water'];
   for (let i = 0; i < file_names.length; i++) {
@@ -112,6 +143,9 @@ function ClearTempFiles() {
   document.head.removeChild(document.getElementById('restProcFile'));
 }
 
+/*
+ * @desc clears files with ready map data
+ */
 function ClearFiles() {
   const file_names = ['streets', 'houses', 'water'];
   for (let i = 0; i < file_names.length; i++) {

@@ -6,7 +6,6 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import CheckboxBar from './components/OutputData';
 import ThreeContainer from './containers/ThreeRendering/Three';
-import LoadingBar from './components/LoadingComponent';
 
 import GlobalStyle from './global-styles';
 
@@ -39,7 +38,6 @@ class App extends Component {
     return (
       <Wrapper>
         <Header />
-        <LoadingBar />
         <ThreeContainer objects={this.state} />
         <CheckboxBar
           updateHouses={this.updateHouses}

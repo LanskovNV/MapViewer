@@ -1,3 +1,8 @@
+/*
+ * @desc filter all unneeded items and compose file only with items recognised as streets
+ * @param json_data - data to filter stored as json file
+ * @return result - json file composed only with items recognised as streets
+ */
 function PickStreets(json_data) {
   let result = JSON.parse('{"items":[]}');
   for (let i = 0; i < json_data.items.length; i++) {
@@ -18,6 +23,11 @@ function PickStreets(json_data) {
   return result;
 }
 
+/*
+ * @desc filter all unneeded items and compose file only with items recognised as houses
+ * @param json_data - data to filter stored as json file
+ * @return result - json file composed only with items recognised as houses
+ */
 function PickHouses(json_data) {
   let result = JSON.parse('{"items":[]}');
   for (let i = 0; i < json_data.items.length; i++) {
@@ -53,6 +63,11 @@ function PickHouses(json_data) {
   return result;
 }
 
+/*
+ * @desc filter all unneeded items and compose file only with items recognised as water
+ * @param json_data - data to filter stored as json file
+ * @return result - json file composed only with items recognised as water
+ */
 function PickWater(json_data) {
   let result = JSON.parse('{"items":[]}');
   for (let i = 0; i < json_data.items.length; i++) {

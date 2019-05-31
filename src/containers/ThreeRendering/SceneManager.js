@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import * as d3 from 'd3';
 import SceneSubject from './SceneSubject';
 
-export default canvas => {
+export default (canvas, objects) => {
   const clock = new THREE.Clock();
 
   const fov = 90;
@@ -29,7 +29,7 @@ export default canvas => {
     });
   const camera = buildCamera(screenDimensions);
   const renderer = buildRender(screenDimensions);
-  const sceneSubjects = createSceneSubjects(scene);
+  const sceneSubjects = createSceneSubjects(scene, objects);
 
   function buildScene() {
     const scene = new THREE.Scene();
@@ -102,8 +102,8 @@ export default canvas => {
   }
   /* End Of Zoom */
 
-  function createSceneSubjects(scene) {
-    return new SceneSubject(scene);
+  function createSceneSubjects(scene, objects) {
+    return new SceneSubject(scene, objects);
   }
 
   function update() {

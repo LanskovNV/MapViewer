@@ -20,9 +20,9 @@ const Wrapper = styled.div`
 
 class App extends Component {
   state = {
-    isHouses: false,
-    isStreets: false,
-    isWater: false
+    isHouses: true,
+    isStreets: true,
+    isWater: true
   };
   // Callbacks to support checkboxes
   updateHouses = value => {

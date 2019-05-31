@@ -1,9 +1,9 @@
 import SceneManager from './SceneManager';
 
-export default container => {
+export default (container, objects) => {
   const canvas = createCanvas(document, container);
   canvasInit();
-  const sceneManager = new SceneManager(canvas);
+  const sceneManager = new SceneManager(canvas, objects);
 
   let canvasHalfWidth = 0;
   let canvasHalfHeight = 0;

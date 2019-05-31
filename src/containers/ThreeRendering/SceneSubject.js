@@ -2,6 +2,9 @@ import * as THREE from 'three';
 import ConvertCoordinates from '../../components/Converter';
 
 export default (scene, objects) => {
+  while (scene.children.length > 0) {
+    scene.remove(scene.children[0]);
+  }
   const holesMaterial = new THREE.MeshBasicMaterial({ color: '#FFF' });
   const elems = [];
 

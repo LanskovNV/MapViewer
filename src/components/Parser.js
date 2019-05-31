@@ -17,11 +17,15 @@ import {
   ClearFiles
 } from './Handle';
 import { PickStreets, PickHouses, PickWater } from './DataFilter';
-import { FilterStreets, FilterHouses, FilterWater } from './ItemsFilter';
+import { FilterFile } from './ItemsFilter';
 import { ConvertCoordinates } from './CoordinatesConversion';
 import { Assemble } from './FilesAssembler';
 
 class Parser {
+  /*
+   * @desc loads map through static load
+   * @param e - event
+   */
   static LoadPreparedMap(e) {
     let files = new Array(3);
     const name = e.target.id;
@@ -44,6 +48,7 @@ class Parser {
       document.getElementById('housesProcFile') !== null ||
       document.getElementById('waterProcFile') !== null
     ) {
+      // Already loaded map before
       ClearFiles();
     }
 
@@ -55,16 +60,21 @@ class Parser {
     saveByteArray([JSON.stringify(files[1])], 'houses.json', 'housesProcFile');
     saveByteArray([JSON.stringify(files[2])], 'water.json', 'waterProcFile');
   }
+  /*
+   * @desc dynamic map load
+   */
   static PickUsefulFromGeoJSONToTXT() {
     const FIRST_ELEMENT = 0;
     const file = document.getElementById('loadedMap').files[FIRST_ELEMENT];
 
     if (file !== undefined) {
+      // File selected
       if (
         document.getElementById('streetsProcFile') !== null ||
         document.getElementById('housesProcFile') !== null ||
         document.getElementById('waterProcFile') !== null
       ) {
+        // Already loaded map before
         ClearFiles();
       }
 
@@ -74,6 +84,10 @@ class Parser {
   }
 }
 
+/*
+ * @desc processes data chunk
+ * @param data - read data
+ */
 function callbackDataProcess(data) {
   const restFile = document.getElementById('restProcFile');
   const str_data = String.fromCharCode.apply(null, new Uint8Array(data)),
@@ -93,6 +107,7 @@ function callbackDataProcess(data) {
         new Uint8Array(data_rest)
       );
       if (str_valid_json.length === 0) {
+        // Nothing can be turned into json
         let str_rest_prolong = str_data_rest + str_data;
         const blob = new Blob([str_rest_prolong], { type: 'text/json' }),
           f = new File([blob], restFile.download, { type: 'text/json' });
@@ -103,6 +118,7 @@ function callbackDataProcess(data) {
       let json_temp;
 
       if (buf_rest.indexOf('FeatureCollection') > 0) {
+        // Read the beginning of geojson file
         let str_json =
           '{"items":[' +
           buf_rest.substr(41, buf_rest.lastIndexOf(',') - 41) +
@@ -121,15 +137,15 @@ function callbackDataProcess(data) {
         water = PickWater(json_temp);
 
       if (streets.items.length > 0) {
-        streets = FilterStreets(streets);
+        streets = FilterFile(streets);
         HandleFile(streets, 'streets');
       }
       if (houses.items.length > 0) {
-        houses = FilterHouses(houses);
+        houses = FilterFile(houses);
         HandleFile(houses, 'houses');
       }
       if (water.items.length > 0) {
-        water = FilterWater(water);
+        water = FilterFile(water);
         HandleFile(water, 'water');
       }
 
@@ -142,6 +158,10 @@ function callbackDataProcess(data) {
     });
 }
 
+/*
+ * @desc processes last data chunk
+ * @param data - read data
+ */
 function callbackEnd(data) {
   let restFile = document.getElementById('restProcFile');
   let str_data = String.fromCharCode.apply(null, new Uint8Array(data));
@@ -162,15 +182,15 @@ function callbackEnd(data) {
         water = PickWater(json_temp);
 
       if (streets.items.length > 0) {
-        streets = FilterStreets(streets);
+        streets = FilterFile(streets);
         HandleFile(streets, 'streets');
       }
       if (houses.items.length > 0) {
-        houses = FilterHouses(houses);
+        houses = FilterFile(houses);
         HandleFile(houses, 'houses');
       }
       if (water.items.length > 0) {
-        water = FilterWater(water);
+        water = FilterFile(water);
         HandleFile(water, 'water');
       }
     })
@@ -180,14 +200,23 @@ function callbackEnd(data) {
     .catch(function(err) {
       alert(err);
     });
-
-  //alert('End. All data successfully read');
 }
 
+/*
+ * @desc returns minimum
+ * @params a, b - values
+ * @return value - minimum out of 'a' and 'b'
+ */
 function min(a, b) {
   return a < b ? a : b;
 }
 
+/*
+ * @desc reads data from file
+ * @param file - file to read
+ * @param callbackProgressF - function to process read data chunks
+ * @param callbackEndF - function to process last read data chunk
+ */
 function loading(file, callbackProgressF, callbackEndF) {
   const CHUNK_SIZE = 10 * 1024;
   let start = 0;
@@ -225,6 +254,14 @@ function loading(file, callbackProgressF, callbackEndF) {
   }
 }
 
+/*
+ * @desc calls corresponding function to process read data
+ * @param reader - FileReader
+ * @param file - read file
+ * @param evt - event
+ * @param callbackProgressF - function to process read data chunks
+ * @param callbackEndF - function to process last read data chunk
+ */
 function callbackRead(reader, file, evt, callbackProgressF, callbackEndF) {
   if (reader.offset + reader.size < file.size) {
     callbackProgressF(evt.target.result);

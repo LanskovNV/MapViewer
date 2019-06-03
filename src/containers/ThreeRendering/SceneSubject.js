@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import ConvertCoordinates from '../../components/Converter';
+import ConvertCoordinates from '../Parsing/Converter';
 
 export default scene => {
   const material = new THREE.MeshBasicMaterial({ color: '#000' });

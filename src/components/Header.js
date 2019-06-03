@@ -4,9 +4,10 @@ import { Dropdown, Badge, Card, ButtonGroup } from 'react-bootstrap';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import messages from '../messages';
 import About from './About';
-import Parser from './Parser';
 import InputLoad from './Input/InputLoad';
 import PropTypes from 'prop-types';
+import StaticLoading from '../containers/Parsing/StaticLoading';
+import DynamicLoading from '../containers/Parsing/DynamicLoading';
 
 class Header extends React.Component {
   constructor() {
@@ -14,12 +15,6 @@ class Header extends React.Component {
     this.state = { percent: 0, isLoading: false };
     this.handleLoading = this.handleLoading.bind(this);
     this.handleLoadingPercent = this.handleLoadingPercent.bind(this);
-    this.Parser = (
-      <Parser
-        handleLoading={this.handleLoading}
-        handleLoadingPercent={this.handleLoadingPercent}
-      />
-    );
   }
   handleLoading = value => {
     this.setState({ isLoading: value });
@@ -57,7 +52,7 @@ class Header extends React.Component {
                     id={'preloadMap1'}
                     type={'submit'}
                     name={'Load1'}
-                    onClick={this.Parser.LoadPreparedMap}
+                    onClick={StaticLoading}
                   />
                 </Dropdown.Item>
                 <Dropdown.Item as="label" hred="preloadMap2">
@@ -67,7 +62,7 @@ class Header extends React.Component {
                     id={'preloadMap2'}
                     type={'submit'}
                     name={'Load2'}
-                    onClick={this.Parser.LoadPreparedMap}
+                    onClick={StaticLoading}
                   />
                 </Dropdown.Item>
                 <Dropdown.Item as="label" hred="preloadMap3">
@@ -77,7 +72,7 @@ class Header extends React.Component {
                     id={'preloadMap3'}
                     type={'submit'}
                     name={'Load3'}
-                    onClick={this.Parser.LoadPreparedMap}
+                    onClick={StaticLoading}
                   />
                 </Dropdown.Item>
                 <Dropdown.Divider />
@@ -88,7 +83,7 @@ class Header extends React.Component {
                     id={'loadedMap'}
                     type={'file'}
                     name={'Load'}
-                    onChange={this.Parser.PickUsefulFromGeoJSONToTXT}
+                    onChange={DynamicLoading}
                   />{' '}
                 </Dropdown.Item>
               </Dropdown.Menu>

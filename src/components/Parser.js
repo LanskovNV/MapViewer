@@ -1,5 +1,4 @@
 import { injectIntl } from 'react-intl';
-
 import mapFile11 from '../readyMaps/Davis/streets';
 import mapFile12 from '../readyMaps/Davis/houses';
 import mapFile13 from '../readyMaps/Davis/water';
@@ -20,11 +19,35 @@ import { PickStreets, PickHouses, PickWater } from './DataFilter';
 import { FilterStreets, FilterHouses, FilterWater } from './ItemsFilter';
 import { ConvertCoordinates } from './CoordinatesConversion';
 import { Assemble } from './FilesAssembler';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-class Parser {
-  static LoadPreparedMap(e) {
+class Parser extends React.Component {
+  constructor() {
+    super();
+    this.state = { percent: 0, step: 0, isLoading: false };
+    this.updateLoading = this.updateLoading.bind(this);
+    this.updateLoadingPercent = this.updateLoadingPercent.bind(this);
+  }
+  updateLoading = function() {
+    this.setState({ isLoading: !this.state.isLoading });
+    this.props.handleLoading(!this.state.isLoading);
+  };
+  updateLoadingStep = function(newStep) {
+    this.setState({ step: newStep });
+  };
+  updateLoadingPercent = function() {
+    this.setState({ percent: this.state.percent + this.step });
+    this.props.handleLoadingPercent(this.state.percent + this.step);
+  };
+  shouldComponentUpdate() {
+    return false;
+  }
+
+  LoadPreparedMap = function(e) {
     let files = new Array(3);
     const name = e.target.id;
+
     if (name === 'preloadMap1') {
       files[0] = mapFile11;
       files[1] = mapFile12;
@@ -54,8 +77,9 @@ class Parser {
     );
     saveByteArray([JSON.stringify(files[1])], 'houses.json', 'housesProcFile');
     saveByteArray([JSON.stringify(files[2])], 'water.json', 'waterProcFile');
-  }
-  static PickUsefulFromGeoJSONToTXT() {
+  };
+
+  PickUsefulFromGeoJSONToTXT = function() {
     const FIRST_ELEMENT = 0;
     const file = document.getElementById('loadedMap').files[FIRST_ELEMENT];
 
@@ -71,7 +95,7 @@ class Parser {
       saveByteArray([''], 'rest.txt', 'restProcFile');
       loading(file, callbackDataProcess, callbackEnd);
     }
-  }
+  };
 }
 
 function callbackDataProcess(data) {
@@ -234,3 +258,8 @@ function callbackRead(reader, file, evt, callbackProgressF, callbackEndF) {
 }
 
 export default injectIntl(Parser);
+
+Parser.propTypes = {
+  handleLoading: PropTypes.func,
+  handleLoadingPercent: PropTypes.func
+};

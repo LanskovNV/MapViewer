@@ -25,6 +25,11 @@ class App extends Component {
     isStreets: false,
     isWater: false
   };
+  loadingProps = {
+    isLoading: false,
+    percent: 0
+  };
+
   // Callbacks to support checkboxes
   updateHouses = value => {
     this.setState({ isHouses: value });
@@ -35,11 +40,23 @@ class App extends Component {
   updateWater = value => {
     this.setState({ isWater: value });
   };
+  updateLoading = value => {
+    this.setState({ isLoading: value });
+  };
+  updateLoadingPercent = value => {
+    this.setState({ percent: value });
+  };
   render() {
     return (
       <Wrapper>
-        <Header />
-        <LoadingBar />
+        <Header
+          updateLoading={this.updateLoading}
+          updateLoadingPercent={this.updateLoadingPercent}
+        />
+        <LoadingBar
+          isLoading={this.loadingProps.isLoading}
+          percent={this.loadingProps.percent}
+        />
         <ThreeContainer objects={this.state} />
         <CheckboxBar
           updateHouses={this.updateHouses}

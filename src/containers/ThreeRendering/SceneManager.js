@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import * as d3 from 'd3';
 import SceneSubject from './SceneSubject';
 
-export default (canvas, scene, objects) => {
+export default (canvas, objects) => {
   const clock = new THREE.Clock();
 
   const fov = 90;
@@ -19,6 +19,7 @@ export default (canvas, scene, objects) => {
     y: 0
   };
 
+  const scene = buildScene();
   const zoom = d3
     .zoom()
     .scaleExtent([getScaleFromZ(far), getScaleFromZ(near)])
@@ -29,6 +30,13 @@ export default (canvas, scene, objects) => {
   const camera = buildCamera(screenDimensions);
   const renderer = buildRender(screenDimensions);
   const sceneSubjects = createSceneSubjects(scene, objects);
+
+  function buildScene() {
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color('#FFF');
+
+    return scene;
+  }
 
   function buildRender({ width, height }) {
     const renderer = new THREE.WebGLRenderer({
@@ -128,7 +136,6 @@ export default (canvas, scene, objects) => {
   return {
     update,
     onWindowResize,
-    onMouseMove,
-    createSceneSubjects
+    onMouseMove
   };
 };

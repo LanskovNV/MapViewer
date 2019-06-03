@@ -19,19 +19,19 @@ class Header extends React.Component {
 
   loadAlexandria() {
     this.props.chooseMap('Alexandria', true);
-    Parser.LoadPreparedMap('preloadMap1');
+    Parser.LoadPreparedMap('Alexandria');
   }
   loadCairo() {
     this.props.chooseMap('Cairo', true);
-    Parser.LoadPreparedMap('preloadMap2');
+    Parser.LoadPreparedMap('Cairo');
   }
   loadDavis() {
     this.props.chooseMap('Davis', true);
-    Parser.LoadPreparedMap('preloadMap3');
+    Parser.LoadPreparedMap('Davis');
   }
   loadSPB() {
     this.props.chooseMap('SPB', true);
-    Parser.LoadPreparedMap('preloadMap4');
+    Parser.LoadPreparedMap('SPB');
   }
   load() {
     this.props.chooseMap('Custom', false);
@@ -57,31 +57,28 @@ class Header extends React.Component {
               <Dropdown.Menu alignRight={true}>
                 <Dropdown.Item as="label" hred="preloadMap1">
                   {' '}
-                  <FormattedMessage {...messages.map1} />{' '}
+                  <FormattedMessage {...messages.Alexandria} />{' '}
                   <InputLoad
-                    id={'preloadMap1'}
+                    id={'Alexandria'}
                     type={'submit'}
-                    name={'Load1'}
                     onClick={this.loadAlexandria}
                   />
                 </Dropdown.Item>
                 <Dropdown.Item as="label" hred="preloadMap2">
                   {' '}
-                  <FormattedMessage {...messages.map2} />{' '}
+                  <FormattedMessage {...messages.Cairo} />{' '}
                   <InputLoad
-                    id={'preloadMap2'}
+                    id={'Cairo'}
                     type={'submit'}
-                    name={'Load2'}
                     onClick={Parser.LoadPreparedMap}
                   />
                 </Dropdown.Item>
                 <Dropdown.Item as="label" hred="preloadMap3">
                   {' '}
-                  <FormattedMessage {...messages.map3} />{' '}
+                  <FormattedMessage {...messages.Davis} />{' '}
                   <InputLoad
-                    id={'preloadMap3'}
+                    id={'Davis'}
                     type={'submit'}
-                    name={'Load3'}
                     onClick={Parser.LoadPreparedMap}
                   />
                 </Dropdown.Item>
@@ -89,9 +86,8 @@ class Header extends React.Component {
                   {' '}
                   <FormattedMessage {...messages.map3} />{' '}
                   <InputLoad
-                    id={'preloadMap4'}
+                    id={'SPB'}
                     type={'submit'}
-                    name={'Load4'}
                     onClick={Parser.LoadPreparedMap}
                   />
                 </Dropdown.Item>

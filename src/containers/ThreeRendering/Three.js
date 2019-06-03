@@ -3,8 +3,12 @@ import PropTypes from 'prop-types';
 import threeEntryPoint from './EntryPoint';
 
 class ThreeContainer extends Component {
-  componentDidMount() {
-    threeEntryPoint(this.threeRootElement, this.props.objects);
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    console.log(this.threeRootElement.childElementCount);
+    if (this.threeRootElement.childElementCount) {
+      this.threeRootElement.removeChild(this.threeRootElement.firstChild);
+    }
+    threeEntryPoint(this.threeRootElement, nextProps.objects);
   }
 
   render() {

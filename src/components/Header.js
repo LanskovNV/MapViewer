@@ -8,6 +8,35 @@ import Parser from './Parser';
 import InputLoad from './Input/InputLoad';
 
 class Header extends React.Component {
+  constructor() {
+    super();
+    this.loadAlexandria = this.loadAlexandria.bind(this);
+    this.loadCairo = this.loadCairo.bind(this);
+    this.loadDavis = this.loadDavis.bind(this);
+    this.loadSPB = this.loadSPB.bind(this);
+    this.load = this.load.bind(this);
+  }
+
+  loadAlexandria() {
+    this.props.chooseMap('Alexandria', true);
+    Parser.LoadPreparedMap('preloadMap1');
+  }
+  loadCairo() {
+    this.props.chooseMap('Cairo', true);
+    Parser.LoadPreparedMap('preloadMap2');
+  }
+  loadDavis() {
+    this.props.chooseMap('Davis', true);
+    Parser.LoadPreparedMap('preloadMap3');
+  }
+  loadSPB() {
+    this.props.chooseMap('SPB', true);
+    Parser.LoadPreparedMap('preloadMap4');
+  }
+  load() {
+    this.props.chooseMap('Custom', false);
+    Parser.PickUsefulFromGeoJSONToTXT();
+  }
   render() {
     return (
       <Card className="text-center" style={{ marginBottom: 10 }}>
@@ -33,7 +62,7 @@ class Header extends React.Component {
                     id={'preloadMap1'}
                     type={'submit'}
                     name={'Load1'}
-                    onClick={Parser.LoadPreparedMap}
+                    onClick={this.loadAlexandria}
                   />
                 </Dropdown.Item>
                 <Dropdown.Item as="label" hred="preloadMap2">
@@ -56,6 +85,16 @@ class Header extends React.Component {
                     onClick={Parser.LoadPreparedMap}
                   />
                 </Dropdown.Item>
+                <Dropdown.Item as="label" hred="preloadMap4">
+                  {' '}
+                  <FormattedMessage {...messages.map3} />{' '}
+                  <InputLoad
+                    id={'preloadMap4'}
+                    type={'submit'}
+                    name={'Load4'}
+                    onClick={Parser.LoadPreparedMap}
+                  />
+                </Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Item as="label" hred="loadedMap">
                   {' '}
@@ -64,7 +103,7 @@ class Header extends React.Component {
                     id={'loadedMap'}
                     type={'file'}
                     name={'Load'}
-                    onChange={Parser.PickUsefulFromGeoJSONToTXT}
+                    onChange={this.load}
                   />{' '}
                 </Dropdown.Item>
               </Dropdown.Menu>

@@ -26,9 +26,8 @@ class Parser {
    * @desc loads map through static load
    * @param e - event
    */
-  static LoadPreparedMap(e) {
+  static LoadPreparedMap(name) {
     let files = new Array(3);
-    const name = e.target.id;
     if (name === 'preloadMap1') {
       files[0] = mapFile11;
       files[1] = mapFile12;

@@ -70,7 +70,7 @@ class Header extends React.Component {
                   <InputLoad
                     id={'Cairo'}
                     type={'submit'}
-                    onClick={Parser.LoadPreparedMap}
+                    onClick={this.loadCairo}
                   />
                 </Dropdown.Item>
                 <Dropdown.Item as="label" hred="preloadMap3">
@@ -79,7 +79,7 @@ class Header extends React.Component {
                   <InputLoad
                     id={'Davis'}
                     type={'submit'}
-                    onClick={Parser.LoadPreparedMap}
+                    onClick={this.loadDavis}
                   />
                 </Dropdown.Item>
                 <Dropdown.Item as="label" hred="preloadMap4">
@@ -88,7 +88,7 @@ class Header extends React.Component {
                   <InputLoad
                     id={'SPB'}
                     type={'submit'}
-                    onClick={Parser.LoadPreparedMap}
+                    onClick={this.loadSPB}
                   />
                 </Dropdown.Item>
                 <Dropdown.Divider />

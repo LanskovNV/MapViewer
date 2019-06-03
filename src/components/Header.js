@@ -35,7 +35,7 @@ class Header extends React.Component {
   }
   load() {
     this.props.chooseMap('Custom', false);
-    Parser.PickUsefulFromGeoJSONToTXT();
+    Parser.PickUsefulFromGeoJSONToTXT(this.props.loaded);
   }
   render() {
     return (

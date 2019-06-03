@@ -19,12 +19,17 @@ const Wrapper = styled.div`
 `;
 
 class App extends Component {
+  constructor() {
+    super();
+    this.loadedCallback = this.loadedCallback.bind(this);
+  }
   state = {
     isHouses: true,
     isStreets: true,
     isWater: true,
     preloadMapMode: true,
-    mapName: 'Davis'
+    mapName: 'Davis',
+    isLoaded: 0
   };
   // Callbacks to support checkboxes
   updateHouses = value => {
@@ -40,10 +45,13 @@ class App extends Component {
   changeMapName = (name, isPreload) => {
     this.setState({ mapName: name, preloadMapMode: isPreload });
   };
+  loadedCallback() {
+    this.setState({ isLoaded: this.state.isLoaded + 1 });
+  }
   render() {
     return (
       <Wrapper>
-        <Header chooseMap={this.changeMapName} />
+        <Header chooseMap={this.changeMapName} loaded={this.loadedCallback} />
         <ThreeContainer objects={this.state} />
         <CheckboxBar
           updateHouses={this.updateHouses}

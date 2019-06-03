@@ -70,7 +70,7 @@ class Parser {
   /*
    * @desc dynamic map load
    */
-  static PickUsefulFromGeoJSONToTXT() {
+  static PickUsefulFromGeoJSONToTXT(callback) {
     const FIRST_ELEMENT = 0;
     const file = document.getElementById('loadedMap').files[FIRST_ELEMENT];
 
@@ -86,7 +86,7 @@ class Parser {
       }
 
       saveByteArray([''], 'rest.txt', 'restProcFile');
-      loading(file, callbackDataProcess, callbackEnd);
+      loading(file, callbackDataProcess, callbackEnd, callback);
     }
   }
 }
@@ -169,7 +169,7 @@ function callbackDataProcess(data) {
  * @desc processes last data chunk
  * @param data - read data
  */
-function callbackEnd(data) {
+function callbackEnd(data, callback) {
   let restFile = document.getElementById('restProcFile');
   let str_data = String.fromCharCode.apply(null, new Uint8Array(data));
 
@@ -204,6 +204,7 @@ function callbackEnd(data) {
     .then(ConvertCoordinates)
     .then(Assemble)
     .then(ClearTempFiles)
+    .then(callback)
     .catch(function(err) {
       alert(err);
     });
@@ -224,7 +225,7 @@ function min(a, b) {
  * @param callbackProgressF - function to process read data chunks
  * @param callbackEndF - function to process last read data chunk
  */
-function loading(file, callbackProgressF, callbackEndF) {
+function loading(file, callbackProgressF, callbackEndF, callback) {
   const CHUNK_SIZE = 10 * 1024;
   let start = 0;
   let end;
@@ -243,7 +244,7 @@ function loading(file, callbackProgressF, callbackEndF) {
   let reader = new FileReader();
   reader.onload = function(evt) {
     reader.offset = start;
-    callbackRead(this, file, evt, callbackProgressF, callbackEndF);
+    callbackRead(this, file, evt, callbackProgressF, callbackEndF, callback);
     start += CHUNK_SIZE;
     Load();
   };
@@ -269,11 +270,18 @@ function loading(file, callbackProgressF, callbackEndF) {
  * @param callbackProgressF - function to process read data chunks
  * @param callbackEndF - function to process last read data chunk
  */
-function callbackRead(reader, file, evt, callbackProgressF, callbackEndF) {
+function callbackRead(
+  reader,
+  file,
+  evt,
+  callbackProgressF,
+  callbackEndF,
+  callback
+) {
   if (reader.offset + reader.size < file.size) {
     callbackProgressF(evt.target.result);
   } else {
-    callbackEndF(evt.target.result);
+    callbackEndF(evt.target.result, callback);
   }
 }
 

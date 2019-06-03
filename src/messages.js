@@ -41,19 +41,19 @@ export default defineMessages({
     id: `choose.map`,
     defaultMessage: 'Choose Map  '
   },
-  map1: {
+  Alexandria: {
     id: `Alexandria`,
     defaultMessage: 'Alexandria'
   },
-  map2: {
+  Cairo: {
     id: `Cairo`,
     defaultMessage: 'Cairo'
   },
-  map3: {
+  Davis: {
     id: `Davis`,
     defaultMessage: 'Davis'
   },
-  map4: {
+  SPB: {
     id: `SPB`,
     defaultMessage: 'SPB'
   },

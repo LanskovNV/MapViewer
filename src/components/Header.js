@@ -84,7 +84,7 @@ class Header extends React.Component {
                 </Dropdown.Item>
                 <Dropdown.Item as="label" hred="preloadMap4">
                   {' '}
-                  <FormattedMessage {...messages.map3} />{' '}
+                  <FormattedMessage {...messages.SPB} />{' '}
                   <InputLoad
                     id={'SPB'}
                     type={'submit'}

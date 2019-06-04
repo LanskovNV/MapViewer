@@ -1,13 +1,41 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Dropdown, Badge, Card, ButtonGroup } from 'react-bootstrap';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import messages from '../messages';
 import About from './About';
-import Parser from './Parser';
 import InputLoad from './Input/InputLoad';
+import LoadPreparedMap from '../containers/Parsing/StaticLoading';
+import PickUsefulFromGeoJSONToTXT from '../containers/Parsing/DynamicLoading';
 
 class Header extends React.Component {
+  constructor() {
+    super();
+    this.loadAlexandria = this.loadAlexandria.bind(this);
+    this.loadCairo = this.loadCairo.bind(this);
+    this.loadDavis = this.loadDavis.bind(this);
+    this.loadSPB = this.loadSPB.bind(this);
+    this.load = this.load.bind(this);
+  }
+  loadAlexandria() {
+    this.props.loaded();
+    LoadPreparedMap('Alexandria');
+  }
+  loadCairo() {
+    this.props.loaded();
+    LoadPreparedMap('Cairo');
+  }
+  loadDavis() {
+    this.props.loaded();
+    LoadPreparedMap('Davis');
+  }
+  loadSPB() {
+    this.props.loaded();
+    LoadPreparedMap('SPB');
+  }
+  load() {
+    PickUsefulFromGeoJSONToTXT(this.props.loaded);
+  }
   render() {
     return (
       <Card className="text-center" style={{ marginBottom: 10 }}>
@@ -28,32 +56,38 @@ class Header extends React.Component {
               <Dropdown.Menu alignRight={true}>
                 <Dropdown.Item as="label" hred="preloadMap1">
                   {' '}
-                  <FormattedMessage {...messages.map1} />{' '}
+                  <FormattedMessage {...messages.Alexandria} />{' '}
                   <InputLoad
-                    id={'preloadMap1'}
+                    id={'Alexandria'}
                     type={'submit'}
-                    name={'Load1'}
-                    onClick={Parser.LoadPreparedMap}
+                    onClick={this.loadAlexandria}
                   />
                 </Dropdown.Item>
                 <Dropdown.Item as="label" hred="preloadMap2">
                   {' '}
-                  <FormattedMessage {...messages.map2} />{' '}
+                  <FormattedMessage {...messages.Cairo} />{' '}
                   <InputLoad
-                    id={'preloadMap2'}
+                    id={'Cairo'}
                     type={'submit'}
-                    name={'Load2'}
-                    onClick={Parser.LoadPreparedMap}
+                    onClick={this.loadCairo}
                   />
                 </Dropdown.Item>
                 <Dropdown.Item as="label" hred="preloadMap3">
                   {' '}
-                  <FormattedMessage {...messages.map3} />{' '}
+                  <FormattedMessage {...messages.Davis} />{' '}
                   <InputLoad
-                    id={'preloadMap3'}
+                    id={'Davis'}
                     type={'submit'}
-                    name={'Load3'}
-                    onClick={Parser.LoadPreparedMap}
+                    onClick={this.loadDavis}
+                  />
+                </Dropdown.Item>
+                <Dropdown.Item as="label" hred="preloadMap4">
+                  {' '}
+                  <FormattedMessage {...messages.SPB} />{' '}
+                  <InputLoad
+                    id={'SPB'}
+                    type={'submit'}
+                    onClick={this.loadSPB}
                   />
                 </Dropdown.Item>
                 <Dropdown.Divider />
@@ -64,7 +98,7 @@ class Header extends React.Component {
                     id={'loadedMap'}
                     type={'file'}
                     name={'Load'}
-                    onChange={Parser.PickUsefulFromGeoJSONToTXT}
+                    onChange={this.load}
                   />{' '}
                 </Dropdown.Item>
               </Dropdown.Menu>
@@ -76,5 +110,9 @@ class Header extends React.Component {
     );
   }
 }
+
+Header.propTypes = {
+  loaded: PropTypes.func
+};
 
 export default injectIntl(Header);

@@ -16,16 +16,16 @@ class OutputData extends React.Component {
     this.handleToggleWater = this.handleToggleWater.bind(this);
   }
   handleToggleHouses() {
-    this.setState({ houses: !this.state.houses });
     this.props.updateHouses(!this.state.houses);
+    this.setState({ houses: !this.state.houses });
   }
   handleToggleStreets() {
-    this.setState({ streets: !this.state.streets });
     this.props.updateStreets(!this.state.streets);
+    this.setState({ streets: !this.state.streets });
   }
   handleToggleWater() {
-    this.setState({ water: !this.state.water });
     this.props.updateWater(!this.state.water);
+    this.setState({ water: !this.state.water });
   }
   shouldComponentUpdate() {
     return false;
@@ -61,7 +61,7 @@ class OutputData extends React.Component {
                   />
                   <Form.Check
                     inline
-                    ype="checkbox"
+                    type="checkbox"
                     id={`inline-checkbox-3`}
                     defaultChecked={true}
                     onChange={this.handleToggleWater}

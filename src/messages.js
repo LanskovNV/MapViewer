@@ -41,17 +41,21 @@ export default defineMessages({
     id: `choose.map`,
     defaultMessage: 'Choose Map  '
   },
-  map1: {
-    id: `map1`,
-    defaultMessage: 'Map1'
+  Alexandria: {
+    id: `Alexandria`,
+    defaultMessage: 'Alexandria'
   },
-  map2: {
-    id: `map2`,
-    defaultMessage: 'Map2'
+  Cairo: {
+    id: `Cairo`,
+    defaultMessage: 'Cairo'
   },
-  map3: {
-    id: `map3`,
-    defaultMessage: 'Map3'
+  Davis: {
+    id: `Davis`,
+    defaultMessage: 'Davis'
+  },
+  SPB: {
+    id: `SPB`,
+    defaultMessage: 'SPB'
   },
   uploadMap: {
     id: `upload.map`,

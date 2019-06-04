@@ -18,19 +18,18 @@ class Header extends React.Component {
   }
 
   loadAlexandria() {
-    this.props.chooseMap('Alexandria', true);
     LoadPreparedMap('Alexandria');
   }
   loadCairo() {
-    this.props.chooseMap('Cairo', true);
+    this.props.loaded();
     LoadPreparedMap('Cairo');
   }
   loadDavis() {
-    this.props.chooseMap('Davis', true);
+    this.props.loaded();
     LoadPreparedMap('Davis');
   }
   loadSPB() {
-    this.props.chooseMap('SPB', true);
+    this.props.loaded();
     LoadPreparedMap('SPB');
   }
   load() {

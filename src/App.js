@@ -27,8 +27,6 @@ class App extends Component {
     isHouses: true,
     isStreets: true,
     isWater: true,
-    preloadMapMode: true,
-    mapName: 'Davis',
     isLoaded: 0
   };
   // Callbacks to support checkboxes
@@ -42,16 +40,13 @@ class App extends Component {
     this.setState({ isWater: value });
   };
   // Choose preload map
-  changeMapName = (name, isPreload) => {
-    this.setState({ mapName: name, preloadMapMode: isPreload });
-  };
   loadedCallback() {
     this.setState({ isLoaded: this.state.isLoaded + 1 });
   }
   render() {
     return (
       <Wrapper>
-        <Header chooseMap={this.changeMapName} loaded={this.loadedCallback} />
+        <Header loaded={this.loadedCallback} />
         <ThreeContainer objects={this.state} />
         <CheckboxBar
           updateHouses={this.updateHouses}

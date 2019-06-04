@@ -14,6 +14,10 @@ export default defineMessages({
     id: `lang`,
     defaultMessage: 'Language'
   },
+  loading: {
+    id: `loading`,
+    defaultMessage: 'Uploading...'
+  },
   about: {
     id: `about`,
     defaultMessage: 'About'

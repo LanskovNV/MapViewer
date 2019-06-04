@@ -118,5 +118,10 @@
     "id": "helpOnChoosing",
     "defaultMessage": "Choose the types of data you want to see.",
     "filepath": "src/messages.js"
+  },
+  {
+    "id": "loading",
+    "defaultMessage": "Uploading...",
+    "filepath": "src/messages.js"
   }
 ]

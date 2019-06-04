@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import ConvertCoordinates from '../Parsing/Converter';
-import { statusJSON } from '../../components/Handle';
+import { statusJSON } from '../Parsing/Handle';
 
 export default (scene, objects) => {
   const holesMaterial = new THREE.MeshBasicMaterial({ color: '#FFF' });

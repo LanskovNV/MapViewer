@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Dropdown, Badge, Card, ButtonGroup } from 'react-bootstrap';
@@ -17,6 +18,7 @@ class Header extends React.Component {
     this.loadSPB = this.loadSPB.bind(this);
     this.load = this.load.bind(this);
   }
+
   loadAlexandria() {
     this.props.loaded();
     LoadPreparedMap('Alexandria');
@@ -34,7 +36,7 @@ class Header extends React.Component {
     LoadPreparedMap('SPB');
   }
   load() {
-    PickUsefulFromGeoJSONToTXT(this.props.loaded);
+    PickUsefulFromGeoJSONToTXT(this.props.loading, this.props.loaded);
   }
   render() {
     return (
@@ -112,6 +114,7 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
+  loading: PropTypes.func,
   loaded: PropTypes.func
 };
 

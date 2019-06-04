@@ -4,7 +4,7 @@ import {
   HandleFile,
   saveByteArray,
   status
-} from '../../components/Handle';
+} from './Handle';
 import loading from './Loading';
 import { PickHouses, PickStreets, PickWater } from './DataFilter';
 import { FilterFile } from './ItemsFilter';
@@ -14,7 +14,7 @@ import { Assemble } from './FilesAssembler';
 /*
  * @desc dynamic map load
  */
-export default callback => {
+export default (callbackStart, callback) => {
   const FIRST_ELEMENT = 0;
   const file = document.getElementById('loadedMap').files[FIRST_ELEMENT];
 
@@ -30,6 +30,7 @@ export default callback => {
     }
 
     saveByteArray([''], 'rest.txt', 'restProcFile');
+    callbackStart();
     loading(file, callbackDataProcess, callbackEnd, callback);
   }
 

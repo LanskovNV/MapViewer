@@ -1,4 +1,4 @@
-import { status, GetFileCounts } from '../../components/Handle';
+import { status, GetFileCounts } from './Handle';
 
 /*
  * @desc finds bounds of map's part present in given json

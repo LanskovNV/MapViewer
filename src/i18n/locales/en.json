@@ -22,5 +22,6 @@
   "SPB": "SPB",
   "right": "right",
   "up": "up",
-  "upload.map": "Upload Map"
+  "upload.map": "Upload Map",
+  "loading": "Uploading..."
 }

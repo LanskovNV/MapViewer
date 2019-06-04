@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { injectIntl } from 'react-intl';
-
+import Spinner from './components/Spinner';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import CheckboxBar from './components/OutputData';
@@ -22,12 +22,15 @@ class App extends Component {
   constructor() {
     super();
     this.loadedCallback = this.loadedCallback.bind(this);
+    this.startLoadingCallback = this.startLoadingCallback.bind(this);
+    this.endLoadingCallback = this.endLoadingCallback.bind(this);
   }
   state = {
     isHouses: true,
     isStreets: true,
     isWater: true,
-    isLoaded: 0
+    isLoaded: 0,
+    isLoading: false
   };
   // Callbacks to support checkboxes
   updateHouses = value => {
@@ -39,15 +42,31 @@ class App extends Component {
   updateWater = value => {
     this.setState({ isWater: value });
   };
-  // Choose preload map
+
   loadedCallback() {
     this.setState({ isLoaded: this.state.isLoaded + 1 });
+    this.endLoadingCallback();
+  }
+  startLoadingCallback() {
+    this.setState({ isLoading: true });
+  }
+  endLoadingCallback() {
+    this.setState({ isLoading: false });
   }
   render() {
+    const objects = {
+      isHouses: this.state.isHouses,
+      isStreets: this.state.isStreets,
+      isWater: this.state.isWater
+    };
     return (
       <Wrapper>
-        <Header loaded={this.loadedCallback} />
-        <ThreeContainer objects={this.state} />
+        <Header
+          loaded={this.loadedCallback}
+          loading={this.startLoadingCallback}
+        />
+        <Spinner isLoading={this.state.isLoading} />
+        <ThreeContainer objects={objects} />
         <CheckboxBar
           updateHouses={this.updateHouses}
           updateStreets={this.updateStreets}

@@ -1,4 +1,6 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Dropdown, Badge, Card, ButtonGroup } from 'react-bootstrap';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import messages from '../messages';
@@ -6,7 +8,6 @@ import About from './About';
 import InputLoad from './Input/InputLoad';
 import LoadPreparedMap from '../containers/Parsing/StaticLoading';
 import PickUsefulFromGeoJSONToTXT from '../containers/Parsing/DynamicLoading';
-import PropTypes from 'prop-types';
 
 class Header extends React.Component {
   constructor() {
@@ -19,23 +20,22 @@ class Header extends React.Component {
   }
 
   loadAlexandria() {
-    this.props.chooseMap('Alexandria', true);
+    this.props.loaded();
     LoadPreparedMap('Alexandria');
   }
   loadCairo() {
-    this.props.chooseMap('Cairo', true);
+    this.props.loaded();
     LoadPreparedMap('Cairo');
   }
   loadDavis() {
-    this.props.chooseMap('Davis', true);
+    this.props.loaded();
     LoadPreparedMap('Davis');
   }
   loadSPB() {
-    this.props.chooseMap('SPB', true);
+    this.props.loaded();
     LoadPreparedMap('SPB');
   }
   load() {
-    this.props.chooseMap('Custom', false);
     PickUsefulFromGeoJSONToTXT(this.props.loading, this.props.loaded);
   }
   render() {
@@ -115,8 +115,7 @@ class Header extends React.Component {
 
 Header.propTypes = {
   loading: PropTypes.func,
-  loaded: PropTypes.func,
-  chooseMap: PropTypes.func
+  loaded: PropTypes.func
 };
 
 export default injectIntl(Header);

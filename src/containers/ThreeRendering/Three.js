@@ -9,7 +9,6 @@ class ThreeContainer extends Component {
     }
     threeEntryPoint(this.threeRootElement, nextProps.objects);
   }
-
   render() {
     return <div ref={element => (this.threeRootElement = element)} />;
   }

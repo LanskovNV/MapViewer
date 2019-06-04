@@ -5,41 +5,29 @@ import { statusJSON } from '../Parsing/Handle';
 export default (scene, objects) => {
   const holesMaterial = new THREE.MeshBasicMaterial({ color: '#FFF' });
   const elems = [];
-  const preload = objects.preloadMapMode;
-  const startCity = objects.mapName;
 
   const houses = {
     toDraw: objects.isHouses,
-    data: preload
-      ? require('../../readyMaps/' + startCity + '/houses.json')
-      : document.getElementById('housesProcFile'),
+    data: document.getElementById('housesProcFile'),
     material: new THREE.MeshBasicMaterial({ color: '#520' })
   };
   const streets = {
     toDraw: objects.isStreets,
-    data: preload
-      ? require('../../readyMaps/' + startCity + '/streets.json')
-      : document.getElementById('streetsProcFile'),
+    data: document.getElementById('streetsProcFile'),
     material: new THREE.MeshBasicMaterial({ color: '#E90' })
   };
   const water = {
     toDraw: objects.isWater,
-    data: preload
-      ? require('../../readyMaps/' + startCity + '/water.json')
-      : document.getElementById('waterProcFile'),
+    data: document.getElementById('waterProcFile'),
     material: new THREE.MeshBasicMaterial({ color: '#0AF' })
   };
   elems.push(houses, streets, water);
 
   elems.forEach(object => {
     if (object.toDraw) {
-      if (preload) {
-        draw(object.data, object);
-      } else if (object.data) {
-        fetch(object.data)
-          .then(statusJSON)
-          .then(data => draw(data, object));
-      }
+      fetch(object.data)
+        .then(statusJSON)
+        .then(data => draw(data, object));
     }
   });
 

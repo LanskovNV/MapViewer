@@ -29,8 +29,6 @@ class App extends Component {
     isHouses: true,
     isStreets: true,
     isWater: true,
-    preloadMapMode: true,
-    mapName: 'Davis',
     isLoaded: 0,
     isLoading: false
   };
@@ -44,10 +42,7 @@ class App extends Component {
   updateWater = value => {
     this.setState({ isWater: value });
   };
-  // Choose preload map
-  changeMapName = (name, isPreload) => {
-    this.setState({ mapName: name, preloadMapMode: isPreload });
-  };
+
   loadedCallback() {
     this.setState({ isLoaded: this.state.isLoaded + 1 });
     this.endLoadingCallback();
@@ -67,7 +62,6 @@ class App extends Component {
     return (
       <Wrapper>
         <Header
-          chooseMap={this.changeMapName}
           loaded={this.loadedCallback}
           loading={this.startLoadingCallback}
         />

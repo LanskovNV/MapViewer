@@ -35,18 +35,23 @@
     "filepath": "src/messages.js"
   },
   {
-    "id": "map1",
-    "defaultMessage": "Map1",
+    "id": "Alexandria",
+    "defaultMessage": "Alexandria",
     "filepath": "src/messages.js"
   },
   {
-    "id": "map2",
-    "defaultMessage": "Map2",
+    "id": "Cairo",
+    "defaultMessage": "Cairo",
     "filepath": "src/messages.js"
   },
   {
-    "id": "map3",
-    "defaultMessage": "Map3",
+    "id": "Davis",
+    "defaultMessage": "Davis",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "SPB",
+    "defaultMessage": "SPB",
     "filepath": "src/messages.js"
   },
   {

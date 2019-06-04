@@ -16,9 +16,10 @@
   "lang": "Language",
   "left": "left",
   "license.message": "This project is licensed under the MIT license.",
-  "map1": "Map1",
-  "map2": "Map2",
-  "map3": "Map3",
+  "Alexandria": "Alexandria",
+  "Cairo": "Cairo",
+  "Davis": "Davis",
+  "SPB": "SPB",
   "right": "right",
   "up": "up",
   "upload.map": "Upload Map"

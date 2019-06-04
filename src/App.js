@@ -19,12 +19,45 @@ const Wrapper = styled.div`
 `;
 
 class App extends Component {
+  constructor() {
+    super();
+    this.loadedCallback = this.loadedCallback.bind(this);
+  }
+  state = {
+    isHouses: true,
+    isStreets: true,
+    isWater: true,
+    preloadMapMode: true,
+    mapName: 'Davis',
+    isLoaded: 0
+  };
+  // Callbacks to support checkboxes
+  updateHouses = value => {
+    this.setState({ isHouses: value });
+  };
+  updateStreets = value => {
+    this.setState({ isStreets: value });
+  };
+  updateWater = value => {
+    this.setState({ isWater: value });
+  };
+  // Choose preload map
+  changeMapName = (name, isPreload) => {
+    this.setState({ mapName: name, preloadMapMode: isPreload });
+  };
+  loadedCallback() {
+    this.setState({ isLoaded: this.state.isLoaded + 1 });
+  }
   render() {
     return (
       <Wrapper>
-        <Header />
-        <ThreeContainer />
-        <CheckboxBar />
+        <Header chooseMap={this.changeMapName} loaded={this.loadedCallback} />
+        <ThreeContainer objects={this.state} />
+        <CheckboxBar
+          updateHouses={this.updateHouses}
+          updateStreets={this.updateStreets}
+          updateWater={this.updateWater}
+        />
         <Footer />
         <GlobalStyle />
       </Wrapper>

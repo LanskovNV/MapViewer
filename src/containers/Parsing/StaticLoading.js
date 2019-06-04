@@ -10,7 +10,7 @@ import mapFile33 from '../../readyMaps/Alexandria/water';
 import mapFile41 from '../../readyMaps/SPB/streets';
 import mapFile42 from '../../readyMaps/SPB/houses';
 import mapFile43 from '../../readyMaps/SPB/water';
-import { ClearFiles, saveByteArray } from '../../components/Handle';
+import { ClearFiles, saveByteArray } from './Handle';
 
 /*
  * @desc loads map through static load

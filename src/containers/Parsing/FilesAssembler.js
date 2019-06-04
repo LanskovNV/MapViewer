@@ -1,8 +1,4 @@
-import {
-  statusJSON,
-  GetFileCounts,
-  saveByteArray
-} from '../../components/Handle';
+import { statusJSON, GetFileCounts, saveByteArray } from './Handle';
 
 /*
  * @desc assembles multiple files "fileName##index" into single file "fileName",

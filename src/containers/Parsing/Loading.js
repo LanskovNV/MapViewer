@@ -4,7 +4,13 @@
  * @param callbackProgressF - function to process read data chunks
  * @param callbackEndF - function to process last read data chunk
  */
-export default (file, callbackProgressF, callbackEndF, callback) => {
+export default function loading(
+  file,
+  callbackProgressF,
+  callbackEndF,
+  callbackStart,
+  callback
+) {
   const CHUNK_SIZE = 10 * 1024;
   let start = 0;
   let end;
@@ -23,7 +29,15 @@ export default (file, callbackProgressF, callbackEndF, callback) => {
   let reader = new FileReader();
   reader.onload = function(evt) {
     reader.offset = start;
-    callbackRead(this, file, evt, callbackProgressF, callbackEndF, callback);
+    callbackRead(
+      this,
+      file,
+      evt,
+      callbackProgressF,
+      callbackEndF,
+      callbackStart,
+      callback
+    );
     start += CHUNK_SIZE;
     Load();
   };
@@ -63,12 +77,13 @@ export default (file, callbackProgressF, callbackEndF, callback) => {
     evt,
     callbackProgressF,
     callbackEndF,
+    callbackStart,
     callback
   ) {
     if (reader.offset + reader.size < file.size) {
-      callbackProgressF(evt.target.result);
+      callbackProgressF(evt.target.result, callbackStart);
     } else {
       callbackEndF(evt.target.result, callback);
     }
   }
-};
+}

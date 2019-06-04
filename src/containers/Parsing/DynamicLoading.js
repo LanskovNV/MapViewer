@@ -4,8 +4,8 @@ import {
   HandleFile,
   saveByteArray,
   status
-} from '../../components/Handle';
-import * as loading from './Loading';
+} from './Handle';
+import loading from './Loading';
 import { PickHouses, PickStreets, PickWater } from './DataFilter';
 import { FilterFile } from './ItemsFilter';
 import { ConvertCoordinates } from './CoordinatesConversion';
@@ -14,7 +14,7 @@ import { Assemble } from './FilesAssembler';
 /*
  * @desc dynamic map load
  */
-export default callback => {
+export default (callbackStart, callback) => {
   const FIRST_ELEMENT = 0;
   const file = document.getElementById('loadedMap').files[FIRST_ELEMENT];
 
@@ -30,14 +30,14 @@ export default callback => {
     }
 
     saveByteArray([''], 'rest.txt', 'restProcFile');
-    loading(file, callbackDataProcess, callbackEnd, callback);
+    loading(file, callbackDataProcess, callbackEnd, callbackStart, callback);
   }
 
   /*
    * @desc processes data chunk
    * @param data - read data
    */
-  function callbackDataProcess(data) {
+  function callbackDataProcess(data, callbackStart) {
     const restFile = document.getElementById('restProcFile');
     const str_data = String.fromCharCode.apply(null, new Uint8Array(data)),
       str_valid_json = str_data.substr(0, str_data.lastIndexOf('\n')),
@@ -48,6 +48,7 @@ export default callback => {
 
     //Get rest part from previous chunk and save new rest part
     fetch(restFile.href)
+      .then(callbackStart)
       .then(status)
       .then(function(data_rest) {
         window.URL.revokeObjectURL(restFile.href);

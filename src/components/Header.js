@@ -6,6 +6,7 @@ import About from './About';
 import InputLoad from './Input/InputLoad';
 import LoadPreparedMap from '../containers/Parsing/StaticLoading';
 import PickUsefulFromGeoJSONToTXT from '../containers/Parsing/DynamicLoading';
+import PropTypes from 'prop-types';
 
 class Header extends React.Component {
   constructor() {
@@ -35,7 +36,7 @@ class Header extends React.Component {
   }
   load() {
     this.props.chooseMap('Custom', false);
-    PickUsefulFromGeoJSONToTXT(this.props.loaded);
+    PickUsefulFromGeoJSONToTXT(this.props.loading, this.props.loaded);
   }
   render() {
     return (
@@ -111,5 +112,11 @@ class Header extends React.Component {
     );
   }
 }
+
+Header.propTypes = {
+  loading: PropTypes.func,
+  loaded: PropTypes.func,
+  chooseMap: PropTypes.func
+};
 
 export default injectIntl(Header);

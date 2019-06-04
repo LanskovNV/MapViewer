@@ -6,30 +6,29 @@ import { Modal } from 'react-bootstrap';
 
 class Spinner extends React.Component {
   render() {
-    if (this.props.isLoading) {
-      return (
-        <div>
-          <Modal.Dialog>
-            <Modal.Header>
-              <Modal.Title>
-                <h5>
-                  <FormattedMessage {...messages.loading} />
-                </h5>
-              </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <div class="text-center">
-                <div className="spinner-border text-info" role="status">
-                  <span className="sr-only" />
-                </div>
-              </div>
-            </Modal.Body>
-          </Modal.Dialog>
-        </div>
-      );
-    } else {
-      return <div />;
-    }
+    return (
+      <div>
+        <Modal
+          show={this.props.isLoading}
+          size="lg"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <Modal.Header>
+            <Modal.Title>
+              <h5>
+                <FormattedMessage {...messages.loading} />
+              </h5>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div class="text-center">
+              <div className="spinner-border text-info" />
+            </div>
+          </Modal.Body>
+        </Modal>
+      </div>
+    );
   }
 }
 

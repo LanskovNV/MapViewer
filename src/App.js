@@ -22,6 +22,8 @@ class App extends Component {
   constructor() {
     super();
     this.loadedCallback = this.loadedCallback.bind(this);
+    this.startLoadingCallback = this.startLoadingCallback.bind(this);
+    this.endLoadingCallback = this.endLoadingCallback.bind(this);
   }
   state = {
     isHouses: true,
@@ -48,12 +50,23 @@ class App extends Component {
   };
   loadedCallback() {
     this.setState({ isLoaded: this.state.isLoaded + 1 });
+    this.endLoadingCallback();
+  }
+  startLoadingCallback() {
+    this.setState({ isLoading: true });
+  }
+  endLoadingCallback() {
+    this.setState({ isLoading: false });
   }
   render() {
     return (
       <Wrapper>
-        <Header chooseMap={this.changeMapName} loaded={this.loadedCallback} />
-        <Spinner isLoading={this.isLoading} />
+        <Header
+          chooseMap={this.changeMapName}
+          loaded={this.loadedCallback}
+          loading={this.startLoadingCallback}
+        />
+        <Spinner isLoading={this.state.isLoading} />
         <ThreeContainer objects={this.state} />
         <CheckboxBar
           updateHouses={this.updateHouses}

@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import ConvertCoordinates from '../../components/Converter';
+import ConvertCoordinates from '../Parsing/Converter';
 import { statusJSON } from '../../components/Handle';
 
 export default (scene, objects) => {

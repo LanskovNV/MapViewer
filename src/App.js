@@ -59,6 +59,11 @@ class App extends Component {
     this.setState({ isLoading: false });
   }
   render() {
+    const objects = {
+      isHouses: this.state.isHouses,
+      isStreets: this.state.isStreets,
+      isWater: this.state.isWater
+    };
     return (
       <Wrapper>
         <Header
@@ -67,7 +72,7 @@ class App extends Component {
           loading={this.startLoadingCallback}
         />
         <Spinner isLoading={this.state.isLoading} />
-        <ThreeContainer objects={this.state} />
+        <ThreeContainer objects={objects} />
         <CheckboxBar
           updateHouses={this.updateHouses}
           updateStreets={this.updateStreets}

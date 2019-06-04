@@ -35,7 +35,7 @@ export default (scene, objects) => {
     if (object.toDraw) {
       if (preload) {
         draw(object.data, object);
-      } else {
+      } else if (object.data) {
         fetch(object.data)
           .then(statusJSON)
           .then(data => draw(data, object));

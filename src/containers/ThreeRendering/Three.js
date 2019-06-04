@@ -4,7 +4,6 @@ import threeEntryPoint from './EntryPoint';
 
 class ThreeContainer extends Component {
   shouldComponentUpdate(nextProps, nextState, nextContext) {
-    console.log(this.threeRootElement.childElementCount);
     if (this.threeRootElement.childElementCount) {
       this.threeRootElement.removeChild(this.threeRootElement.firstChild);
     }

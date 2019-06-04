@@ -8,7 +8,6 @@ export default function loading(
   file,
   callbackProgressF,
   callbackEndF,
-  callbackStart,
   callback
 ) {
   const CHUNK_SIZE = 10 * 1024;
@@ -29,15 +28,7 @@ export default function loading(
   let reader = new FileReader();
   reader.onload = function(evt) {
     reader.offset = start;
-    callbackRead(
-      this,
-      file,
-      evt,
-      callbackProgressF,
-      callbackEndF,
-      callbackStart,
-      callback
-    );
+    callbackRead(this, file, evt, callbackProgressF, callbackEndF, callback);
     start += CHUNK_SIZE;
     Load();
   };
@@ -77,11 +68,10 @@ export default function loading(
     evt,
     callbackProgressF,
     callbackEndF,
-    callbackStart,
     callback
   ) {
     if (reader.offset + reader.size < file.size) {
-      callbackProgressF(evt.target.result, callbackStart);
+      callbackProgressF(evt.target.result);
     } else {
       callbackEndF(evt.target.result, callback);
     }

@@ -30,14 +30,15 @@ export default (callbackStart, callback) => {
     }
 
     saveByteArray([''], 'rest.txt', 'restProcFile');
-    loading(file, callbackDataProcess, callbackEnd, callbackStart, callback);
+    callbackStart();
+    loading(file, callbackDataProcess, callbackEnd, callback);
   }
 
   /*
    * @desc processes data chunk
    * @param data - read data
    */
-  function callbackDataProcess(data, callbackStart) {
+  function callbackDataProcess(data) {
     const restFile = document.getElementById('restProcFile');
     const str_data = String.fromCharCode.apply(null, new Uint8Array(data)),
       str_valid_json = str_data.substr(0, str_data.lastIndexOf('\n')),
@@ -48,7 +49,6 @@ export default (callbackStart, callback) => {
 
     //Get rest part from previous chunk and save new rest part
     fetch(restFile.href)
-      .then(callbackStart)
       .then(status)
       .then(function(data_rest) {
         window.URL.revokeObjectURL(restFile.href);

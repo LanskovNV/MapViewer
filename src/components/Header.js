@@ -1,11 +1,11 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import { Dropdown, Badge, Card, ButtonGroup } from 'react-bootstrap';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import messages from '../messages';
 import About from './About';
-import Parser from './Parser';
 import InputLoad from './Input/InputLoad';
+import LoadPreparedMap from '../containers/Parsing/StaticLoading';
+import PickUsefulFromGeoJSONToTXT from '../containers/Parsing/DynamicLoading';
 
 class Header extends React.Component {
   constructor() {
@@ -19,23 +19,23 @@ class Header extends React.Component {
 
   loadAlexandria() {
     this.props.chooseMap('Alexandria', true);
-    Parser.LoadPreparedMap('Alexandria');
+    LoadPreparedMap('Alexandria');
   }
   loadCairo() {
     this.props.chooseMap('Cairo', true);
-    Parser.LoadPreparedMap('Cairo');
+    LoadPreparedMap('Cairo');
   }
   loadDavis() {
     this.props.chooseMap('Davis', true);
-    Parser.LoadPreparedMap('Davis');
+    LoadPreparedMap('Davis');
   }
   loadSPB() {
     this.props.chooseMap('SPB', true);
-    Parser.LoadPreparedMap('SPB');
+    LoadPreparedMap('SPB');
   }
   load() {
     this.props.chooseMap('Custom', false);
-    Parser.PickUsefulFromGeoJSONToTXT(this.props.loaded);
+    PickUsefulFromGeoJSONToTXT(this.props.loaded);
   }
   render() {
     return (

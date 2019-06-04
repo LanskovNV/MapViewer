@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { injectIntl } from 'react-intl';
-
+import Spinner from './components/Spinner';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import CheckboxBar from './components/OutputData';
@@ -29,7 +29,8 @@ class App extends Component {
     isWater: true,
     preloadMapMode: true,
     mapName: 'Davis',
-    isLoaded: 0
+    isLoaded: 0,
+    isLoading: false
   };
   // Callbacks to support checkboxes
   updateHouses = value => {
@@ -52,6 +53,7 @@ class App extends Component {
     return (
       <Wrapper>
         <Header chooseMap={this.changeMapName} loaded={this.loadedCallback} />
+        <Spinner isLoading={this.isLoading} />
         <ThreeContainer objects={this.state} />
         <CheckboxBar
           updateHouses={this.updateHouses}

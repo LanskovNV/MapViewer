@@ -4,7 +4,12 @@
  * @param callbackProgressF - function to process read data chunks
  * @param callbackEndF - function to process last read data chunk
  */
-export default (file, callbackProgressF, callbackEndF, callback) => {
+export default function loading(
+  file,
+  callbackProgressF,
+  callbackEndF,
+  callback
+) {
   const CHUNK_SIZE = 10 * 1024;
   let start = 0;
   let end;
@@ -71,4 +76,4 @@ export default (file, callbackProgressF, callbackEndF, callback) => {
       callbackEndF(evt.target.result, callback);
     }
   }
-};
+}

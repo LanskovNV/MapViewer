@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import threeEntryPoint from './EntryPoint';
 
 class ThreeContainer extends Component {
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
+  shouldComponentUpdate(nextProps) {
     console.log(this.threeRootElement.childElementCount);
     if (this.threeRootElement.childElementCount) {
       this.threeRootElement.removeChild(this.threeRootElement.firstChild);
     }
     threeEntryPoint(this.threeRootElement, nextProps.objects);
   }
-
   render() {
     return <div ref={element => (this.threeRootElement = element)} />;
   }

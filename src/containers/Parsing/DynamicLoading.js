@@ -5,7 +5,7 @@ import {
   saveByteArray,
   status
 } from '../../components/Handle';
-import * as loading from './Loading';
+import loading from './Loading';
 import { PickHouses, PickStreets, PickWater } from './DataFilter';
 import { FilterFile } from './ItemsFilter';
 import { ConvertCoordinates } from './CoordinatesConversion';

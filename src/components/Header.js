@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Dropdown, Badge, Card, ButtonGroup } from 'react-bootstrap';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import messages from '../messages';
@@ -16,8 +17,8 @@ class Header extends React.Component {
     this.loadSPB = this.loadSPB.bind(this);
     this.load = this.load.bind(this);
   }
-
   loadAlexandria() {
+    this.props.loaded();
     LoadPreparedMap('Alexandria');
   }
   loadCairo() {
@@ -33,7 +34,6 @@ class Header extends React.Component {
     LoadPreparedMap('SPB');
   }
   load() {
-    this.props.chooseMap('Custom', false);
     PickUsefulFromGeoJSONToTXT(this.props.loaded);
   }
   render() {
@@ -110,5 +110,9 @@ class Header extends React.Component {
     );
   }
 }
+
+Header.propTypes = {
+  loaded: PropTypes.func
+};
 
 export default injectIntl(Header);

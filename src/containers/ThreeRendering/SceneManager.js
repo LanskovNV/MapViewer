@@ -7,7 +7,7 @@ export default (canvas, objects) => {
 
   const fov = 90;
   const near = 7000;
-  const far = 100000;
+  const far = 1000000;
 
   const screenDimensions = {
     width: canvas.width,
@@ -71,7 +71,7 @@ export default (canvas, objects) => {
       .translate(screenDimensions.width / 2, screenDimensions.height / 2)
       .scale(initial_scale);
     zoom.transform(view, initial_transform);
-    // camera.position.set(0, 0, far);
+    camera.position.set(0, 0, far);
   }
 
   function zoomHandler(d3_transform) {

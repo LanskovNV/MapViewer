@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import threeEntryPoint from './EntryPoint';
 
 class ThreeContainer extends Component {
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
+  shouldComponentUpdate(nextProps) {
     if (this.threeRootElement.childElementCount) {
       this.threeRootElement.removeChild(this.threeRootElement.firstChild);
     }

@@ -18,7 +18,6 @@ class Header extends React.Component {
     this.loadSPB = this.loadSPB.bind(this);
     this.load = this.load.bind(this);
   }
-
   loadAlexandria() {
     this.props.loaded();
     LoadPreparedMap('Alexandria');

@@ -42,7 +42,6 @@ class App extends Component {
   updateWater = value => {
     this.setState({ isWater: value });
   };
-
   loadedCallback() {
     this.setState({ isLoaded: this.state.isLoaded + 1 });
     this.endLoadingCallback();

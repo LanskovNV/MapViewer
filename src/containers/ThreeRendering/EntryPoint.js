@@ -20,7 +20,6 @@ export default (container, objects) => {
   function bindEventListeners() {
     window.onresize = resizeCanvas;
     window.onmousemove = mouseMove;
-    resizeCanvas();
   }
 
   function canvasInit() {

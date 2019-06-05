@@ -42,7 +42,6 @@ class App extends Component {
   updateWater = value => {
     this.setState({ isWater: value });
   };
-
   loadedCallback() {
     this.setState({ isLoaded: this.state.isLoaded + 1 });
     this.endLoadingCallback();
@@ -66,7 +65,7 @@ class App extends Component {
           loading={this.startLoadingCallback}
         />
         <Spinner isLoading={this.state.isLoading} />
-        <ThreeContainer objects={objects} />
+        <ThreeContainer objects={objects} isLoading={this.state.isLoading} />
         <CheckboxBar
           updateHouses={this.updateHouses}
           updateStreets={this.updateStreets}

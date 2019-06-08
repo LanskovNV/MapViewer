@@ -1,9 +1,18 @@
+/**
+ * File size
+ * @type {number}
+ */
 const KByte50 = 50 * 1024;
-let file_counts = [1, 1, 1]; // Counts for streets, houses and water files
+/**
+ * Counts for streets, houses and water files
+ * @type {number[]}
+ */
+let file_counts = [1, 1, 1];
 
 /**
- * @desc gets files' counts
- * @return {number} file_counts - files' counts
+ * gets files' counts
+ * @returns {number[]}
+ * @constructor
  */
 function GetFileCounts() {
   return file_counts;
@@ -12,7 +21,7 @@ function GetFileCounts() {
 /**
  * @desc processes fetch response into arrayBuffer
  * @param {Response} response - response get from fetch
- * @return {ArrayBuffer} response.arrayBuffer() - request result as arrayBuffer
+ * @returns {ArrayBuffer | Promise<ArrayBuffer>} response.arrayBuffer() - request result as arrayBuffer
  */
 function status(response) {
   if (response.status !== 200) {
@@ -26,7 +35,7 @@ function status(response) {
 /**
  * @desc processes fetch response into json
  * @param {Response} response - response get from fetch
- * @return {json} response.json() - request result as json
+ * @returns {json} response.json() - request result as json
  */
 function statusJSON(response) {
   if (response.status !== 200) {

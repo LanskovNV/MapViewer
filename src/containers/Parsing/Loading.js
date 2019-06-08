@@ -48,8 +48,9 @@ export default function loading(
 
   /**
    * This function returns minimum
-   * @params a, b - values
-   * @return value - minimum out of 'a' and 'b'
+   * @param {number} a - value1
+   * @param {param} b - value2
+   * @returns {number} - minimum out of 'a' and 'b'
    */
   function min(a, b) {
     return a < b ? a : b;

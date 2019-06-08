@@ -3,7 +3,7 @@ import { status, GetFileCounts } from './Handle';
 /**
  * @desc finds bounds of map's part present in given json
  * @param {json} json_data - part of map stored as json file
- * @return {Array} arr_bounds - array of bounds [left(west), right(east), up(north), down(south)]
+ * @returns {Array} arr_bounds - array of bounds [left(west), right(east), up(north), down(south)]
  */
 function GetBoundsOneFile(json_data) {
   let arr_bounds = new Array(4);
@@ -34,7 +34,7 @@ function GetBoundsOneFile(json_data) {
 /**
  * @desc finds map's bounds
  * @param {Array} arr_of_file_names - ["streets", "houses", "water"]
- * @return {Array} arr_bounds - array of bounds [left(west), right(east), up(north), down(south)]
+ * @returns {Array} arr_bounds - array of bounds [left(west), right(east), up(north), down(south)]
  */
 async function GetBounds(arr_of_file_names) {
   let arr_bounds = new Array(4);
@@ -93,7 +93,7 @@ async function GetBounds(arr_of_file_names) {
  * @param {number} right - right map's bound
  * @param {number} up - upper map's bound
  * @param {number} down - lower map's bound
- * @return {json} json_data - part of map with converted coordinates stored as json file
+ * @returns {json} json_data - part of map with converted coordinates stored as json file
  */
 function ConvertCoordinatesOneFile(json_data, left, right, up, down) {
   const scale = 10000;

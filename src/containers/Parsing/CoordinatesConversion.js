@@ -1,9 +1,9 @@
 import { status, GetFileCounts } from './Handle';
 
-/*
+/**
  * @desc finds bounds of map's part present in given json
- * @param json_data - part of map stored as json file
- * @return arr_bounds - array of bounds [left(west), right(east), up(north), down(south)]
+ * @param {json} json_data - part of map stored as json file
+ * @return {Array} arr_bounds - array of bounds [left(west), right(east), up(north), down(south)]
  */
 function GetBoundsOneFile(json_data) {
   let arr_bounds = new Array(4);
@@ -31,10 +31,10 @@ function GetBoundsOneFile(json_data) {
   return arr_bounds;
 }
 
-/*
+/**
  * @desc finds map's bounds
- * @param arr_of_file_names - ["streets", "houses", "water"]
- * @return arr_bounds - array of bounds [left(west), right(east), up(north), down(south)]
+ * @param {Array} arr_of_file_names - ["streets", "houses", "water"]
+ * @return {Array} arr_bounds - array of bounds [left(west), right(east), up(north), down(south)]
  */
 async function GetBounds(arr_of_file_names) {
   let arr_bounds = new Array(4);
@@ -85,15 +85,15 @@ async function GetBounds(arr_of_file_names) {
   return arr_bounds;
 }
 
-/*
+/**
  * @desc converts coordinates of map's part present in given json into unsigned int format
  *       with left and lower bounds as [0, 0] coordinate and scale 1.0000 degree = 10000
- * @param json_data - part of map stored as json file
- * @param left - left map's bound
- * @param right - right map's bound
- * @param up - upper map's bound
- * @param down - lower map's bound
- * @return json_data - part of map with converted coordinates stored as json file
+ * @param {json} json_data - part of map stored as json file
+ * @param {number} left - left map's bound
+ * @param {number} right - right map's bound
+ * @param {number} up - upper map's bound
+ * @param {number} down - lower map's bound
+ * @return {json} json_data - part of map with converted coordinates stored as json file
  */
 function ConvertCoordinatesOneFile(json_data, left, right, up, down) {
   const scale = 10000;
@@ -112,7 +112,7 @@ function ConvertCoordinatesOneFile(json_data, left, right, up, down) {
   return json_data;
 }
 
-/*
+/**
  * @desc converts map's coordinates into unsigned int format
  */
 async function ConvertCoordinates() {

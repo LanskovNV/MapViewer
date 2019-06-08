@@ -11,8 +11,10 @@ import { FilterFile } from './ItemsFilter';
 import { ConvertCoordinates } from './CoordinatesConversion';
 import { Assemble } from './FilesAssembler';
 
-/*
+/**
  * @desc dynamic map load
+ * @param {function} callbackStart - notifies application that data started loading
+ * @param {function} callback - notifies application that data loaded
  */
 export default (callbackStart, callback) => {
   const FIRST_ELEMENT = 0;
@@ -34,9 +36,9 @@ export default (callbackStart, callback) => {
     loading(file, callbackDataProcess, callbackEnd, callback);
   }
 
-  /*
+  /**
    * @desc processes data chunk
-   * @param data - read data
+   * @param {ArrayBuffer} data - read data
    */
   function callbackDataProcess(data) {
     const restFile = document.getElementById('restProcFile');
@@ -108,9 +110,10 @@ export default (callbackStart, callback) => {
       });
   }
 
-  /*
+  /**
    * @desc processes last data chunk
-   * @param data - read data
+   * @param {ArrayBuffer} data - read data
+   * @param {function} callback - notifies application that data loaded
    */
   function callbackEnd(data, callback) {
     let restFile = document.getElementById('restProcFile');

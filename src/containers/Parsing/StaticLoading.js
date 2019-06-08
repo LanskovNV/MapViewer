@@ -12,9 +12,8 @@ import mapFile42 from '../../readyMaps/SPB/houses';
 import mapFile43 from '../../readyMaps/SPB/water';
 import { ClearFiles, saveByteArray } from './Handle';
 
-/*
+/**
  * @desc loads map through static load
- * @param e - event
  */
 export default name => {
   let files = new Array(3);

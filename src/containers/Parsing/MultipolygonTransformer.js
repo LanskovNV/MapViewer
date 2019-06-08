@@ -1,7 +1,7 @@
-/*
+/**
  * @desc transforms multipolygon into lines
- * @param arr_multipolygons_coord - multipolygon present as its coordinates (array of polygons)
- * @return arr_lines_coords - array of lines representing given polygon
+ * @param {Array} arr_multipolygons_coord - multipolygon present as its coordinates (array of polygons)
+ * @return {Array} arr_lines_coords - array of lines representing given polygon
  */
 function TransformMultipolygon(arr_multipolygons_coord) {
   let arr_lines_coords = new Array(0);

@@ -1,9 +1,9 @@
 import { TransformMultipolygon } from './MultipolygonTransformer';
 
-/*
+/**
  * @desc deletes unneeded data present in each item and transform multipolygons into lines
- * @param json_data - data to filter stored as json file
- * @return result - filtered json file
+ * @param {json} json_data - data to filter stored as json file
+ * @return {json} result - filtered json file
  */
 function FilterFile(json_data) {
   let result = JSON.parse('{"items":[]}');

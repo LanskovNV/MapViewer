@@ -5,7 +5,8 @@ import Spinner from './components/Spinner';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import CheckboxBar from './components/OutputData';
-import ThreeContainer from './containers/ThreeRendering/Three';
+// import ThreeContainer from './containers/ThreeRendering/Three';
+import ThreeRendering from './containers/ThreeRendering/ThreeRendering';
 
 import GlobalStyle from './global-styles';
 
@@ -65,7 +66,7 @@ class App extends Component {
           loading={this.startLoadingCallback}
         />
         <Spinner isLoading={this.state.isLoading} />
-        <ThreeContainer objects={objects} isLoading={this.state.isLoading} />
+        <ThreeRendering objects={objects} isLoading={this.state.isLoading} />
         <CheckboxBar
           updateHouses={this.updateHouses}
           updateStreets={this.updateStreets}

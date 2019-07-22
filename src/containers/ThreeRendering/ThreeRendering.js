@@ -13,23 +13,24 @@ class ThreeRendering extends Component {
       width / 2,
       height / 2,
       height / -2,
-      1,
-      1000
+      10,
+      500
     );
-    const controls = new OrbitControls(camera);
     const renderer = new THREE.WebGLRenderer({ antialias: true });
+    const controls = new OrbitControls(camera, renderer.domElement);
     const geometry = new THREE.BoxGeometry(1, 1, 1);
     const material = new THREE.MeshBasicMaterial({ color: 0xff00ff });
     const cube = new THREE.Mesh(geometry, material);
 
     controls.enableRotate = false;
+    controls.enableKeys = false;
     controls.enableZoom = true;
-    controls.enablePan = false;
+    controls.enablePan = true;
     controls.screenSpacePanning = true;
 
-    camera.position.set(0, 0, 1000);
+    camera.position.set(0, 0, 500);
     scene.add(cube);
-    renderer.setClearColor('#FFF');
+    renderer.setClearColor('#FAF');
     renderer.setSize(width, height);
 
     this.scene = scene;
@@ -40,6 +41,12 @@ class ThreeRendering extends Component {
     this.controls = controls;
 
     window.addEventListener('resize', this.handleResize);
+    this.controls.addEventListener('change', this.animate);
+    controls.mouseButtons = {
+      RIGHT: THREE.MOUSE.LEFT,
+      MIDDLE: THREE.MOUSE.MIDDLE,
+      LEFT: THREE.MOUSE.RIGHT
+    };
 
     this.mount.appendChild(this.renderer.domElement);
     this.start();
@@ -81,7 +88,7 @@ class ThreeRendering extends Component {
   render() {
     return (
       <div
-        style={{ width: '1000px', height: '400px' }}
+        style={{ width: '52vw', height: '30vw' }}
         ref={mount => {
           this.mount = mount;
         }}

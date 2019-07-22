@@ -88,7 +88,7 @@ class ThreeRendering extends Component {
   render() {
     return (
       <div
-        style={{ width: '52vw', height: '30vw' }}
+        style={{ width: 'inherit', height: '50vh' }}
         ref={mount => {
           this.mount = mount;
         }}

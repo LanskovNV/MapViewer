@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import * as THREE from 'three';
 import OrbitControls from 'three-orbitcontrols';
+import { statusJSON } from '../Parsing/Handle';
+
+import draw from './Draw';
 
 class ThreeRendering extends Component {
   componentDidMount() {
@@ -8,36 +11,38 @@ class ThreeRendering extends Component {
     const height = this.mount.clientHeight;
 
     const scene = new THREE.Scene();
-    const camera = new THREE.OrthographicCamera(
+    /*const camera = new THREE.OrthographicCamera(
       width / -2,
       width / 2,
       height / 2,
       height / -2,
       10,
       500
+    );*/
+    const camera = new THREE.PerspectiveCamera(
+      90,
+      width / height,
+      7000,
+      1000000
     );
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     const controls = new OrbitControls(camera, renderer.domElement);
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshBasicMaterial({ color: 0xff00ff });
-    const cube = new THREE.Mesh(geometry, material);
 
     controls.enableRotate = false;
     controls.enableKeys = false;
     controls.enableZoom = true;
     controls.enablePan = true;
+    controls.zoomSpeed = 4;
+    controls.panSpeed = 2;
     controls.screenSpacePanning = true;
 
-    camera.position.set(0, 0, 500);
-    scene.add(cube);
-    renderer.setClearColor('#FAF');
+    camera.position.set(0, 0, 1000000);
+    renderer.setClearColor('#FFF');
     renderer.setSize(width, height);
 
     this.scene = scene;
     this.camera = camera;
     this.renderer = renderer;
-    this.material = material;
-    this.cube = cube;
     this.controls = controls;
 
     window.addEventListener('resize', this.handleResize);
@@ -50,6 +55,36 @@ class ThreeRendering extends Component {
 
     this.mount.appendChild(this.renderer.domElement);
     this.start();
+  }
+
+  componentDidUpdate() {
+    const holesMaterial = new THREE.MeshBasicMaterial({ color: '#FFF' });
+    const elems = [];
+
+    const houses = {
+      toDraw: true,
+      data: document.getElementById('housesProcFile'),
+      material: new THREE.MeshBasicMaterial({ color: '#520' })
+    };
+    const streets = {
+      toDraw: true,
+      data: document.getElementById('streetsProcFile'),
+      material: new THREE.MeshBasicMaterial({ color: '#E90' })
+    };
+    const water = {
+      toDraw: true,
+      data: document.getElementById('waterProcFile'),
+      material: new THREE.MeshBasicMaterial({ color: '#0AF' })
+    };
+    elems.push(houses, streets, water);
+
+    elems.forEach(object => {
+      if (object.toDraw) {
+        fetch(object.data)
+          .then(statusJSON)
+          .then(data => draw(this.scene, data, object, holesMaterial));
+      }
+    });
   }
 
   componentWillUnmount() {

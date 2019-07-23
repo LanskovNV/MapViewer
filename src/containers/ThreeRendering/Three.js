@@ -12,7 +12,12 @@ class ThreeContainer extends Component {
     }
   }
   render() {
-    return <div ref={element => (this.threeRootElement = element)} />;
+    return (
+      <div
+        style={{ width: 'inherit', height: '50vh' }}
+        ref={element => (this.threeRootElement = element)}
+      />
+    );
   }
 }
 

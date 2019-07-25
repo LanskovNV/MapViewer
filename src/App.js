@@ -66,7 +66,11 @@ class App extends Component {
           loading={this.startLoadingCallback}
         />
         <Spinner isLoading={this.state.isLoading} />
-        <ThreeRendering objects={objects} isLoading={this.state.isLoading} />
+        <ThreeRendering
+          objects={objects}
+          isLoading={this.state.isLoading}
+          isNew={this.state.isLoaded}
+        />
         <CheckboxBar
           updateHouses={this.updateHouses}
           updateStreets={this.updateStreets}

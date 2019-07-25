@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import * as THREE from 'three';
 import OrbitControls from 'three-orbitcontrols';
 import objectGeneration from './ObjectsGeneration';
+import { statusJSON } from '../Parsing/Handle';
 import draw from './Draw';
 
 class ThreeRendering extends Component {
@@ -80,13 +81,26 @@ class ThreeRendering extends Component {
   }
   componentDidUpdate() {
     this.elems = objectGeneration();
+    this.drawing_bjects = [];
 
-    if (this.props.isNew) {
+    if (this.props.isNew !== this.old) {
+      this.old = this.props.isNew;
+
+      // clear scene
+      this.scene.dispose();
+      /*
       this.scene.traverse(child => {
         this.scene.remove(child);
       });
+       */
+
       this.elems.forEach(object => {
-        object.data = data => draw(data, object);
+        object.data = fetch(object.data)
+          .then(statusJSON)
+          .then(data => draw(data, object));
+        if (object.toDraw) {
+          this.scene.add(object.data);
+        }
       });
     }
 

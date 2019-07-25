@@ -38,7 +38,7 @@ export default (callbackStart, callback) => {
    * @desc processes data chunk
    * @param data - read data
    */
-  function callbackDataProcess(data) {
+  function callbackDataProcess(data, Load) {
     const restFile = document.getElementById('restProcFile');
     const str_data = String.fromCharCode.apply(null, new Uint8Array(data)),
       str_valid_json = str_data.substr(0, str_data.lastIndexOf('\n')),
@@ -102,6 +102,9 @@ export default (callbackStart, callback) => {
         const blob = new Blob([str_rest], { type: 'text/json' }),
           f = new File([blob], restFile.download, { type: 'text/json' });
         restFile.href = window.URL.createObjectURL(f);
+      })
+      .then(function() {
+        Load();
       })
       .catch(function(err) {
         alert(err);

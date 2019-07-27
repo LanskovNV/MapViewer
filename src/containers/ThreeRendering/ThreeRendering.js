@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import * as THREE from 'three';
 import OrbitControls from 'three-orbitcontrols';
 import objectGeneration from './ObjectsGeneration';
+import updateObjects from './UpdateObjects';
 import { statusJSON } from '../Parsing/Handle';
 import draw from './Draw';
 
 class ThreeRendering extends Component {
-  createCamera() {
-    const width = this.mount.clientWidth;
-    const height = this.mount.clientHeight;
+  createCamera(width, height) {
     const camera = new THREE.PerspectiveCamera(
       90,
       width / height,
@@ -20,7 +19,7 @@ class ThreeRendering extends Component {
 
     return camera;
   }
-  createRenderer() {
+  createRenderer(width, height) {
     const renderer = new THREE.WebGLRenderer({ antialias: true });
 
     renderer.setClearColor('#FFF');
@@ -68,9 +67,12 @@ class ThreeRendering extends Component {
     this.renderer.render(this.scene, this.camera);
   };
   componentDidMount() {
+    const width = this.mount.clientWidth;
+    const height = this.mount.clientHeight;
+
     this.scene = new THREE.Scene();
-    this.camera = this.createCamera();
-    this.renderer = this.createRenderer();
+    this.camera = this.createCamera(width, height);
+    this.renderer = this.createRenderer(width, height);
     this.controls = this.createControls();
     this.old = this.props.isNew;
 
@@ -80,41 +82,56 @@ class ThreeRendering extends Component {
     this.start();
   }
   componentDidUpdate() {
-    this.elems = objectGeneration();
-    this.drawing_bjects = [];
-
+    if (this.elems === undefined)
+      this.elems = objectGeneration(this.props.objects);
     if (this.props.isNew !== this.old) {
-      this.old = this.props.isNew;
-
-      // clear scene
-      this.scene.dispose();
-      /*
-      this.scene.traverse(child => {
-        this.scene.remove(child);
-      });
-       */
-
-      this.elems.forEach(object => {
-        object.data = fetch(object.data)
+      this.old = this.props.isNew; // update status
+      while (this.scene.children.length > 0) {
+        this.scene.remove(this.scene.children[0]);
+      }
+      this.elems = updateObjects(this.elems);
+      this.elems.forEach(elem => {
+        fetch(elem.data)
           .then(statusJSON)
-          .then(data => draw(data, object));
-        if (object.toDraw) {
-          this.scene.add(object.data);
+          .then(data => draw(this.scene, data, elem));
+      });
+      this.renderScene();
+    } else {
+      this.elems.forEach(elem => {
+        if (!elem.toDraw) {
+          this.scene.traverse(child => {
+            if (child.id === elem.id) {
+              this.scene.remove(child);
+              elem.id = 0;
+            }
+          });
+        } else {
+          let flag = true;
+          this.scene.traverse(child => {
+            if (child.id === elem.id) flag = false;
+          });
+          if (flag) {
+            fetch(elem.data)
+              .then(statusJSON)
+              .then(data => draw(this.scene, data, elem));
+          }
         }
       });
     }
 
-    this.elems.forEach(e => {
-      e.data.name = e.id;
-      if (e.toDraw) this.scene.add(e.data);
+    /*
+    this.drawing_objects.forEach(e => {
+      if (e.toDraw)
+        this.scene.add(e.data);
       else {
         this.scene.traverse(child => {
-          if (child.name === e.id) {
+          if (child.name === e.toDraw) {
             this.scene.remove(child);
           }
         });
       }
     });
+     */
   }
   componentWillUnmount() {
     window.removeEventListener('resize');
@@ -136,7 +153,7 @@ class ThreeRendering extends Component {
 ThreeRendering.propTypes = {
   objects: PropTypes.any,
   isLoading: PropTypes.bool,
-  isNew: PropTypes.bool
+  isNew: PropTypes.number
 };
 
 export default ThreeRendering;

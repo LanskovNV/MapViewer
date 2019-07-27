@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import ConvertCoordinates from '../Parsing/Converter';
 
-export default function draw(data_json, object) {
+export default function draw(scene, data_json, object) {
   const hm = new THREE.MeshBasicMaterial({ color: '#FFF' });
 
   let polygons = [];
@@ -58,6 +58,6 @@ export default function draw(data_json, object) {
   group.add(meshes);
   group.add(holeMeshes);
 
-  // scene.add(group);
-  return group;
+  object.id = group.id;
+  scene.add(group);
 }

@@ -87,6 +87,12 @@ class ThreeRendering extends Component {
     this.start();
   }
   componentDidUpdate() {
+    if (this.props.isLoading) {
+      // clear scene
+      while (this.scene.children.length > 0) {
+        this.scene.remove(this.scene.children[0]);
+      }
+    }
     if (this.elems === undefined)
       this.elems = objectGeneration(this.props.objects);
     if (this.props.isNew !== this.old) {
@@ -100,14 +106,14 @@ class ThreeRendering extends Component {
 
       this.elems = updateObjects(this.elems, this.props.objects);
       this.elems.forEach(elem => {
-        if (elem.toDraw) {
+        if (elem.toDraw && this.scene.children.length < 3) {
           fetch(elem.data)
             .then(statusJSON)
             .then(data => draw(this.scene, data, elem));
         }
       });
-      this.renderScene();
-    } else {
+      //this.renderScene();
+    } else if (this.scene.children.length !== 0) {
       this.elems.forEach(elem => {
         // updating toDraw flags
         if (elem.name === 'houses') {
@@ -122,18 +128,17 @@ class ThreeRendering extends Component {
           // del old from scene
           const toDel = this.scene.getObjectById(elem.id);
           this.scene.remove(toDel);
-          this.animate();
           elem.id = 0;
         }
-        if (elem.toDraw && !elem.id) {
+        if (elem.toDraw && !elem.id && this.scene.children.length < 3) {
           // add new to scene
           fetch(elem.data)
             .then(statusJSON)
             .then(data => draw(this.scene, data, elem));
         }
-        this.animate();
       });
     }
+    this.animate();
   }
   componentWillUnmount() {
     window.removeEventListener('resize');

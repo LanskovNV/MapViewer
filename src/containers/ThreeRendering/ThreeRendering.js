@@ -85,37 +85,48 @@ class ThreeRendering extends Component {
     if (this.elems === undefined)
       this.elems = objectGeneration(this.props.objects);
     if (this.props.isNew !== this.old) {
-      this.old = this.props.isNew; // update status
+      // update status
+      this.old = this.props.isNew;
+
+      // clear scene
       while (this.scene.children.length > 0) {
         this.scene.remove(this.scene.children[0]);
       }
-      this.elems = updateObjects(this.elems);
+
+      this.elems = updateObjects(this.elems, this.props.objects);
       this.elems.forEach(elem => {
-        fetch(elem.data)
-          .then(statusJSON)
-          .then(data => draw(this.scene, data, elem));
+        if (elem.toDraw) {
+          fetch(elem.data)
+            .then(statusJSON)
+            .then(data => draw(this.scene, data, elem));
+        }
       });
       this.renderScene();
     } else {
       this.elems.forEach(elem => {
-        if (!elem.toDraw) {
-          this.scene.traverse(child => {
-            if (child.id === elem.id) {
-              this.scene.remove(child);
-              elem.id = 0;
-            }
-          });
+        // updating toDraw flags
+        if (elem.name === 'houses') {
+          elem.toDraw = this.props.objects.isHouses;
+        } else if (elem.name === 'streets') {
+          elem.toDraw = this.props.objects.isStreets;
         } else {
-          let flag = true;
-          this.scene.traverse(child => {
-            if (child.id === elem.id) flag = false;
-          });
-          if (flag) {
-            fetch(elem.data)
-              .then(statusJSON)
-              .then(data => draw(this.scene, data, elem));
-          }
+          elem.toDraw = this.props.objects.isWater;
         }
+
+        if (!elem.toDraw && elem.id) {
+          // del old from scene
+          const toDel = this.scene.getObjectById(elem.id);
+          this.scene.remove(toDel);
+          this.animate();
+          elem.id = 0;
+        }
+        if (elem.toDraw && !elem.id) {
+          // add new to scene
+          fetch(elem.data)
+            .then(statusJSON)
+            .then(data => draw(this.scene, data, elem));
+        }
+        this.animate();
       });
     }
 

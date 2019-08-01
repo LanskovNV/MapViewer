@@ -9,12 +9,26 @@ import draw from './Draw';
 
 class ThreeRendering extends Component {
   createCamera(width, height) {
+    const h_o = 1000000 * 2 * Math.atan((90 * Math.PI) / 180 / 2);
+    const w_o = (width / height) * h_o;
+
+    const camera = new THREE.OrthographicCamera(
+      w_o / -2,
+      w_o / 2,
+      h_o / 2,
+      h_o / -2,
+      7000,
+      1000000
+    );
+    /*
     const camera = new THREE.PerspectiveCamera(
       90,
       width / height,
       7000,
       1000000
     );
+
+     */
     camera.position.set(0, 0, 1000000);
 
     return camera;
@@ -36,8 +50,8 @@ class ThreeRendering extends Component {
     controls.zoomSpeed = 4;
     controls.panSpeed = 2;
     controls.screenSpacePanning = true;
-    controls.maxDistance = 1000000;
-    controls.minDistance = 7000;
+    controls.maxZoom = 10;
+    controls.minZoom = 1;
     controls.mouseButtons = {
       RIGHT: THREE.MOUSE.LEFT,
       MIDDLE: THREE.MOUSE.MIDDLE,

@@ -11,7 +11,6 @@ class ThreeRendering extends Component {
   createCamera(width, height) {
     const h_o = 1000000 * 2 * Math.atan((90 * Math.PI) / 180 / 2);
     const w_o = (width / height) * h_o;
-
     const camera = new THREE.OrthographicCamera(
       w_o / -2,
       w_o / 2,
@@ -20,17 +19,7 @@ class ThreeRendering extends Component {
       7000,
       1000000
     );
-    /*
-    const camera = new THREE.PerspectiveCamera(
-      90,
-      width / height,
-      7000,
-      1000000
-    );
-
-     */
     camera.position.set(0, 0, 1000000);
-
     return camera;
   }
   createRenderer(width, height) {
@@ -47,8 +36,8 @@ class ThreeRendering extends Component {
     controls.enableKeys = false;
     controls.enableZoom = true;
     controls.enablePan = true;
-    controls.zoomSpeed = 4;
-    controls.panSpeed = 2;
+    controls.zoomSpeed = 2;
+    controls.panSpeed = 1;
     controls.screenSpacePanning = true;
     controls.maxZoom = 10;
     controls.minZoom = 1;
@@ -145,20 +134,6 @@ class ThreeRendering extends Component {
         this.animate();
       });
     }
-
-    /*
-    this.drawing_objects.forEach(e => {
-      if (e.toDraw)
-        this.scene.add(e.data);
-      else {
-        this.scene.traverse(child => {
-          if (child.name === e.toDraw) {
-            this.scene.remove(child);
-          }
-        });
-      }
-    });
-     */
   }
   componentWillUnmount() {
     window.removeEventListener('resize');

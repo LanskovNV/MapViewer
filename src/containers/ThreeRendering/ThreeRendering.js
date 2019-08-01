@@ -6,6 +6,7 @@ import objectGeneration from './ObjectsGeneration';
 import updateObjects from './UpdateObjects';
 import { statusJSON } from '../Parsing/Handle';
 import draw from './Draw';
+import updateToDrawFlags from './UpdateToDrawFlags';
 
 class ThreeRendering extends Component {
   createCamera(width, height) {
@@ -115,14 +116,7 @@ class ThreeRendering extends Component {
       //this.renderScene();
     } else if (this.scene.children.length !== 0) {
       this.elems.forEach(elem => {
-        // updating toDraw flags
-        if (elem.name === 'houses') {
-          elem.toDraw = this.props.objects.isHouses;
-        } else if (elem.name === 'streets') {
-          elem.toDraw = this.props.objects.isStreets;
-        } else {
-          elem.toDraw = this.props.objects.isWater;
-        }
+        elem = updateToDrawFlags(elem, this.props.objects);
 
         if (!elem.toDraw && elem.id) {
           // del old from scene

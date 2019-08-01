@@ -36,6 +36,8 @@ class ThreeRendering extends Component {
     controls.zoomSpeed = 4;
     controls.panSpeed = 2;
     controls.screenSpacePanning = true;
+    controls.maxDistance = 1000000;
+    controls.minDistance = 7000;
     controls.mouseButtons = {
       RIGHT: THREE.MOUSE.LEFT,
       MIDDLE: THREE.MOUSE.MIDDLE,

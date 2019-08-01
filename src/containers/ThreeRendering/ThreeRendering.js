@@ -7,6 +7,7 @@ import updateObjects from './UpdateObjects';
 import { statusJSON } from '../Parsing/Handle';
 import draw from './Draw';
 import updateToDrawFlags from './UpdateToDrawFlags';
+import clearScene from './ClearScene';
 
 class ThreeRendering extends Component {
   createCamera(width, height) {
@@ -89,48 +90,36 @@ class ThreeRendering extends Component {
   }
   componentDidUpdate() {
     if (this.props.isLoading) {
-      // clear scene
-      while (this.scene.children.length > 0) {
-        this.scene.remove(this.scene.children[0]);
+      this.scene = clearScene(this.scene);
+    } else {
+      if (this.elems === undefined)
+        this.elems = objectGeneration(this.props.objects);
+      if (this.props.isNew !== this.old) {
+        this.old = this.props.isNew;
+        this.scene = clearScene(this.scene);
+        this.elems = updateObjects(this.elems, this.props.objects);
+        this.elems.forEach(elem => {
+          if (elem.toDraw && this.scene.children.length < 3) {
+            fetch(elem.data)
+              .then(statusJSON)
+              .then(data => draw(this.scene, data, elem));
+          }
+        });
+      } else if (this.scene.children.length !== 0) {
+        this.elems.forEach(elem => {
+          elem = updateToDrawFlags(elem, this.props.objects);
+          if (!elem.toDraw && elem.id) {
+            const toDel = this.scene.getObjectById(elem.id);
+            this.scene.remove(toDel);
+            elem.id = 0;
+          }
+          if (elem.toDraw && !elem.id && this.scene.children.length < 3) {
+            fetch(elem.data)
+              .then(statusJSON)
+              .then(data => draw(this.scene, data, elem));
+          }
+        });
       }
-    }
-    if (this.elems === undefined)
-      this.elems = objectGeneration(this.props.objects);
-    if (this.props.isNew !== this.old) {
-      // update status
-      this.old = this.props.isNew;
-
-      // clear scene
-      while (this.scene.children.length > 0) {
-        this.scene.remove(this.scene.children[0]);
-      }
-
-      this.elems = updateObjects(this.elems, this.props.objects);
-      this.elems.forEach(elem => {
-        if (elem.toDraw && this.scene.children.length < 3) {
-          fetch(elem.data)
-            .then(statusJSON)
-            .then(data => draw(this.scene, data, elem));
-        }
-      });
-      //this.renderScene();
-    } else if (this.scene.children.length !== 0) {
-      this.elems.forEach(elem => {
-        elem = updateToDrawFlags(elem, this.props.objects);
-
-        if (!elem.toDraw && elem.id) {
-          // del old from scene
-          const toDel = this.scene.getObjectById(elem.id);
-          this.scene.remove(toDel);
-          elem.id = 0;
-        }
-        if (elem.toDraw && !elem.id && this.scene.children.length < 3) {
-          // add new to scene
-          fetch(elem.data)
-            .then(statusJSON)
-            .then(data => draw(this.scene, data, elem));
-        }
-      });
     }
     this.animate();
   }

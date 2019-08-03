@@ -100,13 +100,49 @@ function ConvertCoordinatesOneFile(json_data, left, right, up, down) {
   const width = (right - left) * scale,
     height = (up - down) * scale;
   for (let j = 0; j < json_data.items.length; j++) {
-    for (let k = 0; k < json_data.items[j].coordinates.length; k++) {
-      json_data.items[j].coordinates[k][0] = Math.round(
-        ((json_data.items[j].coordinates[k][0] - left) / (right - left)) * width
-      );
-      json_data.items[j].coordinates[k][1] = Math.round(
-        ((json_data.items[j].coordinates[k][1] - down) / (up - down)) * height
-      );
+    if (json_data.items[j].type === 'MultiPolygon') {
+      // polygon coordinates itself
+      for (let k = 0; k < json_data.items[j].coordinates[0].length; k++) {
+        json_data.items[j].coordinates[0][k][0] = Math.round(
+          ((json_data.items[j].coordinates[0][k][0] - left) / (right - left)) *
+            width
+        );
+        json_data.items[j].coordinates[0][k][1] = Math.round(
+          ((json_data.items[j].coordinates[0][k][1] - down) / (up - down)) *
+            height
+        );
+      }
+      if (json_data.items[j].coordinates.length > 1) {
+        // massive of holes processing
+        for (let i = 0; i < json_data.items[j].coordinates[1].length; i++) {
+          for (
+            let k = 0;
+            k < json_data.items[j].coordinates[1][i].length;
+            k++
+          ) {
+            json_data.items[j].coordinates[1][i][k][0] = Math.round(
+              ((json_data.items[j].coordinates[1][i][k][0] - left) /
+                (right - left)) *
+                width
+            );
+            json_data.items[j].coordinates[1][i][k][1] = Math.round(
+              ((json_data.items[j].coordinates[1][i][k][1] - down) /
+                (up - down)) *
+                height
+            );
+          }
+        }
+      }
+    } else {
+      for (let k = 0; k < json_data.items[j].coordinates.length; k++) {
+        json_data.items[j].coordinates[k][0] = Math.round(
+          ((json_data.items[j].coordinates[k][0] - left) / (right - left)) *
+            width
+        );
+        json_data.items[j].coordinates[k][1] = Math.round(
+          ((json_data.items[j].coordinates[k][1] - down) / (up - down)) * height
+        );
+      }
     }
   }
   return json_data;

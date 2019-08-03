@@ -7,7 +7,6 @@ import updateObjects from './UpdateObjects';
 import { statusJSON } from '../Parsing/Handle';
 import draw from './Draw';
 import updateToDrawFlags from './UpdateToDrawFlags';
-import clearScene from './ClearScene';
 
 class ThreeRendering extends Component {
   createCamera(width, height) {
@@ -90,13 +89,19 @@ class ThreeRendering extends Component {
   }
   componentDidUpdate() {
     if (this.props.isLoading) {
-      this.scene = clearScene(this.scene);
+      // clear scene
+      while (this.scene.children.length > 0) {
+        this.scene.remove(this.scene.children[0]);
+      }
     } else {
       if (this.elems === undefined)
         this.elems = objectGeneration(this.props.objects);
       if (this.props.isNew !== this.old) {
         this.old = this.props.isNew;
-        this.scene = clearScene(this.scene);
+        // clear scene
+        while (this.scene.children.length > 0) {
+          this.scene.remove(this.scene.children[0]);
+        }
         this.elems = updateObjects(this.elems, this.props.objects);
         this.elems.forEach(elem => {
           if (elem.toDraw && this.scene.children.length < 3) {

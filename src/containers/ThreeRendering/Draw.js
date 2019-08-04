@@ -3,6 +3,7 @@ import ConvertCoordinates from '../Parsing/Converter';
 
 export default function draw(scene, data_json, object) {
   let polygons = [];
+  let polyShapes = [];
   let lines = [];
 
   // parse json to objects
@@ -11,29 +12,35 @@ export default function draw(scene, data_json, object) {
 
     if (feature.type === 'MultiPolygon') {
       // polygon's vertices
-      feature.coordinates[0].forEach(coord => {
-        coord = ConvertCoordinates(coord);
-        vertices.push(new THREE.Vector2(coord[0], coord[1]));
+      feature.coordinates[0].forEach(lineStr => {
+        lineStr.forEach(coord => {
+          coord = ConvertCoordinates(coord);
+          vertices.push(new THREE.Vector2(coord[0], coord[1]));
+        });
       });
 
       const shape = new THREE.Shape(vertices);
+      const polygon = new THREE.Geometry();
+      polygon.vertices = vertices;
 
       // holes vertices
-      if (feature.coordinates.length !== 1) {
-        feature.coordinates[1].forEach(hole => {
-          const holePoints = [];
-          const newHole = new THREE.Path();
+      for (let i = 1; i < feature.coordinates.length; i++) {
+        const holePoints = [];
 
-          hole.forEach(coord1 => {
+        feature.coordinates[i].forEach(lineStr1 => {
+          lineStr1.forEach(coord1 => {
             coord1 = ConvertCoordinates(coord1);
-            holePoints.push(new THREE.Vector3(coord1[0], coord1[1], 0));
+            holePoints.push(new THREE.Vector2(coord1[0], coord1[1]));
           });
-
-          newHole.fromPoints(holePoints);
-          shape.holes.push(newHole);
         });
+
+        polygon.vertices = polygon.vertices.concat(holePoints);
+        const newHole = new THREE.Path();
+        newHole.fromPoints(holePoints);
+        shape.holes.push(newHole);
       }
-      polygons.push(shape);
+      polyShapes.push(shape);
+      polygons.push(polygon);
 
       // lines
     } else {
@@ -48,18 +55,17 @@ export default function draw(scene, data_json, object) {
 
   // multipolygon processing
   let meshes = new THREE.Group();
-  for (let i = 0; i < polygons.length; i++) {
-    const points = polygons[i].extractPoints(3);
+  for (let i = 0; i < polyShapes.length; i++) {
+    const points = polyShapes[i].extractPoints(2);
     const triangles = THREE.ShapeUtils.triangulateShape(
-      points.vertices,
+      points.shape,
       points.holes
     );
-    const polygon = new THREE.Geometry();
-    polygon.faces = [];
+    polygons[i].faces = [];
     triangles.forEach(tr => {
-      polygon.faces.push(new THREE.Face3(tr[0], tr[1], tr[2]));
+      polygons[i].faces.push(new THREE.Face3(tr[0], tr[1], tr[2]));
     });
-    meshes.add(new THREE.Mesh(polygon, object.material));
+    meshes.add(new THREE.Mesh(polygons[i], object.material));
   }
 
   // lines processing

@@ -19,9 +19,12 @@ export default function draw(scene, data_json, object) {
         });
       });
 
-      const polygon = new THREE.Geometry();
+      /*
+      const polygon = new THREE.ShapeGeometry();
       polygon.vertices = vertices;
       const shape = new THREE.Shape(polygon.vertices);
+       */
+      const shape = new THREE.Shape(vertices);
 
       // holes vertices
       for (let i = 1; i < feature.coordinates.length; i++) {
@@ -34,11 +37,12 @@ export default function draw(scene, data_json, object) {
           });
         });
 
-        //polygon.vertices = polygon.vertices.concat(holePoints);
+        // polygon.vertices = polygon.vertices.concat(holePoints);
         const newHole = new THREE.Path();
         newHole.fromPoints(holePoints);
         shape.holes.push(newHole);
       }
+      const polygon = new THREE.ShapeGeometry(shape); // !!!
       polyShapes.push(shape);
       polygons.push(polygon);
 
@@ -56,7 +60,7 @@ export default function draw(scene, data_json, object) {
   // multipolygon processing
   let meshes = new THREE.Group();
   for (let i = 0; i < polyShapes.length; i++) {
-    const points = polyShapes[i].extractPoints(2);
+    const points = polyShapes[i].extractPoints(3);
     const triangles = THREE.ShapeUtils.triangulateShape(
       points.shape,
       points.holes
@@ -64,9 +68,12 @@ export default function draw(scene, data_json, object) {
     polygons[i].faces = [];
     triangles.forEach(tr => {
       polygons[i].faces.push(new THREE.Face3(tr[0], tr[1], tr[2]));
+      /*
+      polygons[i].faceVertexUvs[0] =
+          THREE.ExtrudeGeometry.WorldUVGenerator.generateTopUV(polygons[i], tr[0], tr[1], tr[2]);
+       */
     });
-    polygons[i].computeFaceNormals();
-    polygons[i].computeVertexNormals();
+
     const mesh = new THREE.Mesh(polygons[i], object.material);
     meshes.add(mesh);
   }

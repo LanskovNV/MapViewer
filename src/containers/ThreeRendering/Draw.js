@@ -15,13 +15,13 @@ export default function draw(scene, data_json, object) {
       feature.coordinates[0].forEach(lineStr => {
         lineStr.forEach(coord => {
           coord = ConvertCoordinates(coord);
-          vertices.push(new THREE.Vector2(coord[0], coord[1]));
+          vertices.push(new THREE.Vector3(coord[0], coord[1], 0));
         });
       });
 
-      const shape = new THREE.Shape(vertices);
       const polygon = new THREE.Geometry();
       polygon.vertices = vertices;
+      const shape = new THREE.Shape(polygon.vertices);
 
       // holes vertices
       for (let i = 1; i < feature.coordinates.length; i++) {
@@ -30,11 +30,11 @@ export default function draw(scene, data_json, object) {
         feature.coordinates[i].forEach(lineStr1 => {
           lineStr1.forEach(coord1 => {
             coord1 = ConvertCoordinates(coord1);
-            holePoints.push(new THREE.Vector2(coord1[0], coord1[1]));
+            holePoints.push(new THREE.Vector3(coord1[0], coord1[1], 0));
           });
         });
 
-        polygon.vertices = polygon.vertices.concat(holePoints);
+        //polygon.vertices = polygon.vertices.concat(holePoints);
         const newHole = new THREE.Path();
         newHole.fromPoints(holePoints);
         shape.holes.push(newHole);
@@ -65,7 +65,10 @@ export default function draw(scene, data_json, object) {
     triangles.forEach(tr => {
       polygons[i].faces.push(new THREE.Face3(tr[0], tr[1], tr[2]));
     });
-    meshes.add(new THREE.Mesh(polygons[i], object.material));
+    polygons[i].computeFaceNormals();
+    polygons[i].computeVertexNormals();
+    const mesh = new THREE.Mesh(polygons[i], object.material);
+    meshes.add(mesh);
   }
 
   // lines processing

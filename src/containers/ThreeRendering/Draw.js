@@ -46,11 +46,13 @@ export default function draw(scene, data_json, object) {
         )
       );
     }
-    const mesh = new THREE.Mesh(
-      polygons[i],
-      new THREE.MeshBasicMaterial({ color: object.color })
-    );
-    meshes.add(mesh);
+    if (polygons[i].faces.length !== 0) {
+      const mesh = new THREE.Mesh(
+        polygons[i],
+        new THREE.MeshBasicMaterial({ color: object.color })
+      );
+      meshes.add(mesh);
+    }
   }
 
   // lines processing

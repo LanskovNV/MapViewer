@@ -46,14 +46,20 @@ export default function draw(scene, data_json, object) {
         )
       );
     }
-    const mesh = new THREE.Mesh(polygons[i], object.material);
+    const mesh = new THREE.Mesh(
+      polygons[i],
+      new THREE.MeshBasicMaterial({ color: object.color })
+    );
     meshes.add(mesh);
   }
 
   // lines processing
   let lineMeshes = new THREE.Group();
   for (let i = 0; i < lines.length; i++) {
-    const line = new THREE.Line(lines[i], object.material);
+    const line = new THREE.Line(
+      lines[i],
+      new THREE.LineBasicMaterial({ color: object.color })
+    );
     lineMeshes.add(line);
   }
 

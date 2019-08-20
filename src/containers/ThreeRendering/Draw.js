@@ -1,54 +1,29 @@
+import * as earcut from 'earcut';
 import * as THREE from 'three';
 import ConvertCoordinates from '../Parsing/Converter';
 
 export default function draw(scene, data_json, object) {
   let polygons = [];
-  let polyShapes = [];
+  let triangles = [];
   let lines = [];
 
   // parse json to objects
   data_json.items.forEach(feature => {
-    const vertices = [];
+    const geom = new THREE.Geometry();
 
     if (feature.type === 'MultiPolygon') {
-      // polygon's vertices
+      const data = earcut.flatten(feature.coordinates[0]);
+      const tr = earcut(data.vertices, data.holes, data.dimensions);
+      triangles.push(tr);
+
       feature.coordinates[0].forEach(lineStr => {
         lineStr.forEach(coord => {
           coord = ConvertCoordinates(coord);
-          vertices.push(new THREE.Vector3(coord[0], coord[1], 0));
+          geom.vertices.push(new THREE.Vector3(coord[0], coord[1], 0));
         });
       });
-
-      /*
-      const polygon = new THREE.ShapeGeometry();
-      polygon.vertices = vertices;
-      const shape = new THREE.Shape(polygon.vertices);
-       */
-      const shape = new THREE.Shape(vertices);
-
-      // holes vertices
-      for (let i = 1; i < feature.coordinates.length; i++) {
-        const holePoints = [];
-
-        feature.coordinates[i].forEach(lineStr1 => {
-          lineStr1.forEach(coord1 => {
-            coord1 = ConvertCoordinates(coord1);
-            holePoints.push(new THREE.Vector3(coord1[0], coord1[1], 0));
-          });
-        });
-
-        // polygon.vertices = polygon.vertices.concat(holePoints);
-        const newHole = new THREE.Path();
-        newHole.fromPoints(holePoints);
-        shape.holes.push(newHole);
-      }
-      const polygon = new THREE.ShapeGeometry(shape); // !!!
-      polyShapes.push(shape);
-      polygons.push(polygon);
-
-      // lines
+      polygons.push(geom);
     } else {
-      const geom = new THREE.Geometry();
       feature.coordinates.forEach(coord => {
         coord = ConvertCoordinates(coord);
         geom.vertices.push(new THREE.Vector3(coord[0], coord[1], 0));
@@ -59,21 +34,18 @@ export default function draw(scene, data_json, object) {
 
   // multipolygon processing
   let meshes = new THREE.Group();
-  for (let i = 0; i < polyShapes.length; i++) {
-    const points = polyShapes[i].extractPoints(3);
-    const triangles = THREE.ShapeUtils.triangulateShape(
-      points.shape,
-      points.holes
-    );
-    polygons[i].faces = [];
-    triangles.forEach(tr => {
-      polygons[i].faces.push(new THREE.Face3(tr[0], tr[1], tr[2]));
-      /*
-      polygons[i].faceVertexUvs[0] =
-          THREE.ExtrudeGeometry.WorldUVGenerator.generateTopUV(polygons[i], tr[0], tr[1], tr[2]);
-       */
-    });
 
+  for (let i = 0; i < polygons.length; i++) {
+    polygons[i].faces = [];
+    for (let j = 0; j < triangles[i].length - 2; j += 3) {
+      polygons[i].faces.push(
+        new THREE.Face3(
+          triangles[i][j],
+          triangles[i][j + 1],
+          triangles[i][j + 2]
+        )
+      );
+    }
     const mesh = new THREE.Mesh(polygons[i], object.material);
     meshes.add(mesh);
   }

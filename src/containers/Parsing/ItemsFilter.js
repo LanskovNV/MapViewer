@@ -1,5 +1,3 @@
-import { TransformMultipolygon } from './MultipolygonTransformer';
-
 /*
  * @desc deletes unneeded data present in each item and transform multipolygons into lines
  * @param json_data - data to filter stored as json file

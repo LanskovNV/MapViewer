@@ -128,7 +128,7 @@ async function GetBounds(arr_of_file_names) {
  * @return json_data - part of map with converted coordinates stored as json file
  */
 function ConvertCoordinatesOneFile(json_data, left, right, up, down) {
-  const scale = 10000;
+  const scale = (right - left) * 200000;
   const width = (right - left) * scale,
     height = (up - down) * scale;
   for (let j = 0; j < json_data.items.length; j++) {
@@ -143,12 +143,14 @@ function ConvertCoordinatesOneFile(json_data, left, right, up, down) {
             json_data.items[j].coordinates[i][k][l][0] = Math.round(
               ((json_data.items[j].coordinates[i][k][l][0] - left) /
                 (right - left)) *
-                width
+                width -
+                width / 2
             );
             json_data.items[j].coordinates[i][k][l][1] = Math.round(
               ((json_data.items[j].coordinates[i][k][l][1] - down) /
                 (up - down)) *
-                height
+                height -
+                height / 2
             );
           }
         }
@@ -157,10 +159,13 @@ function ConvertCoordinatesOneFile(json_data, left, right, up, down) {
       for (let k = 0; k < json_data.items[j].coordinates.length; k++) {
         json_data.items[j].coordinates[k][0] = Math.round(
           ((json_data.items[j].coordinates[k][0] - left) / (right - left)) *
-            width
+            width -
+            width / 2
         );
         json_data.items[j].coordinates[k][1] = Math.round(
-          ((json_data.items[j].coordinates[k][1] - down) / (up - down)) * height
+          ((json_data.items[j].coordinates[k][1] - down) / (up - down)) *
+            height -
+            height / 2
         );
       }
     }

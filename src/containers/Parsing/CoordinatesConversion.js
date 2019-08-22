@@ -7,25 +7,57 @@ import { status, GetFileCounts } from './Handle';
  */
 function GetBoundsOneFile(json_data) {
   let arr_bounds = new Array(4);
-  arr_bounds[0] = json_data.items[0].coordinates[0][0];
-  arr_bounds[1] = arr_bounds[0];
-  arr_bounds[2] = json_data.items[0].coordinates[0][1];
-  arr_bounds[3] = arr_bounds[2];
+  if (json_data.items[0].type === 'MultiPolygon') {
+    arr_bounds[0] = json_data.items[0].coordinates[0][0][0][0];
+    arr_bounds[1] = arr_bounds[0];
+    arr_bounds[2] = json_data.items[0].coordinates[0][0][0][1];
+    arr_bounds[3] = arr_bounds[2];
+  } else {
+    arr_bounds[0] = json_data.items[0].coordinates[0][0];
+    arr_bounds[1] = arr_bounds[0];
+    arr_bounds[2] = json_data.items[0].coordinates[0][1];
+    arr_bounds[3] = arr_bounds[2];
+  }
 
   for (let j = 0; j < json_data.items.length; j++) {
-    for (let k = 0; k < json_data.items[j].coordinates.length; k++) {
-      if (json_data.items[j].coordinates[k][0] < arr_bounds[0])
-        // Update left bound
-        arr_bounds[0] = json_data.items[j].coordinates[k][0];
-      if (json_data.items[j].coordinates[k][0] > arr_bounds[1])
-        // Update right bound
-        arr_bounds[1] = json_data.items[j].coordinates[k][0];
-      if (json_data.items[j].coordinates[k][1] > arr_bounds[2])
-        // Update upper bound
-        arr_bounds[2] = json_data.items[j].coordinates[k][1];
-      if (json_data.items[j].coordinates[k][1] < arr_bounds[3])
-        // Update lower bound
-        arr_bounds[3] = json_data.items[j].coordinates[k][1];
+    if (json_data.items[j].type === 'MultiPolygon') {
+      for (let i = 0; i < json_data.items[j].coordinates.length; i++) {
+        for (let k = 0; k < json_data.items[j].coordinates[i].length; k++) {
+          for (
+            let l = 0;
+            l < json_data.items[j].coordinates[i][k].length;
+            l++
+          ) {
+            if (json_data.items[j].coordinates[i][k][l][0] < arr_bounds[0])
+              // Update left bound
+              arr_bounds[0] = json_data.items[j].coordinates[k][0];
+            if (json_data.items[j].coordinates[i][k][l][0] > arr_bounds[1])
+              // Update right bound
+              arr_bounds[1] = json_data.items[j].coordinates[k][0];
+            if (json_data.items[j].coordinates[i][k][l][1] > arr_bounds[2])
+              // Update upper bound
+              arr_bounds[2] = json_data.items[j].coordinates[k][1];
+            if (json_data.items[j].coordinates[i][k][l][1] < arr_bounds[3])
+              // Update lower bound
+              arr_bounds[3] = json_data.items[j].coordinates[k][1];
+          }
+        }
+      }
+    } else {
+      for (let k = 0; k < json_data.items[j].coordinates.length; k++) {
+        if (json_data.items[j].coordinates[k][0] < arr_bounds[0])
+          // Update left bound
+          arr_bounds[0] = json_data.items[j].coordinates[k][0];
+        if (json_data.items[j].coordinates[k][0] > arr_bounds[1])
+          // Update right bound
+          arr_bounds[1] = json_data.items[j].coordinates[k][0];
+        if (json_data.items[j].coordinates[k][1] > arr_bounds[2])
+          // Update upper bound
+          arr_bounds[2] = json_data.items[j].coordinates[k][1];
+        if (json_data.items[j].coordinates[k][1] < arr_bounds[3])
+          // Update lower bound
+          arr_bounds[3] = json_data.items[j].coordinates[k][1];
+      }
     }
   }
   return arr_bounds;

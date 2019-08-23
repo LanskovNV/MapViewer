@@ -10,17 +10,19 @@ import updateToDrawFlags from './UpdateToDrawFlags';
 
 class ThreeRendering extends Component {
   createCamera(width, height) {
-    const h_o = 1000000 * 2 * Math.atan((90 * Math.PI) / 180 / 2);
+    const near = 7000;
+    const far = 10000000;
+    const h_o = far * 2 * Math.atan((90 * Math.PI) / 180 / 2);
     const w_o = (width / height) * h_o;
     const camera = new THREE.OrthographicCamera(
       w_o / -2,
       w_o / 2,
       h_o / 2,
       h_o / -2,
-      7000,
-      1000000
+      near,
+      far
     );
-    camera.position.set(0, 0, 1000000);
+    camera.position.set(0, 0, far);
     return camera;
   }
   createRenderer(width, height) {

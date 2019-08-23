@@ -128,7 +128,7 @@ async function GetBounds(arr_of_file_names) {
  * @return json_data - part of map with converted coordinates stored as json file
  */
 function ConvertCoordinatesOneFile(json_data, left, right, up, down) {
-  const scale = (right - left) * 200000;
+  const scale = (right - left) * 20000;
   const width = (right - left) * scale,
     height = (up - down) * scale;
   for (let j = 0; j < json_data.items.length; j++) {

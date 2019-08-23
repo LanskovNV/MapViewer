@@ -11,7 +11,7 @@ import updateToDrawFlags from './UpdateToDrawFlags';
 class ThreeRendering extends Component {
   createCamera(width, height) {
     const near = 7000;
-    const far = 10000000;
+    const far = 1000000;
     const h_o = far * 2 * Math.atan((90 * Math.PI) / 180 / 2);
     const w_o = (width / height) * h_o;
     const camera = new THREE.OrthographicCamera(

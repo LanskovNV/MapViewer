@@ -113,6 +113,11 @@ async function GetBounds(arr_of_file_names) {
     arr_bounds[1] = 0;
     arr_bounds[2] = 0;
     arr_bounds[3] = 0;
+  } else {
+    arr_bounds[0] = arr_bounds[0] - 0.05 * Math.abs(arr_bounds[0]); // left
+    arr_bounds[1] = arr_bounds[1] + 0.05 * Math.abs(arr_bounds[1]); // right
+    arr_bounds[2] = arr_bounds[2] + 0.05 * Math.abs(arr_bounds[2]); // up
+    arr_bounds[3] = arr_bounds[3] - 0.05 * Math.abs(arr_bounds[3]); // down
   }
   return arr_bounds;
 }

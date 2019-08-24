@@ -112,7 +112,7 @@ class ThreeRendering extends Component {
               .then(data => draw(this.scene, data, elem));
           }
         });
-      } else if (this.scene.children.length !== 0) {
+      } else {
         this.elems.forEach(elem => {
           elem = updateToDrawFlags(elem, this.props.objects);
           if (!elem.toDraw && elem.id) {

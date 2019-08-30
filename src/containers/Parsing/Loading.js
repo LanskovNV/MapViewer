@@ -1,8 +1,9 @@
-/*
- * @desc reads data from file
- * @param file - file to read
- * @param callbackProgressF - function to process read data chunks
- * @param callbackEndF - function to process last read data chunk
+/**
+ * This function reads data from file
+ * @param {File} file - file to read
+ * @param {function} callbackProgressF - function to process read data chunks
+ * @param {function} callbackEndF - function to process last read data chunk
+ * @param {function} callback - function to notify application that data is loaded
  */
 export default function loading(
   file,
@@ -52,22 +53,24 @@ export default function loading(
     }
   }
 
-  /*
-   * @desc returns minimum
-   * @params a, b - values
-   * @return value - minimum out of 'a' and 'b'
+  /**
+   * This function returns minimum
+   * @param {number} a - value1
+   * @param {param} b - value2
+   * @returns {number} - minimum out of 'a' and 'b'
    */
   function min(a, b) {
     return a < b ? a : b;
   }
 
-  /*
-   * @desc calls corresponding function to process read data
-   * @param reader - FileReader
-   * @param file - read file
-   * @param evt - event
-   * @param callbackProgressF - function to process read data chunks
-   * @param callbackEndF - function to process last read data chunk
+  /**
+   * This function calls corresponding function to process read data
+   * @param {FileReader} reader - FileReader
+   * @param {File} file - read file
+   * @param {Event} evt - event
+   * @param {function} callbackProgressF - function to process read data chunks
+   * @param {function} callbackEndF - function to process last read data chunk
+   * @param {function} callback - function to notify application that data is loaded
    */
   function callbackRead(
     reader,

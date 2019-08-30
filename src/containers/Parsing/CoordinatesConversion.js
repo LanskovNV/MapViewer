@@ -7,25 +7,57 @@ import { status, GetFileCounts } from './Handle';
  */
 function GetBoundsOneFile(json_data) {
   let arr_bounds = new Array(4);
-  arr_bounds[0] = json_data.items[0].coordinates[0][0];
-  arr_bounds[1] = arr_bounds[0];
-  arr_bounds[2] = json_data.items[0].coordinates[0][1];
-  arr_bounds[3] = arr_bounds[2];
+  if (json_data.items[0].type === 'MultiPolygon') {
+    arr_bounds[0] = json_data.items[0].coordinates[0][0][0][0];
+    arr_bounds[1] = arr_bounds[0];
+    arr_bounds[2] = json_data.items[0].coordinates[0][0][0][1];
+    arr_bounds[3] = arr_bounds[2];
+  } else {
+    arr_bounds[0] = json_data.items[0].coordinates[0][0];
+    arr_bounds[1] = arr_bounds[0];
+    arr_bounds[2] = json_data.items[0].coordinates[0][1];
+    arr_bounds[3] = arr_bounds[2];
+  }
 
   for (let j = 0; j < json_data.items.length; j++) {
-    for (let k = 0; k < json_data.items[j].coordinates.length; k++) {
-      if (json_data.items[j].coordinates[k][0] < arr_bounds[0])
-        // Update left bound
-        arr_bounds[0] = json_data.items[j].coordinates[k][0];
-      if (json_data.items[j].coordinates[k][0] > arr_bounds[1])
-        // Update right bound
-        arr_bounds[1] = json_data.items[j].coordinates[k][0];
-      if (json_data.items[j].coordinates[k][1] > arr_bounds[2])
-        // Update upper bound
-        arr_bounds[2] = json_data.items[j].coordinates[k][1];
-      if (json_data.items[j].coordinates[k][1] < arr_bounds[3])
-        // Update lower bound
-        arr_bounds[3] = json_data.items[j].coordinates[k][1];
+    if (json_data.items[j].type === 'MultiPolygon') {
+      for (let i = 0; i < json_data.items[j].coordinates.length; i++) {
+        for (let k = 0; k < json_data.items[j].coordinates[i].length; k++) {
+          for (
+            let l = 0;
+            l < json_data.items[j].coordinates[i][k].length;
+            l++
+          ) {
+            if (json_data.items[j].coordinates[i][k][l][0] < arr_bounds[0])
+              // Update left bound
+              arr_bounds[0] = json_data.items[j].coordinates[k][0];
+            if (json_data.items[j].coordinates[i][k][l][0] > arr_bounds[1])
+              // Update right bound
+              arr_bounds[1] = json_data.items[j].coordinates[k][0];
+            if (json_data.items[j].coordinates[i][k][l][1] > arr_bounds[2])
+              // Update upper bound
+              arr_bounds[2] = json_data.items[j].coordinates[k][1];
+            if (json_data.items[j].coordinates[i][k][l][1] < arr_bounds[3])
+              // Update lower bound
+              arr_bounds[3] = json_data.items[j].coordinates[k][1];
+          }
+        }
+      }
+    } else {
+      for (let k = 0; k < json_data.items[j].coordinates.length; k++) {
+        if (json_data.items[j].coordinates[k][0] < arr_bounds[0])
+          // Update left bound
+          arr_bounds[0] = json_data.items[j].coordinates[k][0];
+        if (json_data.items[j].coordinates[k][0] > arr_bounds[1])
+          // Update right bound
+          arr_bounds[1] = json_data.items[j].coordinates[k][0];
+        if (json_data.items[j].coordinates[k][1] > arr_bounds[2])
+          // Update upper bound
+          arr_bounds[2] = json_data.items[j].coordinates[k][1];
+        if (json_data.items[j].coordinates[k][1] < arr_bounds[3])
+          // Update lower bound
+          arr_bounds[3] = json_data.items[j].coordinates[k][1];
+      }
     }
   }
   return arr_bounds;
@@ -81,6 +113,11 @@ async function GetBounds(arr_of_file_names) {
     arr_bounds[1] = 0;
     arr_bounds[2] = 0;
     arr_bounds[3] = 0;
+  } else {
+    arr_bounds[0] = arr_bounds[0] - 0.05 * Math.abs(arr_bounds[0]); // left
+    arr_bounds[1] = arr_bounds[1] + 0.05 * Math.abs(arr_bounds[1]); // right
+    arr_bounds[2] = arr_bounds[2] + 0.05 * Math.abs(arr_bounds[2]); // up
+    arr_bounds[3] = arr_bounds[3] - 0.05 * Math.abs(arr_bounds[3]); // down
   }
   return arr_bounds;
 }
@@ -96,17 +133,46 @@ async function GetBounds(arr_of_file_names) {
  * @returns {json} json_data - part of map with converted coordinates stored as json file
  */
 function ConvertCoordinatesOneFile(json_data, left, right, up, down) {
-  const scale = 10000;
+  const scale = (right - left) * 20000;
   const width = (right - left) * scale,
     height = (up - down) * scale;
   for (let j = 0; j < json_data.items.length; j++) {
-    for (let k = 0; k < json_data.items[j].coordinates.length; k++) {
-      json_data.items[j].coordinates[k][0] = Math.round(
-        ((json_data.items[j].coordinates[k][0] - left) / (right - left)) * width
-      );
-      json_data.items[j].coordinates[k][1] = Math.round(
-        ((json_data.items[j].coordinates[k][1] - down) / (up - down)) * height
-      );
+    if (json_data.items[j].type === 'MultiPolygon') {
+      for (let i = 0; i < json_data.items[j].coordinates.length; i++) {
+        for (let k = 0; k < json_data.items[j].coordinates[i].length; k++) {
+          for (
+            let l = 0;
+            l < json_data.items[j].coordinates[i][k].length;
+            l++
+          ) {
+            json_data.items[j].coordinates[i][k][l][0] = Math.round(
+              ((json_data.items[j].coordinates[i][k][l][0] - left) /
+                (right - left)) *
+                width -
+                width / 2
+            );
+            json_data.items[j].coordinates[i][k][l][1] = Math.round(
+              ((json_data.items[j].coordinates[i][k][l][1] - down) /
+                (up - down)) *
+                height -
+                height / 2
+            );
+          }
+        }
+      }
+    } else {
+      for (let k = 0; k < json_data.items[j].coordinates.length; k++) {
+        json_data.items[j].coordinates[k][0] = Math.round(
+          ((json_data.items[j].coordinates[k][0] - left) / (right - left)) *
+            width -
+            width / 2
+        );
+        json_data.items[j].coordinates[k][1] = Math.round(
+          ((json_data.items[j].coordinates[k][1] - down) / (up - down)) *
+            height -
+            height / 2
+        );
+      }
     }
   }
   return json_data;

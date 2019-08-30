@@ -29,9 +29,16 @@ export default function loading(
   let reader = new FileReader();
   reader.onload = function(evt) {
     reader.offset = start;
-    callbackRead(this, file, evt, callbackProgressF, callbackEndF, callback);
+    callbackRead(
+      this,
+      file,
+      evt,
+      callbackProgressF,
+      callbackEndF,
+      callback,
+      Load
+    );
     start += CHUNK_SIZE;
-    Load();
   };
   reader.size = CHUNK_SIZE;
 
@@ -71,10 +78,11 @@ export default function loading(
     evt,
     callbackProgressF,
     callbackEndF,
-    callback
+    callback,
+    Load
   ) {
     if (reader.offset + reader.size < file.size) {
-      callbackProgressF(evt.target.result);
+      callbackProgressF(evt.target.result, Load);
     } else {
       callbackEndF(evt.target.result, callback);
     }

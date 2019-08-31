@@ -2,6 +2,12 @@ import * as earcut from 'earcut';
 import * as THREE from 'three';
 import ConvertCoordinates from '../Parsing/Converter';
 
+/**
+ * @desc add all objects to render scene
+ * @param scene
+ * @param data_json json data file from blob with prepared items
+ * @param object struct describing draw objects (color, id, e.t.c)
+ */
 export default function draw(scene, data_json, object) {
   let polygons = [];
   let triangles = [];

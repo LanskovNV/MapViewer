@@ -1,3 +1,8 @@
+/**
+ * @desc generate array of drawing objects
+ * @param objects toDraw flags
+ * @returns {[]}
+ */
 export default function objectGeneration(objects) {
   const elems = [];
   const houses = {

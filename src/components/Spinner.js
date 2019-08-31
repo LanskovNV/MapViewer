@@ -1,8 +1,8 @@
 import React from 'react';
 import { injectIntl, FormattedMessage } from 'react-intl';
-import messages from '../messages';
 import PropTypes from 'prop-types';
 import { Modal } from 'react-bootstrap';
+import messages from '../messages';
 
 class Spinner extends React.Component {
   render() {
@@ -22,7 +22,7 @@ class Spinner extends React.Component {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <div class="text-center">
+            <div className="text-center">
               <div className="spinner-border text-info" />
             </div>
           </Modal.Body>

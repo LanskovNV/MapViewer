@@ -5,7 +5,8 @@ import Spinner from './components/Spinner';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import CheckboxBar from './components/OutputData';
-import ThreeContainer from './containers/ThreeRendering/Three';
+// import ThreeContainer from './containers/ThreeRendering/Three';
+import ThreeRendering from './containers/ThreeRendering/ThreeRendering';
 
 import GlobalStyle from './global-styles';
 
@@ -42,7 +43,6 @@ class App extends Component {
   updateWater = value => {
     this.setState({ isWater: value });
   };
-
   loadedCallback() {
     this.setState({ isLoaded: this.state.isLoaded + 1 });
     this.endLoadingCallback();
@@ -66,7 +66,11 @@ class App extends Component {
           loading={this.startLoadingCallback}
         />
         <Spinner isLoading={this.state.isLoading} />
-        <ThreeContainer objects={objects} />
+        <ThreeRendering
+          objects={objects}
+          isLoading={this.state.isLoading}
+          isNew={this.state.isLoaded}
+        />
         <CheckboxBar
           updateHouses={this.updateHouses}
           updateStreets={this.updateStreets}

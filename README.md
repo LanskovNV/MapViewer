@@ -39,6 +39,7 @@ To run the project in WebStorm on the localhost:
 2) Update project 
 3) To install the project, run
 ```
+ npm install -g yarn
  yarn install
  ```
 using built-in terminal.

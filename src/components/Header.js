@@ -13,26 +13,21 @@ class Header extends React.Component {
   constructor() {
     super();
     this.loadAlexandria = this.loadAlexandria.bind(this);
-    this.loadCairo = this.loadCairo.bind(this);
-    this.loadDavis = this.loadDavis.bind(this);
-    this.loadSPB = this.loadSPB.bind(this);
+    this.loadBaku = this.loadBaku.bind(this);
+    this.loadStockton = this.loadStockton.bind(this);
     this.load = this.load.bind(this);
   }
   loadAlexandria() {
     this.props.loaded();
     LoadPreparedMap('Alexandria');
   }
-  loadCairo() {
+  loadBaku() {
     this.props.loaded();
-    LoadPreparedMap('Cairo');
+    LoadPreparedMap('Baku');
   }
-  loadDavis() {
+  loadStockton() {
     this.props.loaded();
-    LoadPreparedMap('Davis');
-  }
-  loadSPB() {
-    this.props.loaded();
-    LoadPreparedMap('SPB');
+    LoadPreparedMap('Stockton');
   }
   load() {
     PickUsefulFromGeoJSONToTXT(this.props.loading, this.props.loaded);
@@ -66,29 +61,20 @@ class Header extends React.Component {
                 </Dropdown.Item>
                 <Dropdown.Item as="label" hred="preloadMap2">
                   {' '}
-                  <FormattedMessage {...messages.Cairo} />{' '}
+                  <FormattedMessage {...messages.Baku} />{' '}
                   <InputLoad
-                    id={'Cairo'}
+                    id={'Baku'}
                     type={'submit'}
-                    onClick={this.loadCairo}
+                    onClick={this.loadBaku}
                   />
                 </Dropdown.Item>
                 <Dropdown.Item as="label" hred="preloadMap3">
                   {' '}
-                  <FormattedMessage {...messages.Davis} />{' '}
+                  <FormattedMessage {...messages.Stockton} />{' '}
                   <InputLoad
-                    id={'Davis'}
+                    id={'Stockton'}
                     type={'submit'}
-                    onClick={this.loadDavis}
-                  />
-                </Dropdown.Item>
-                <Dropdown.Item as="label" hred="preloadMap4">
-                  {' '}
-                  <FormattedMessage {...messages.SPB} />{' '}
-                  <InputLoad
-                    id={'SPB'}
-                    type={'submit'}
-                    onClick={this.loadSPB}
+                    onClick={this.loadStockton}
                   />
                 </Dropdown.Item>
                 <Dropdown.Divider />
@@ -100,6 +86,7 @@ class Header extends React.Component {
                     type={'file'}
                     name={'Load'}
                     onChange={this.load}
+                    h
                   />{' '}
                 </Dropdown.Item>
               </Dropdown.Menu>

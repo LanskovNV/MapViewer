@@ -1,15 +1,12 @@
-import mapFile11 from '../../readyMaps/Davis/streets';
-import mapFile12 from '../../readyMaps/Davis/houses';
-import mapFile13 from '../../readyMaps/Davis/water';
-import mapFile21 from '../../readyMaps/Cairo/streets';
-import mapFile22 from '../../readyMaps/Cairo/houses';
-import mapFile23 from '../../readyMaps/Cairo/water';
+import mapFile11 from '../../readyMaps/Stockton/streets';
+import mapFile12 from '../../readyMaps/Stockton/houses';
+import mapFile13 from '../../readyMaps/Stockton/water';
+import mapFile21 from '../../readyMaps/Baku/streets';
+import mapFile22 from '../../readyMaps/Baku/houses';
+import mapFile23 from '../../readyMaps/Baku/water';
 import mapFile31 from '../../readyMaps/Alexandria/streets';
 import mapFile32 from '../../readyMaps/Alexandria/houses';
 import mapFile33 from '../../readyMaps/Alexandria/water';
-import mapFile41 from '../../readyMaps/SPB/streets';
-import mapFile42 from '../../readyMaps/SPB/houses';
-import mapFile43 from '../../readyMaps/SPB/water';
 import { ClearFiles, saveByteArray } from './Handle';
 
 /**
@@ -17,11 +14,11 @@ import { ClearFiles, saveByteArray } from './Handle';
  */
 export default name => {
   let files = new Array(3);
-  if (name === 'Davis') {
+  if (name === 'Stockton') {
     files[0] = mapFile11;
     files[1] = mapFile12;
     files[2] = mapFile13;
-  } else if (name === 'Cairo') {
+  } else if (name === 'Baku') {
     files[0] = mapFile21;
     files[1] = mapFile22;
     files[2] = mapFile23;
@@ -29,10 +26,6 @@ export default name => {
     files[0] = mapFile31;
     files[1] = mapFile32;
     files[2] = mapFile33;
-  } else if (name === 'SPB') {
-    files[0] = mapFile41;
-    files[1] = mapFile42;
-    files[2] = mapFile43;
   }
 
   if (

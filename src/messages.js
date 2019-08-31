@@ -49,17 +49,13 @@ export default defineMessages({
     id: `Alexandria`,
     defaultMessage: 'Alexandria'
   },
-  Cairo: {
-    id: `Cairo`,
-    defaultMessage: 'Cairo'
+  Baku: {
+    id: `Baku`,
+    defaultMessage: 'Baku'
   },
-  Davis: {
-    id: `Davis`,
-    defaultMessage: 'Davis'
-  },
-  SPB: {
-    id: `SPB`,
-    defaultMessage: 'SPB'
+  Stockton: {
+    id: `Stockton`,
+    defaultMessage: 'Stockton'
   },
   uploadMap: {
     id: `upload.map`,

@@ -1,5 +1,6 @@
-const THREE = require('three');
+const earcut = require('earcut');
 const intersections = require('./intersections');
+const createTriangles = require('./triangles');
 /*
     triangulation is correct if:
        - number of triangles equals to number of vertices - 2
@@ -8,18 +9,15 @@ const intersections = require('./intersections');
     */
 
 test('triangulate square', () => {
-  let square = new THREE.Geometry();
-  const vertices = [[100, 100], [100, 200], [200, 200], [200, 100]];
+  const geometry = [[[100, 100], [100, 200], [200, 200], [200, 100]]];
+  const data = earcut.flatten(geometry);
 
-  for (let i = 0; i < vertices.length; i++) {
-    square.vertices.push(new THREE.Vector3(vertices[i][0], vertices[i][1], 0));
-  }
-
-  let triangles = THREE.ShapeUtils.triangulateShape(square.vertices, []);
-
+  let triangles = createTriangles(
+    earcut(data.vertices, data.holes, data.dimensions)
+  );
   console.log('triangulate square');
   console.log(triangles);
 
-  expect(triangles.length).toEqual(vertices.length - 2);
-  expect(intersections(triangles, vertices)).toEqual(false);
+  expect(triangles.length).toEqual(geometry[0].length - 2);
+  expect(intersections(triangles, geometry[0])).toEqual(false);
 });

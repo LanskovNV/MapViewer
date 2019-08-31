@@ -1,5 +1,6 @@
-const THREE = require('three');
+const earcut = require('earcut');
 const intersections = require('./intersections');
+const createTriangles = require('./triangles');
 
 /*
     triangulation is correct if:
@@ -9,25 +10,17 @@ const intersections = require('./intersections');
     */
 
 test('triangulate russian "Г"', () => {
-  let poly = new THREE.Geometry();
-  const vertices = [
-    [0, 0],
-    [0, 400],
-    [300, 400],
-    [300, 300],
-    [100, 300],
-    [100, 0]
+  const geometry = [
+    [[0, 0], [0, 400], [300, 400], [300, 300], [100, 300], [100, 0]]
   ];
+  const data = earcut.flatten(geometry);
 
-  for (let i = 0; i < vertices.length; i++) {
-    poly.vertices.push(new THREE.Vector3(vertices[i][0], vertices[i][1], 0));
-  }
-
-  let triangles = THREE.ShapeUtils.triangulateShape(poly.vertices, []);
-
+  let triangles = createTriangles(
+    earcut(data.vertices, data.holes, data.dimensions)
+  );
   console.log('triangulate russian "Г"');
   console.log(triangles);
 
-  expect(triangles.length).toEqual(vertices.length - 2);
-  expect(intersections(triangles, vertices)).toEqual(false);
+  expect(triangles.length).toEqual(geometry[0].length - 2);
+  expect(intersections(triangles, geometry[0])).toEqual(false);
 });

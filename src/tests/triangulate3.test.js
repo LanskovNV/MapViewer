@@ -1,5 +1,6 @@
-const THREE = require('three');
+const earcut = require('earcut');
 const intersections = require('./intersections');
+const createTriangles = require('./triangles');
 
 /*
     triangulation is correct if:
@@ -9,27 +10,26 @@ const intersections = require('./intersections');
     */
 
 test('triangulate square with a square projection', () => {
-  let poly = new THREE.Geometry();
-  const vertices = [
-    [0, 50],
-    [0, 350],
-    [300, 350],
-    [300, 50],
-    [200, 50],
-    [200, 0],
-    [150, 0],
-    [150, 50]
+  const geometry = [
+    [
+      [0, 50],
+      [0, 350],
+      [300, 350],
+      [300, 50],
+      [200, 50],
+      [200, 0],
+      [150, 0],
+      [150, 50]
+    ]
   ];
+  const data = earcut.flatten(geometry);
 
-  for (let i = 0; i < vertices.length; i++) {
-    poly.vertices.push(new THREE.Vector3(vertices[i][0], vertices[i][1], 0));
-  }
-
-  let triangles = THREE.ShapeUtils.triangulateShape(poly.vertices, []);
-
+  let triangles = createTriangles(
+    earcut(data.vertices, data.holes, data.dimensions)
+  );
   console.log('triangulate square with a square projection');
   console.log(triangles);
 
-  expect(triangles.length).toEqual(vertices.length - 2);
-  expect(intersections(triangles, vertices)).toEqual(false);
+  expect(triangles.length).toEqual(geometry[0].length - 2);
+  expect(intersections(triangles, geometry[0])).toEqual(false);
 });

@@ -1,7 +1,15 @@
 function intersections(triangles, grid) {
+  for (let j = 0; j < triangles.length; j++) {
+    triangles[j] = [
+      grid[triangles[j][0]],
+      grid[triangles[j][1]],
+      grid[triangles[j][2]]
+    ];
+  }
+
   for (let i = 0; i < triangles.length - 1; i++) {
     for (let j = i + 1; j < triangles.length; j++) {
-      if (areIntersectTriangles(triangles[i], triangles[j], grid)) {
+      if (areIntersectTriangles(triangles[i], triangles[j])) {
         return true;
       }
     }
@@ -9,9 +17,7 @@ function intersections(triangles, grid) {
   return false;
 }
 
-function areIntersectTriangles(triangle1, triangle2, grid) {
-  let tr1 = [grid[triangle1[0]], grid[triangle1[1]], grid[triangle1[2]]];
-  let tr2 = [grid[triangle2[0]], grid[triangle2[1]], grid[triangle2[2]]];
+function areIntersectTriangles(tr1, tr2) {
   let bnd1 = getBounders(tr1);
   let bnd2 = getBounders(tr2);
 

@@ -1,43 +1,54 @@
 # MapViewer
 ![](https://raw.githubusercontent.com/LanskovNV/MapViewer/master/public/mapbanner.png)
 ## Purpose
-Java Script project to work with maps. You can load openstreetmap you want and we'll parse streets, houses and water objects for you.
-### Quick start guide
+MapViewer is the React project providing web mapping service, which offers street maps watching with data filters, containing selectivity towards streets, houses and water objects.
+# Quick start guide
+Here's a guide to get you started using MapViewer.
 
-1. For the very beginning you need to choose one of two languages the application supports: Russian or English. You can do it by using the local toggle situated down below.
+## Locale settings
+You can choose one of two languages the application supports (Russian or English) by using the local toggle down below on the page. 
 
-*And when you can read and understand the necessary data, let's continue our gentle introduction.*
+## Prepared maps
+To see prepared maps click on the button *Choose map* on the top and choose the map from the list. 
+ 
+## Uploading map
+To upload the map click on the *Choose map* button and press ***upload your own map*** in the shortcut. In file explorer choose the file from the local storage in ***.geojson*** format.
 
-2. Then you need to choose the map you want to parse. You might choose the prepared map from the list *(it is located on the home page)* or ***upload your own map*** from the local drive in ***.json*** format.
-
-*Now let's move to the map page and research what you can do with the map.*
-
-3. Using buttons ***'left'*** , ***'right'*** , ***'up'*** and ***'down'*** you can navigate the map.
-4. By clicking on ***'+'*** and ***'-'*** buttons down below or by rotating the mouse wheel, you can ***zoom in / zoom out*** your map.
-5. You can choose all the necessary types of data you want to see now using ***checkboxes***.
+## Learn how the map works
+There are lots of ways to use MapViewer on your computer, phone or tablet. Here are some things you can do.
+### Move the map
+On your computer, click anywhere on the map and move your cursor holding down mouse button in any direction you need:  ***'left'*** , ***'right'*** , ***'up'*** or ***'down'***. On your phone or tablet, touch anywhere on the map and slide to quickly move through the map.  
+To see more details on the map, zoom in or zoom out. On the computer you can do it by using the mouse wheel.
+### Data filters
+You can choose the types of data you want to see by using ***checkboxes*** down below.
+## About
+You can learn more about the application and developers by clicking on the *About* button on the top. 
 
 *And now you are ready to start!*
 ## Limitations
- Now we can work with json files (read and open) and show Map view with threejs+webglrender
+MapViewer works only with maps uploaded in .geojson format. 
 ## Prerequisites
  - NodeJS and npm
  - git
- - WebStorm *// optional*  
- (please, unzip preload maps in src/readyMaps before start)
+ - WebStorm or Visual Studio Code *(optional)*  
+
 ## Command interface
- To run the projectnpx in WebStorm on localhost:
- 1) Clone project with git
- 2) If you want to work with develop version, check out develop
-    branch and update project
- 3) open built-in terminal and run 
- ```
+### Install and run
+To run the project in WebStorm on the localhost:
+1) Clone project using git
+2) Update project 
+3) To install the project, run
+```
  npm install
  ```
- 4) when installation completed, run 
+using built-in terminal.
+
+4) When installation completed, run 
  ```
  npm run start
  ``` 
- Also our app provide testing 
+### Other commands
+Also the app provide testing
  ```
  npm run test
  ```
@@ -45,7 +56,7 @@ Java Script project to work with maps. You can load openstreetmap you want and w
  ```
  npm run lint
  ```
- If you want test production build on local server, do the following:
+ If you want to test the production build on the local server, do the following:
  ```
  npm run build
  npm install -g serve
@@ -58,5 +69,6 @@ Java Script project to work with maps. You can load openstreetmap you want and w
  sudo npm install -g n
  sudo n stable
 ```
-It solves temporary problem with node 11.11.0
-2) If you have some problems with eslint - you can remove strange rules from eslint config.
+It solves temporary problem with node 11.11.0.
+
+2) If you have some problems with eslint, you can remove strange rules from eslint config.

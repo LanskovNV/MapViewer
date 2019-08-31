@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "babel-core": "^7.0.0-bridge.0",
     "bootstrap": "^4.3.1",
     "earcut": "^2.1.5",
     "esdoc": "^1.1.0",
@@ -62,10 +63,6 @@
   "devDependencies": {
     "esdoc": "^1.1.0",
     "esdoc-standard-plugin": "^1.0.0",
-    "jest": "^24.8.0",
     "react-intl-translations-manager": "^5.0.3"
-  },
-  "scripts": {
-    "test": "jest"
   }
 }

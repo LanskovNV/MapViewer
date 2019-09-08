@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import * as THREE from 'three';
+import * as d3 from 'd3';
 import objectGeneration from './ObjectsGeneration';
 import updateObjects from './UpdateObjects';
 import { statusJSON } from '../Parsing/Handle';
 import draw from './Draw';
 import updateToDrawFlags from './UpdateToDrawFlags';
+import zoomInit from './D3Zoom';
 
 class ThreeRendering extends Component {
   createCamera(width, height) {
@@ -48,10 +50,20 @@ class ThreeRendering extends Component {
     const width = this.mount.clientWidth;
     const height = this.mount.clientHeight;
 
+    // threejs setup
     this.scene = new THREE.Scene();
     this.camera = this.createCamera(width, height);
     this.renderer = this.createRenderer(width, height);
+
+    // get map id
     this.old = this.props.isNew;
+
+    // setup zoom handling
+    const zoom = zoomInit(this.camera, width, height);
+    const view = d3.select(this.renderer.domElement);
+    view.call(zoom);
+    view.on('dblclick.zoom', null);
+    zoom.scaleTo(view, this.camera.far);
 
     window.addEventListener('resize', this.handleResize);
     this.mount.appendChild(this.renderer.domElement);

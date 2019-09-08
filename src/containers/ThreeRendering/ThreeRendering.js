@@ -12,16 +12,7 @@ class ThreeRendering extends Component {
   createCamera(width, height) {
     const near = 7000;
     const far = 1000000;
-    const h_o = far * 2 * Math.atan((90 * Math.PI) / 180 / 2);
-    const w_o = (width / height) * h_o;
-    const camera = new THREE.OrthographicCamera(
-      w_o / -2,
-      w_o / 2,
-      h_o / 2,
-      h_o / -2,
-      near,
-      far
-    );
+    const camera = new THREE.PerspectiveCamera(90, width / height, near, far);
     camera.position.set(0, 0, far);
     return camera;
   }

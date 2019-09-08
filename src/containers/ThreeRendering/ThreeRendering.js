@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import * as THREE from 'three';
-import OrbitControls from 'three-orbitcontrols';
 import objectGeneration from './ObjectsGeneration';
 import updateObjects from './UpdateObjects';
 import { statusJSON } from '../Parsing/Handle';
@@ -22,26 +21,6 @@ class ThreeRendering extends Component {
     renderer.setClearColor('#FFF');
     renderer.setSize(width, height);
     return renderer;
-  }
-  createControls() {
-    const controls = new OrbitControls(this.camera, this.renderer.domElement);
-
-    controls.enableRotate = false;
-    controls.enableKeys = false;
-    controls.enableZoom = true;
-    controls.enablePan = true;
-    controls.zoomSpeed = 2;
-    controls.panSpeed = 1;
-    controls.screenSpacePanning = true;
-    controls.maxZoom = 100;
-    controls.minZoom = 1;
-    controls.mouseButtons = {
-      RIGHT: THREE.MOUSE.LEFT,
-      MIDDLE: THREE.MOUSE.MIDDLE,
-      LEFT: THREE.MOUSE.RIGHT
-    };
-
-    return controls;
   }
   handleResize = () => {
     const width = this.mount.clientWidth;
@@ -72,11 +51,9 @@ class ThreeRendering extends Component {
     this.scene = new THREE.Scene();
     this.camera = this.createCamera(width, height);
     this.renderer = this.createRenderer(width, height);
-    this.controls = this.createControls();
     this.old = this.props.isNew;
 
     window.addEventListener('resize', this.handleResize);
-    this.controls.addEventListener('change', this.animate);
     this.mount.appendChild(this.renderer.domElement);
     this.start();
   }

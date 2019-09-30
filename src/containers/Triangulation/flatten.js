@@ -1,5 +1,4 @@
-export default flattenCoords(data);
-{
+const flattenCoords = data => {
   const dim = data[0][0].length;
   const result = { vertices: [], holes: [], dimensions: dim };
   let holeIndex = 0;
@@ -15,4 +14,6 @@ export default flattenCoords(data);
   }
 
   return result;
-}
+};
+
+export default flattenCoords;

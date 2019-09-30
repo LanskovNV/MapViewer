@@ -2,7 +2,7 @@
  * File size
  * @type {number}
  */
-const KByte50 = 50 * 1024;
+const KByte50 = 100 * 1024;
 /**
  * Counts for streets, houses and water files
  * @type {number[]}

@@ -1,27 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import * as THREE from 'three';
-import OrbitControls from 'three-orbitcontrols';
+import * as d3 from 'd3';
 import objectGeneration from './ObjectsGeneration';
 import updateObjects from './UpdateObjects';
 import { statusJSON } from '../Parsing/Handle';
 import draw from './Draw';
 import updateToDrawFlags from './UpdateToDrawFlags';
+import zoomInit from './D3Zoom';
 
 class ThreeRendering extends Component {
   createCamera(width, height) {
     const near = 7000;
     const far = 1000000;
-    const h_o = far * 2 * Math.atan((90 * Math.PI) / 180 / 2);
-    const w_o = (width / height) * h_o;
-    const camera = new THREE.OrthographicCamera(
-      w_o / -2,
-      w_o / 2,
-      h_o / 2,
-      h_o / -2,
-      near,
-      far
-    );
+    const camera = new THREE.PerspectiveCamera(90, width / height, near, far);
     camera.position.set(0, 0, far);
     return camera;
   }
@@ -31,26 +23,6 @@ class ThreeRendering extends Component {
     renderer.setClearColor('#FFF');
     renderer.setSize(width, height);
     return renderer;
-  }
-  createControls() {
-    const controls = new OrbitControls(this.camera, this.renderer.domElement);
-
-    controls.enableRotate = false;
-    controls.enableKeys = false;
-    controls.enableZoom = true;
-    controls.enablePan = true;
-    controls.zoomSpeed = 2;
-    controls.panSpeed = 1;
-    controls.screenSpacePanning = true;
-    controls.maxZoom = 100;
-    controls.minZoom = 1;
-    controls.mouseButtons = {
-      RIGHT: THREE.MOUSE.LEFT,
-      MIDDLE: THREE.MOUSE.MIDDLE,
-      LEFT: THREE.MOUSE.RIGHT
-    };
-
-    return controls;
   }
   handleResize = () => {
     const width = this.mount.clientWidth;
@@ -78,14 +50,22 @@ class ThreeRendering extends Component {
     const width = this.mount.clientWidth;
     const height = this.mount.clientHeight;
 
+    // threejs setup
     this.scene = new THREE.Scene();
     this.camera = this.createCamera(width, height);
     this.renderer = this.createRenderer(width, height);
-    this.controls = this.createControls();
+
+    // get map id
     this.old = this.props.isNew;
 
+    // setup zoom handling
+    const zoom = zoomInit(this.camera, width, height);
+    const view = d3.select(this.renderer.domElement);
+    view.call(zoom);
+    view.on('dblclick.zoom', null);
+    zoom.scaleTo(view, this.camera.far);
+
     window.addEventListener('resize', this.handleResize);
-    this.controls.addEventListener('change', this.animate);
     this.mount.appendChild(this.renderer.domElement);
     this.start();
   }

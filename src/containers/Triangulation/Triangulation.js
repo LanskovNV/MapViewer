@@ -158,15 +158,11 @@ function triangulate(pol) {
       } else if (i === pol.length - 2) {
         pol.pop();
       } else {
-        console.log(i + ':------');
-        console.log(pol);
         pol = pol.slice(0, i + 1).concat(pol.slice(i + 2, pol.length));
-        console.log(pol);
       }
     } else {
       i = (i + 1) % pol.length;
     }
-    console.log(pol.length);
   }
   triangles.push(pol);
   return triangles;

@@ -144,6 +144,26 @@ const eliminateHoles = (data, holeIndices, outerNode, dim) => {
   return outerNode;
 };
 
-const elimination = data => {};
+const elimination = (data, holeIndices, dim) => {
+  dim = dim || 2;
+
+  let hasHoles = holeIndices && holeIndices.length,
+    outerLen = hasHoles ? holeIndices[0] * dim : data.length,
+    outerNode = linkedList(data, 0, outerLen, dim, true),
+    triangles = [];
+
+  if (!outerNode || outerNode.next === outerNode.prev) return triangles;
+
+  if (hasHoles) outerNode = eliminateHoles(data, holeIndices, outerNode, dim);
+
+  const p = outerNode;
+  const polygon = [];
+
+  do {
+    polygon.push([p.x, p.y]);
+  } while (p !== outerNode);
+
+  return polygon;
+};
 
 export default elimination;

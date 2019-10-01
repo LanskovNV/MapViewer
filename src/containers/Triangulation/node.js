@@ -1,25 +1,27 @@
-const Node = (i, x, y) => {
-  // vertex index in coordinates array
-  this.i = i;
+class Node {
+  constructor(i, x, y) {
+    // vertex index in coordinates array
+    this.i = i;
 
-  // vertex coordinates
-  this.x = x;
-  this.y = y;
+    // vertex coordinates
+    this.x = x;
+    this.y = y;
 
-  // previous and next vertex nodes in a polygon ring
-  this.prev = null;
-  this.next = null;
+    // previous and next vertex nodes in a polygon ring
+    this.prev = null;
+    this.next = null;
 
-  // z-order curve value
-  this.z = null;
+    // z-order curve value
+    this.z = null;
 
-  // previous and next nodes in z-order
-  this.prevZ = null;
-  this.nextZ = null;
+    // previous and next nodes in z-order
+    this.prevZ = null;
+    this.nextZ = null;
 
-  // indicates whether this is a steiner point
-  this.steiner = false;
-};
+    // indicates whether this is a steiner point
+    this.steiner = false;
+  }
+}
 
 // create a node and optionally link it with previous one (in a circular doubly linked list)
 const insertNode = (i, x, y, last) => {

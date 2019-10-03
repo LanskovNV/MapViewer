@@ -156,11 +156,12 @@ const elimination = (data, holeIndices, dim) => {
 
   if (hasHoles) outerNode = eliminateHoles(data, holeIndices, outerNode, dim);
 
-  const p = outerNode;
+  let p = outerNode;
   const polygon = [];
 
   do {
     polygon.push([p.x, p.y]);
+    p = p.next;
   } while (p !== outerNode);
 
   return polygon;

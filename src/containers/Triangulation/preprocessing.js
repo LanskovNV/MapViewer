@@ -161,7 +161,7 @@ const elimination = (data, holeIndices, dim) => {
 
   do {
     const l = polygon.length;
-    if (l > 0 && (p.x !== polygon[l - 1][0] || p.y !== polygon[l - 1][1])) {
+    if (l === 0 || p.x !== polygon[l - 1][0] || p.y !== polygon[l - 1][1]) {
       polygon.push([p.x, p.y]);
     }
     p = p.next;

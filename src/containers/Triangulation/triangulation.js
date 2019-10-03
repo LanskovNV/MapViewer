@@ -155,6 +155,7 @@ function triangulate(pol) {
       ]);
       if (i === pol.length - 1) {
         pol = pol.slice(1, pol.length);
+        i--;
       } else if (i === pol.length - 2) {
         pol.pop();
       } else {

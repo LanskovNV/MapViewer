@@ -8,6 +8,7 @@ import {
   locallyInside,
   getLeftmost
 } from './geometry';
+import { IsEqual } from './triangulation';
 
 // eliminate colinear or duplicate points
 const filterPoints = (start, end) => {
@@ -167,7 +168,54 @@ const elimination = (data, holeIndices, dim) => {
     p = p.next;
   } while (p !== outerNode);
 
-  return polygon;
+  let polygon_reorder = [],
+    left = 0,
+    clockwise;
+  for (let i = 1; i < polygon.length; i++) {
+    if (polygon[i][0] < polygon[left][0]) {
+      left = i;
+    }
+  }
+  console.log('Pre-reorder');
+  for (let i = 0; i < polygon.length; i++) {
+    console.log(polygon[i]);
+  }
+
+  if (
+    polygon[(left + polygon.length - 1) % polygon.length][1] <=
+    polygon[(left + 1) % polygon.length][1]
+  ) {
+    clockwise = true;
+  }
+  if (!clockwise) {
+    for (let i = polygon.length - 1; i >= 0; i--) {
+      polygon_reorder.push(polygon[i]);
+    }
+  } else {
+    polygon_reorder = polygon;
+  }
+
+  // delete identical neighbors
+  for (let i = 0; i < polygon_reorder.length - 1; i++) {
+    while (
+      i < polygon_reorder.length - 1 &&
+      IsEqual(polygon_reorder[i], polygon_reorder[i + 1])
+    ) {
+      polygon_reorder = polygon_reorder
+        .slice(0, i)
+        .concat(polygon_reorder.slice(i + 1, polygon_reorder.length));
+    }
+  }
+  if (
+    IsEqual(polygon_reorder[0], polygon_reorder[polygon_reorder.length - 1])
+  ) {
+    polygon_reorder.pop();
+  }
+  console.log('Post-reorder');
+  for (let i = 0; i < polygon_reorder.length; i++) {
+    console.log(polygon_reorder[i]);
+  }
+  return polygon_reorder;
 };
 
 export default elimination;

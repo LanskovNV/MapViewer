@@ -4,7 +4,7 @@ import * as THREE from 'three';
 // custom triangulation
 import elimination from '../Triangulation/preprocessing';
 import flattenCoords from '../Triangulation/flatten';
-import triangulate from '../Triangulation/triangulation';
+import { triangulate } from '../Triangulation/triangulation';
 
 import ConvertCoordinates from '../Parsing/Converter';
 

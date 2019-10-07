@@ -44,6 +44,7 @@ function IsCrossed(m_point11, m_point12, m_point21, m_point22) {
           (point12[1] >= point22[1] && point12[1] <= point21[1])))
     ) {
       // Two vertical lines crossed
+      //console.trace();
       return true;
     }
   } else if (point12[0] === point11[0]) {
@@ -56,11 +57,14 @@ function IsCrossed(m_point11, m_point12, m_point21, m_point22) {
     if (
       ((y0 >= point11[1] && y0 <= point12[1]) ||
         (y0 >= point12[1] && y0 <= point11[1])) &&
+      ((x0 >= point21[0] && x0 <= point22[0]) ||
+        (x0 >= point22[0] && x0 <= point21[0])) &&
       (!IsEqual(point11, point21) &&
         !IsEqual(point11, point22) &&
         !IsEqual(point12, point21) &&
         !IsEqual(point12, point22))
     ) {
+      //console.trace();
       return true;
     }
   } else if (point22[0] === point21[0]) {
@@ -70,14 +74,16 @@ function IsCrossed(m_point11, m_point12, m_point21, m_point22) {
     x0 = point21[0];
     y0 = k1 * x0;
     if (
-      (y0 >= point21[1] && y0 <= point22[1]) ||
-      (y0 >= point22[1] &&
-        y0 <= point21[1] &&
-        (!IsEqual(point11, point21) &&
-          !IsEqual(point11, point22) &&
-          !IsEqual(point12, point21) &&
-          !IsEqual(point12, point22)))
+      ((y0 >= point21[1] && y0 <= point22[1]) ||
+        (y0 >= point22[1] && y0 <= point21[1])) &&
+      ((x0 >= point11[0] && x0 <= point12[0]) ||
+        (x0 >= point12[0] && x0 <= point11[0])) &&
+      (!IsEqual(point11, point21) &&
+        !IsEqual(point11, point22) &&
+        !IsEqual(point12, point21) &&
+        !IsEqual(point12, point22))
     ) {
+      //console.trace();
       return true;
     }
   } else {
@@ -92,7 +98,7 @@ function IsCrossed(m_point11, m_point12, m_point21, m_point22) {
         ((point11[0] >= point21[0] && point11[0] <= point22[0]) ||
           (point11[0] >= point22[0] && point11[0] <= point21[0]) ||
           ((point12[0] >= point21[0] && point12[0] <= point22[0]) ||
-            (point12[0] >= point22[0] && point12[1] <= point21[0])))
+            (point12[0] >= point22[0] && point12[0] <= point21[0])))
       );
     }
     x0 = b2 / (k1 - k2);
@@ -106,6 +112,7 @@ function IsCrossed(m_point11, m_point12, m_point21, m_point22) {
         !IsEqual(point12, point21) &&
         !IsEqual(point12, point22))
     ) {
+      //console.trace();
       return true;
     }
   }
@@ -115,9 +122,13 @@ function IsCrossed(m_point11, m_point12, m_point21, m_point22) {
 /**
  * @return {boolean}
  */
-function IsEar(pol, point1, point2) {
+function IsEar(pol, point1, point2, point3) {
+  let middle = [(point1[0] + point3[0]) / 2, (point1[1] + point3[1]) / 2];
   for (let i = 1; i < pol.length; i++) {
-    if (IsCrossed(pol[i - 1], pol[i], point1, point2)) {
+    if (
+      IsCrossed(pol[i - 1], pol[i], point1, point3) ||
+      IsCrossed(pol[i - 1], pol[i], middle, point2)
+    ) {
       return false;
     }
   }
@@ -131,10 +142,17 @@ function IsEar(pol, point1, point2) {
  */
 function triangulate(pol) {
   let triangles = [];
-  let i = 0;
+  let i = 0,
+    j = 0;
 
-  pol.pop();
+  //pol.pop();
+  console.log(pol.length);
   while (pol.length > 3) {
+    console.log('Step' + j++);
+    console.log(pol.length);
+    for (let i = 0; i < pol.length; i++) {
+      console.log(pol[i]);
+    }
     if (
       CrossProduct(
         [
@@ -146,13 +164,15 @@ function triangulate(pol) {
           pol[(i + 2) % pol.length][1] - pol[i][1]
         ]
       ) < 0 &&
-      IsEar(pol, pol[i], pol[(i + 2) % pol.length])
+      IsEar(pol, pol[i], pol[(i + 1) % pol.length], pol[(i + 2) % pol.length])
     ) {
       triangles.push([
         pol[i],
         pol[(i + 1) % pol.length],
         pol[(i + 2) % pol.length]
       ]);
+      console.log('Push triangle');
+      console.log(pol[i], pol[(i + 1) % pol.length], pol[(i + 2) % pol.length]);
       if (i === pol.length - 1) {
         pol = pol.slice(1, pol.length);
         i--;
@@ -161,12 +181,24 @@ function triangulate(pol) {
       } else {
         pol = pol.slice(0, i + 1).concat(pol.slice(i + 2, pol.length));
       }
+      // delete identical neighbors
+      for (let i = 0; i < pol.length - 1; i++) {
+        while (i < pol.length - 1 && IsEqual(pol[i], pol[i + 1])) {
+          pol = pol.slice(0, i).concat(pol.slice(i + 1, pol.length));
+        }
+      }
+      if (IsEqual(pol[0], pol[pol.length - 1])) {
+        pol.pop();
+      }
     } else {
       i = (i + 1) % pol.length;
     }
   }
-  triangles.push(pol);
+  if (pol.length === 3) {
+    triangles.push(pol);
+  }
+  console.log('End');
   return triangles;
 }
 
-export default triangulate;
+export { triangulate, IsEqual, IsEar };

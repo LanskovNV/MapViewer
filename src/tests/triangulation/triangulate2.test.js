@@ -9,8 +9,7 @@ test('triangulate 2', () => {
     [150, 100],
     [200, 50],
     [150, 0],
-    [50, 0],
-    [0, 50]
+    [50, 0]
   ];
   const correctResults = [
     [

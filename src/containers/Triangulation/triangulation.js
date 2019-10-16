@@ -175,22 +175,22 @@ function IsCrossed(m_point11, m_point12, m_point21, m_point22) {
  */
 function IsEar(pol, point1, point2, point3) {
   let middle = [(point1[0] + point3[0]) / 2, (point1[1] + point3[1]) / 2];
-  for (let i = 1; i < pol.length; i++) {
+  for (let i = 1; i <= pol.length; i++) {
     //console.log(!IsIdentical([pol[i - 1], pol[i]], [point1, point3]), IsCrossed(pol[i - 1], pol[i], point1, point3), IsCrossed(pol[i - 1], pol[i], middle, point2));
     if (
-      !IsIdentical([pol[i - 1], pol[i]], [point1, point3]) &&
-      (IsCrossed(pol[i - 1], pol[i], point1, point3) ||
-        IsCrossed(pol[i - 1], pol[i], middle, point2))
+      !IsIdentical([pol[i - 1], pol[i % pol.length]], [point1, point3]) &&
+      (IsCrossed(pol[i - 1], pol[i % pol.length], point1, point3) ||
+        IsCrossed(pol[i - 1], pol[i % pol.length], middle, point2))
     ) {
       if (
         !(
-          (IsEqual(point1, pol[i]) &&
+          (IsEqual(point1, pol[i % pol.length]) &&
             IsNotIdenticalSubIntervalConnectedByPoint2(
               point3,
               point1,
               pol[i - 1]
             )) ||
-          (IsEqual(point3, pol[i]) &&
+          (IsEqual(point3, pol[i % pol.length]) &&
             IsNotIdenticalSubIntervalConnectedByPoint2(
               point1,
               point3,
@@ -200,10 +200,14 @@ function IsEar(pol, point1, point2, point3) {
             IsNotIdenticalSubIntervalConnectedByPoint2(
               point3,
               point1,
-              pol[i]
+              pol[i % pol.length]
             )) ||
           (IsEqual(point3, pol[i - 1]) &&
-            IsNotIdenticalSubIntervalConnectedByPoint2(point1, point3, pol[i]))
+            IsNotIdenticalSubIntervalConnectedByPoint2(
+              point1,
+              point3,
+              pol[i % pol.length]
+            ))
         )
       ) {
         return false;
@@ -223,13 +227,13 @@ function triangulate(pol) {
   let i = 0,
     j = 0;
 
-  console.log(pol.length);
+  //console.log(pol.length);
   while (pol.length > 3) {
-    console.log('Step' + j++);
+    /*console.log('Step' + j++);
     console.log(pol.length);
     for (let i = 0; i < pol.length; i++) {
       console.log(pol[i]);
-    }
+    }*/
     if (IsEqual(pol[i], pol[(i + 2) % pol.length])) {
       if (i === pol.length - 1) {
         pol = pol.slice(2, pol.length);
@@ -275,8 +279,8 @@ function triangulate(pol) {
         pol[(i + 1) % pol.length],
         pol[(i + 2) % pol.length]
       ]);
-      console.log('Push triangle');
-      console.log(pol[i], pol[(i + 1) % pol.length], pol[(i + 2) % pol.length]);
+      //console.log('Push triangle');
+      //console.log(pol[i], pol[(i + 1) % pol.length], pol[(i + 2) % pol.length]);
       if (i === pol.length - 1) {
         pol = pol.slice(1, pol.length);
         i--;
@@ -322,16 +326,18 @@ function triangulate(pol) {
   }
   if (pol.length === 3) {
     triangles.push(pol);
-    console.log('Push triangle');
-    console.log(pol[0], pol[1], pol[2]);
+    //console.log('Push triangle');
+    //console.log(pol[0], pol[1], pol[2]);
   }
-  console.log('End');
+  //console.log('End');
   return triangles;
 }
 
 export {
   triangulate,
   IsEqual,
+  IsCrossed,
+  IsIdentical,
   IsEar,
   IsNotIdenticalSubIntervalConnectedByPoint2
 };

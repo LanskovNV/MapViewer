@@ -8,7 +8,7 @@ import {
   locallyInside,
   getLeftmost
 } from './geometry';
-import { IsEqual } from './triangulation';
+import { IsCrossed, IsEqual, IsIdentical } from './triangulation';
 
 // eliminate colinear or duplicate points
 const filterPoints = (start, end) => {
@@ -145,6 +145,33 @@ const eliminateHoles = (data, holeIndices, outerNode, dim) => {
   return outerNode;
 };
 
+function polygonReorder(polygon, shouldBeClockWise) {
+  let clockwise = false,
+    polygon_reorder = [],
+    left = 0;
+
+  for (let i = 1; i < polygon.length; i++) {
+    if (polygon[i][0] < polygon[left][0]) {
+      left = i;
+    }
+  }
+
+  if (
+    polygon[(left + polygon.length - 1) % polygon.length][1] <=
+    polygon[(left + 1) % polygon.length][1]
+  ) {
+    clockwise = true;
+  }
+  if (clockwise !== shouldBeClockWise) {
+    for (let i = polygon.length - 1; i >= 0; i--) {
+      polygon_reorder.push(polygon[i]);
+    }
+  } else {
+    polygon_reorder = polygon;
+  }
+  return polygon_reorder;
+}
+
 const elimination = (data, holeIndices, dim) => {
   dim = dim || 2;
 
@@ -168,32 +195,16 @@ const elimination = (data, holeIndices, dim) => {
     p = p.next;
   } while (p !== outerNode);
 
-  let polygon_reorder = [],
+  let polygon_reorder,
     left = 0,
     clockwise;
-  for (let i = 1; i < polygon.length; i++) {
-    if (polygon[i][0] < polygon[left][0]) {
-      left = i;
-    }
-  }
-  console.log('Pre-reorder');
+
+  /*console.log('Pre-reorder');
   for (let i = 0; i < polygon.length; i++) {
     console.log(polygon[i]);
-  }
+  }*/
 
-  if (
-    polygon[(left + polygon.length - 1) % polygon.length][1] <=
-    polygon[(left + 1) % polygon.length][1]
-  ) {
-    clockwise = true;
-  }
-  if (!clockwise) {
-    for (let i = polygon.length - 1; i >= 0; i--) {
-      polygon_reorder.push(polygon[i]);
-    }
-  } else {
-    polygon_reorder = polygon;
-  }
+  polygon_reorder = polygonReorder(polygon, true);
 
   // delete identical neighbors
   for (let i = 0; i < polygon_reorder.length - 1; i++) {
@@ -211,11 +222,114 @@ const elimination = (data, holeIndices, dim) => {
   ) {
     polygon_reorder.pop();
   }
-  console.log('Post-reorder');
+  /*console.log('Post-reorder');
   for (let i = 0; i < polygon_reorder.length; i++) {
     console.log(polygon_reorder[i]);
-  }
+  }*/
   return polygon_reorder;
 };
 
-export default elimination;
+function eliminateHole2(polygon) {
+  let res_polygon = [],
+    res_polygon0 = [],
+    isBridged = false,
+    isCrossed = false;
+
+  for (let i = 0; i < polygon[1].length; i++) {
+    if (isBridged) {
+      break;
+    }
+    for (let j = 0; j < polygon[0].length; j++) {
+      if (isCrossed) {
+        for (let l = 0; l <= j; l++) {
+          res_polygon0.push(polygon[0][j]);
+        }
+        for (let l = i; l < polygon[1].length; l++) {
+          res_polygon0.push(polygon[1][i]);
+        }
+        for (let l = 0; l <= i; l++) {
+          res_polygon0.push(polygon[1][i]);
+        }
+        for (let l = j; l < polygon[0].length; l++) {
+          res_polygon0.push(polygon[0][j]);
+        }
+
+        isBridged = true;
+        break;
+      }
+      for (let t = 0; t < polygon.length; t++) {
+        for (let k = 1; k <= polygon[t].length; k++) {
+          if (
+            !(
+              IsEqual(polygon[0][j], polygon[1][i]) ||
+              !IsCrossed(
+                polygon[t][k - 1],
+                polygon[t][k % polygon[t].length],
+                polygon[0][j],
+                polygon[1][i]
+              ) ||
+              IsIdentical(
+                [polygon[t][k - 1], polygon[t][k % polygon[t].length]],
+                [polygon[0][j], polygon[1][i]]
+              )
+            )
+          ) {
+            isCrossed = true;
+            break;
+          }
+        }
+      }
+    }
+  }
+  if (isBridged) {
+    res_polygon.push(res_polygon0);
+    for (let i = 2; i < polygon.length; i++) {
+      res_polygon.push(polygon[i]);
+    }
+  } else {
+    res_polygon = polygon
+      .slice(0, 1)
+      .concat(polygon.slice(2, polygon.length))
+      .concat(polygon.slice(1, 2));
+  }
+
+  return res_polygon;
+}
+
+function elimination2(polygon) {
+  let res_polygon;
+  polygon[0] = polygonReorder(polygon[0], true);
+  while (polygon.length > 1) {
+    polygon[1] = polygonReorder(polygon[1], false);
+    polygon = eliminateHole2(polygon);
+  }
+
+  res_polygon = polygon[0];
+
+  /*console.log('Post-reorder');
+    for (let i = 0; i < res_polygon.length; i++) {
+        console.log(res_polygon[i]);
+    }*/
+
+  // delete identical neighbors
+  for (let i = 0; i < res_polygon.length - 1; i++) {
+    while (
+      i < res_polygon.length - 1 &&
+      IsEqual(res_polygon[i], res_polygon[i + 1])
+    ) {
+      res_polygon = res_polygon
+        .slice(0, i)
+        .concat(res_polygon.slice(i + 1, res_polygon.length));
+    }
+  }
+  if (IsEqual(res_polygon[0], res_polygon[res_polygon.length - 1])) {
+    res_polygon.pop();
+  }
+  /*console.log('Post-reorder');
+    for (let i = 0; i < res_polygon.length; i++) {
+        console.log(res_polygon[i]);
+    }*/
+  return res_polygon;
+}
+
+export default elimination2;

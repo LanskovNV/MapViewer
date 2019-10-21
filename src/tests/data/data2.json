@@ -1,0 +1,904 @@
+{
+  "items": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.01879, -12.1407422],
+          [-77.0187722, -12.1407922],
+          [-77.0185295, -12.1414753]
+        ]
+      },
+      "properties": {
+        "name": "Highway1",
+        "highway": "living_street",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [[-77.0212902, -12.1385657], [-77.0213427, -12.1380514]]
+      },
+      "properties": {
+        "name": "Highway2",
+        "lanes": "2",
+        "highway": "residential",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.0204275, -12.1385075],
+          [-77.0204698, -12.1380369],
+          [-77.0204951, -12.137822]
+        ]
+      },
+      "properties": {
+        "name": "Highway3",
+        "highway": "service",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.01879, -12.1407422],
+          [-77.0187722, -12.1407922],
+          [-77.0185295, -12.1414753]
+        ]
+      },
+      "properties": {
+        "name": "Highway4",
+        "highway": "footway",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [[-77.0212902, -12.1385657], [-77.0213427, -12.1380514]]
+      },
+      "properties": {
+        "name": "Highway5",
+        "lanes": "2",
+        "highway": "residential",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.0204275, -12.1385075],
+          [-77.0204698, -12.1380369],
+          [-77.0204951, -12.137822]
+        ]
+      },
+      "properties": {
+        "name": "Highway6",
+        "highway": "track",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.01879, -12.1407422],
+          [-77.0187722, -12.1407922],
+          [-77.0185295, -12.1414753]
+        ]
+      },
+      "properties": {
+        "name": "Highway7",
+        "highway": "unclassified",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [[-77.0212902, -12.1385657], [-77.0213427, -12.1380514]]
+      },
+      "properties": {
+        "name": "Highway8",
+        "lanes": "2",
+        "highway": "path",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.0204275, -12.1385075],
+          [-77.0204698, -12.1380369],
+          [-77.0204951, -12.137822]
+        ]
+      },
+      "properties": {
+        "name": "Highway9",
+        "highway": "tertiary",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.01879, -12.1407422],
+          [-77.0187722, -12.1407922],
+          [-77.0185295, -12.1414753]
+        ]
+      },
+      "properties": {
+        "name": "Highway10",
+        "highway": "secondary",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [[-77.0212902, -12.1385657], [-77.0213427, -12.1380514]]
+      },
+      "properties": {
+        "name": "Highway11",
+        "lanes": "2",
+        "highway": "crossing",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.0204275, -12.1385075],
+          [-77.0204698, -12.1380369],
+          [-77.0204951, -12.137822]
+        ]
+      },
+      "properties": {
+        "name": "Highway12",
+        "highway": "primary",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.01879, -12.1407422],
+          [-77.0187722, -12.1407922],
+          [-77.0185295, -12.1414753]
+        ]
+      },
+      "properties": {
+        "name": "Highway13",
+        "highway": "bus_stop",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [[-77.0212902, -12.1385657], [-77.0213427, -12.1380514]]
+      },
+      "properties": {
+        "name": "Highway14",
+        "lanes": "2",
+        "highway": "turning_circle",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.0204275, -12.1385075],
+          [-77.0204698, -12.1380369],
+          [-77.0204951, -12.137822]
+        ]
+      },
+      "properties": {
+        "name": "Highway15",
+        "highway": "street_lamp",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.01879, -12.1407422],
+          [-77.0187722, -12.1407922],
+          [-77.0185295, -12.1414753]
+        ]
+      },
+      "properties": {
+        "name": "Highway16",
+        "highway": "traffic_signals",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [[-77.0212902, -12.1385657], [-77.0213427, -12.1380514]]
+      },
+      "properties": {
+        "name": "Highway17",
+        "lanes": "2",
+        "highway": "residential",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.0204275, -12.1385075],
+          [-77.0204698, -12.1380369],
+          [-77.0204951, -12.137822]
+        ]
+      },
+      "properties": {
+        "name": "Highway18",
+        "highway": "cycleway",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.01879, -12.1407422],
+          [-77.0187722, -12.1407922],
+          [-77.0185295, -12.1414753]
+        ]
+      },
+      "properties": {
+        "name": "Highway19",
+        "highway": "footway",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [[-77.0212902, -12.1385657], [-77.0213427, -12.1380514]]
+      },
+      "properties": {
+        "name": "Highway20",
+        "lanes": "2",
+        "highway": "motorway",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.0204275, -12.1385075],
+          [-77.0204698, -12.1380369],
+          [-77.0204951, -12.137822]
+        ]
+      },
+      "properties": {
+        "name": "Highway21",
+        "highway": "stop",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.01879, -12.1407422],
+          [-77.0187722, -12.1407922],
+          [-77.0185295, -12.1414753]
+        ]
+      },
+      "properties": {
+        "name": "Highway22",
+        "highway": "pedestrian",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [[-77.0212902, -12.1385657], [-77.0213427, -12.1380514]]
+      },
+      "properties": {
+        "name": "Highway23",
+        "lanes": "2",
+        "highway": "give_way",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.0204275, -12.1385075],
+          [-77.0204698, -12.1380369],
+          [-77.0204951, -12.137822]
+        ]
+      },
+      "properties": {
+        "name": "Highway24",
+        "highway": "road",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.01879, -12.1407422],
+          [-77.0187722, -12.1407922],
+          [-77.0185295, -12.1414753]
+        ]
+      },
+      "properties": {
+        "name": "Highway25",
+        "highway": "milestone",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [[-77.0212902, -12.1385657], [-77.0213427, -12.1380514]]
+      },
+      "properties": {
+        "name": "Highway26",
+        "lanes": "2",
+        "highway": "platform",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.0204275, -12.1385075],
+          [-77.0204698, -12.1380369],
+          [-77.0204951, -12.137822]
+        ]
+      },
+      "properties": {
+        "name": "Highway27",
+        "highway": "bridleway",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.01879, -12.1407422],
+          [-77.0187722, -12.1407922],
+          [-77.0185295, -12.1414753]
+        ]
+      },
+      "properties": {
+        "name": "Highway28",
+        "highway": "elevator",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [[-77.0212902, -12.1385657], [-77.0213427, -12.1380514]]
+      },
+      "properties": {
+        "name": "Highway29",
+        "lanes": "2",
+        "highway": "turning_loop",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.0204275, -12.1385075],
+          [-77.0204698, -12.1380369],
+          [-77.0204951, -12.137822]
+        ]
+      },
+      "properties": {
+        "name": "Highway30",
+        "highway": "parking_place",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.01879, -12.1407422],
+          [-77.0187722, -12.1407922],
+          [-77.0185295, -12.1414753]
+        ]
+      },
+      "properties": {
+        "name": "Highway31",
+        "highway": "services",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [[-77.0212902, -12.1385657], [-77.0213427, -12.1380514]]
+      },
+      "properties": {
+        "name": "Highway32",
+        "lanes": "2",
+        "highway": "trail",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.0204275, -12.1385075],
+          [-77.0204698, -12.1380369],
+          [-77.0204951, -12.137822]
+        ]
+      },
+      "properties": {
+        "name": "Highway33",
+        "highway": "abandoned",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.01879, -12.1407422],
+          [-77.0187722, -12.1407922],
+          [-77.0185295, -12.1414753]
+        ]
+      },
+      "properties": {
+        "name": "Highway34",
+        "highway": "traffic_sign",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [[-77.0212902, -12.1385657], [-77.0213427, -12.1380514]]
+      },
+      "properties": {
+        "name": "Highway35",
+        "lanes": "2",
+        "highway": "residential",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.0204275, -12.1385075],
+          [-77.0204698, -12.1380369],
+          [-77.0204951, -12.137822]
+        ]
+      },
+      "properties": {
+        "name": "Highway36",
+        "highway": "no",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.01879, -12.1407422],
+          [-77.0187722, -12.1407922],
+          [-77.0185295, -12.1414753]
+        ]
+      },
+      "properties": {
+        "name": "Highway37",
+        "highway": "yes",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [[-77.0212902, -12.1385657], [-77.0213427, -12.1380514]]
+      },
+      "properties": {
+        "name": "Highway38",
+        "lanes": "2",
+        "highway": "escape",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.0204275, -12.1385075],
+          [-77.0204698, -12.1380369],
+          [-77.0204951, -12.137822]
+        ]
+      },
+      "properties": {
+        "name": "Highway39",
+        "highway": "noexit",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.01879, -12.1407422],
+          [-77.0187722, -12.1407922],
+          [-77.0185295, -12.1414753]
+        ]
+      },
+      "properties": {
+        "name": "Highway40",
+        "highway": "street_sign",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [[-77.0212902, -12.1385657], [-77.0213427, -12.1380514]]
+      },
+      "properties": {
+        "name": "Highway41",
+        "lanes": "2",
+        "highway": "unsurfaced",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.0204275, -12.1385075],
+          [-77.0204698, -12.1380369],
+          [-77.0204951, -12.137822]
+        ]
+      },
+      "properties": {
+        "name": "Highway42",
+        "highway": "virtual",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.01879, -12.1407422],
+          [-77.0187722, -12.1407922],
+          [-77.0185295, -12.1414753]
+        ]
+      },
+      "properties": {
+        "name": "Highway43",
+        "highway": "distance_marker",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [[-77.0212902, -12.1385657], [-77.0213427, -12.1380514]]
+      },
+      "properties": {
+        "name": "Highway44",
+        "lanes": "2",
+        "highway": "stop_line",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.0204275, -12.1385075],
+          [-77.0204698, -12.1380369],
+          [-77.0204951, -12.137822]
+        ]
+      },
+      "properties": {
+        "name": "Highway45",
+        "highway": "access",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.01879, -12.1407422],
+          [-77.0187722, -12.1407922],
+          [-77.0185295, -12.1414753]
+        ]
+      },
+      "properties": {
+        "name": "Highway46",
+        "highway": "street_light",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [[-77.0212902, -12.1385657], [-77.0213427, -12.1380514]]
+      },
+      "properties": {
+        "name": "Highway47",
+        "lanes": "2",
+        "highway": "redlight_camera",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.0204275, -12.1385075],
+          [-77.0204698, -12.1380369],
+          [-77.0204951, -12.137822]
+        ]
+      },
+      "properties": {
+        "name": "Highway48",
+        "highway": "mirror",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.01879, -12.1407422],
+          [-77.0187722, -12.1407922],
+          [-77.0185295, -12.1414753]
+        ]
+      },
+      "properties": {
+        "name": "Highway49",
+        "highway": "unspecified",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [[-77.0212902, -12.1385657], [-77.0213427, -12.1380514]]
+      },
+      "properties": {
+        "name": "Highway50",
+        "lanes": "2",
+        "highway": "access_ramp",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.0204275, -12.1385075],
+          [-77.0204698, -12.1380369],
+          [-77.0204951, -12.137822]
+        ]
+      },
+      "properties": {
+        "name": "Highway51",
+        "highway": "streetlamp",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.01879, -12.1407422],
+          [-77.0187722, -12.1407922],
+          [-77.0185295, -12.1414753]
+        ]
+      },
+      "properties": {
+        "name": "Highway52",
+        "highway": "closed",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [[-77.0212902, -12.1385657], [-77.0213427, -12.1380514]]
+      },
+      "properties": {
+        "name": "Highway53",
+        "lanes": "2",
+        "highway": "gate",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.0204275, -12.1385075],
+          [-77.0204698, -12.1380369],
+          [-77.0204951, -12.137822]
+        ]
+      },
+      "properties": {
+        "name": "Highway54",
+        "highway": "seasonal",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.01879, -12.1407422],
+          [-77.0187722, -12.1407922],
+          [-77.0185295, -12.1414753]
+        ]
+      },
+      "properties": {
+        "name": "Highway55",
+        "highway": "busway",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [[-77.0212902, -12.1385657], [-77.0213427, -12.1380514]]
+      },
+      "properties": {
+        "name": "Highway56",
+        "lanes": "2",
+        "highway": "waymarker",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.0204275, -12.1385075],
+          [-77.0204698, -12.1380369],
+          [-77.0204951, -12.137822]
+        ]
+      },
+      "properties": {
+        "name": "Highway57",
+        "highway": "virtual_rail",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.01879, -12.1407422],
+          [-77.0187722, -12.1407922],
+          [-77.0185295, -12.1414753]
+        ]
+      },
+      "properties": {
+        "name": "Highway58",
+        "highway": "signpost",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [[-77.0212902, -12.1385657], [-77.0213427, -12.1380514]]
+      },
+      "properties": {
+        "name": "Highway59",
+        "lanes": "2",
+        "highway": "construction",
+        "surface": "concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-77.0204275, -12.1385075],
+          [-77.0204698, -12.1380369],
+          [-77.0204951, -12.137822]
+        ]
+      },
+      "properties": {
+        "name": "Highway60",
+        "highway": "traffic",
+        "surface": "concrete"
+      }
+    }
+  ]
+}

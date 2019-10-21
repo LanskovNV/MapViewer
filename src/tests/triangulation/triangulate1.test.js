@@ -1,5 +1,5 @@
 import { triangulate } from '../../containers/Triangulation/triangulation';
-import isCorrect from './isCorrect';
+import isCorrect from '../isCorrect';
 
 test('triangulate 1', () => {
   const geometry = [[100, 100], [100, 200], [150, 150], [200, 200], [200, 100]];

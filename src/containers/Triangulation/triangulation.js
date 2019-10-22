@@ -57,6 +57,38 @@ function CrossProduct(v1, v2) {
 }
 
 /**
+ *@return {boolean} - returns false if not collinear, returns true if collinear
+ */
+function IsCollinearConnectedByPoint2(
+  m_point11,
+  m_point12,
+  m_point21,
+  m_point22
+) {
+  let k1, k2;
+  let point11 = [m_point11[0], m_point11[1]],
+    point12 = [m_point12[0], m_point12[1]],
+    point21 = [m_point21[0], m_point21[1]],
+    point22 = [m_point22[0], m_point22[1]];
+
+  //Transform to coordinates' system with point11 as (0,0)
+  // x-axis
+  point12[0] -= point11[0];
+  point21[0] -= point11[0];
+  point22[0] -= point11[0];
+  point11[0] -= point11[0];
+  // y-axis
+  point12[1] -= point11[1];
+  point21[1] -= point11[1];
+  point22[1] -= point11[1];
+  point11[1] -= point11[1];
+
+  k1 = (point12[1] - point11[1]) / (point12[0] - point11[0]);
+  k2 = (point22[1] - point21[1]) / (point22[0] - point21[0]);
+  return k1 === k2;
+}
+
+/**
  * @return {boolean}
  */
 function IsCrossed(m_point11, m_point12, m_point21, m_point22) {
@@ -227,7 +259,7 @@ function triangulate(pol) {
   let i = 0,
     j = 0;
 
-  //console.log(pol.length);
+  console.log(pol.length);
   while (pol.length > 3) {
     /*console.log('Step' + j++);
     console.log(pol.length);
@@ -245,6 +277,22 @@ function triangulate(pol) {
         pol.pop();
       } else {
         pol = pol.slice(0, i + 1).concat(pol.slice(i + 3, pol.length));
+      }
+    } else if (
+      IsCollinearConnectedByPoint2(
+        pol[i],
+        pol[(i + 1) % pol.length],
+        pol[(i + 1) % pol.length],
+        pol[(i + 2) % pol.length]
+      )
+    ) {
+      if (i === pol.length - 1) {
+        pol = pol.slice(1, pol.length);
+        i--;
+      } else if (i === pol.length - 2) {
+        pol.pop();
+      } else {
+        pol = pol.slice(0, i + 1).concat(pol.slice(i + 2, pol.length));
       }
     } else if (
       IsNotIdenticalSubIntervalConnectedByPoint2(
@@ -279,8 +327,8 @@ function triangulate(pol) {
         pol[(i + 1) % pol.length],
         pol[(i + 2) % pol.length]
       ]);
-      //console.log('Push triangle');
-      //console.log(pol[i], pol[(i + 1) % pol.length], pol[(i + 2) % pol.length]);
+      console.log('Push triangle');
+      console.log(pol[i], pol[(i + 1) % pol.length], pol[(i + 2) % pol.length]);
       if (i === pol.length - 1) {
         pol = pol.slice(1, pol.length);
         i--;
@@ -290,9 +338,12 @@ function triangulate(pol) {
         pol = pol.slice(0, i + 1).concat(pol.slice(i + 2, pol.length));
       }
       // delete identical neighbors
-      for (let i = 0; i < pol.length - 1; i++) {
-        while (i < pol.length - 1 && IsEqual(pol[i], pol[i + 1])) {
-          pol = pol.slice(0, i).concat(pol.slice(i + 1, pol.length));
+      for (let j = 0; j < pol.length - 1; j++) {
+        while (j < pol.length - 1 && IsEqual(pol[j], pol[j + 1])) {
+          pol = pol.slice(0, j).concat(pol.slice(j + 1, pol.length));
+          if (i > j) {
+            i--;
+          }
         }
       }
       if (IsEqual(pol[0], pol[pol.length - 1])) {
@@ -304,9 +355,9 @@ function triangulate(pol) {
     let polygon_reorder = [],
       left = 0,
       clockwise;
-    for (let i = 1; i < pol.length; i++) {
-      if (pol[i][0] < pol[left][0]) {
-        left = i;
+    for (let j = 1; j < pol.length; j++) {
+      if (pol[j][0] < pol[left][0]) {
+        left = j;
       }
     }
     if (
@@ -326,8 +377,8 @@ function triangulate(pol) {
   }
   if (pol.length === 3) {
     triangles.push(pol);
-    //console.log('Push triangle');
-    //console.log(pol[0], pol[1], pol[2]);
+    console.log('Push triangle');
+    console.log(pol[0], pol[1], pol[2]);
   }
   //console.log('End');
   return triangles;

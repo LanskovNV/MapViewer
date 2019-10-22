@@ -229,6 +229,23 @@ const elimination = (data, holeIndices, dim) => {
   return polygon_reorder;
 };
 
+/**
+ * @return {boolean}
+ */
+function CheckHole(point1, point2, hole) {
+  let check1 = false,
+    check2 = false;
+  for (let i = 0; i < hole.length; i++) {
+    if (IsEqual(point1, hole[i])) {
+      check1 = true;
+    }
+    if (IsEqual(point2, hole[i])) {
+      check2 = true;
+    }
+  }
+  return check1 && check2;
+}
+
 function eliminateHole2(polygon) {
   let res_polygon = [],
     res_polygon0 = [],
@@ -240,44 +257,48 @@ function eliminateHole2(polygon) {
       break;
     }
     for (let j = 0; j < polygon[0].length; j++) {
-      if (isCrossed) {
-        for (let l = 0; l <= j; l++) {
-          res_polygon0.push(polygon[0][j]);
-        }
-        for (let l = i; l < polygon[1].length; l++) {
-          res_polygon0.push(polygon[1][i]);
-        }
-        for (let l = 0; l <= i; l++) {
-          res_polygon0.push(polygon[1][i]);
-        }
-        for (let l = j; l < polygon[0].length; l++) {
-          res_polygon0.push(polygon[0][j]);
-        }
-
-        isBridged = true;
-        break;
-      }
+      isCrossed = false;
       for (let t = 0; t < polygon.length; t++) {
+        if (isCrossed) {
+          break;
+        }
         for (let k = 1; k <= polygon[t].length; k++) {
           if (
-            !(
-              IsEqual(polygon[0][j], polygon[1][i]) ||
-              !IsCrossed(
+            (!IsEqual(polygon[0][j], polygon[1][i]) &&
+              IsCrossed(
                 polygon[t][k - 1],
                 polygon[t][k % polygon[t].length],
                 polygon[0][j],
                 polygon[1][i]
-              ) ||
-              IsIdentical(
+              ) &&
+              !IsIdentical(
                 [polygon[t][k - 1], polygon[t][k % polygon[t].length]],
                 [polygon[0][j], polygon[1][i]]
-              )
-            )
+              )) ||
+            (CheckHole(polygon[0][j], polygon[1][i], polygon[1]) &&
+              !IsEqual(polygon[0][j], polygon[1][i]))
           ) {
             isCrossed = true;
             break;
           }
         }
+      }
+      if (!isCrossed) {
+        for (let l = 0; l <= j; l++) {
+          res_polygon0.push(polygon[0][l]);
+        }
+        for (let l = i; l < polygon[1].length; l++) {
+          res_polygon0.push(polygon[1][l]);
+        }
+        for (let l = 0; l <= i; l++) {
+          res_polygon0.push(polygon[1][l]);
+        }
+        for (let l = j; l < polygon[0].length; l++) {
+          res_polygon0.push(polygon[0][l]);
+        }
+
+        isBridged = true;
+        break;
       }
     }
   }
@@ -298,6 +319,11 @@ function eliminateHole2(polygon) {
 
 function elimination2(polygon) {
   let res_polygon;
+
+  for (let i = 0; i < polygon.length; i++) {
+    polygon[i].pop();
+  }
+
   polygon[0] = polygonReorder(polygon[0], true);
   while (polygon.length > 1) {
     polygon[1] = polygonReorder(polygon[1], false);

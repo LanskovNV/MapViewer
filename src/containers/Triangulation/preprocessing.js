@@ -8,7 +8,7 @@ import {
   locallyInside,
   getLeftmost
 } from './geometry';
-import { IsCrossed, IsEqual, IsIdentical } from './triangulation';
+import { IsClockwise, IsCrossed, IsEqual, IsIdentical } from './triangulation';
 
 // eliminate colinear or duplicate points
 const filterPoints = (start, end) => {
@@ -157,8 +157,11 @@ function polygonReorder(polygon, shouldBeClockWise) {
   }
 
   if (
-    polygon[(left + polygon.length - 1) % polygon.length][1] <=
-    polygon[(left + 1) % polygon.length][1]
+    IsClockwise(
+      polygon[left],
+      polygon[(left + 1) % polygon.length],
+      polygon[(left + polygon.length - 1) % polygon.length]
+    )
   ) {
     clockwise = true;
   }

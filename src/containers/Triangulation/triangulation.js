@@ -1,6 +1,30 @@
 /**
  * @return {boolean}
  */
+function IsClockwise(leftPoint, nextPoint, prevPoint) {
+  let k1, k2;
+  let pointLeft = [leftPoint[0], leftPoint[1]],
+    pointNext = [nextPoint[0], nextPoint[1]],
+    pointPrev = [prevPoint[0], prevPoint[1]];
+
+  //Transform to coordinates' system with point11 as (0,0)
+  // x-axis
+  pointNext[0] -= pointLeft[0];
+  pointPrev[0] -= pointLeft[0];
+  pointLeft[0] -= pointLeft[0];
+  // y-axis
+  pointNext[1] -= pointLeft[1];
+  pointPrev[1] -= pointLeft[1];
+  pointLeft[1] -= pointLeft[1];
+
+  k1 = (pointNext[1] - pointLeft[1]) / (pointNext[0] - pointLeft[0]);
+  k2 = (pointPrev[1] - pointLeft[1]) / (pointPrev[0] - pointLeft[0]);
+  return k1 >= k2;
+}
+
+/**
+ * @return {boolean}
+ */
 function IsNotIdenticalSubIntervalConnectedByPoint2(point1, point2, point3) {
   let b1,
     b2,
@@ -260,18 +284,20 @@ function triangulate(pol) {
     j = 0;
 
   console.log(pol.length);
+  //console.log(pol[0], pol[1]);
   while (pol.length > 3) {
-    /*console.log('Step' + j++);
+    console.log('Step' + j++);
     console.log(pol.length);
     for (let i = 0; i < pol.length; i++) {
       console.log(pol[i]);
-    }*/
+    }
     if (IsEqual(pol[i], pol[(i + 2) % pol.length])) {
       if (i === pol.length - 1) {
         pol = pol.slice(2, pol.length);
         i = i - 2;
       } else if (i === pol.length - 2) {
         pol = pol.slice(1, pol.length - 1);
+        i = i - 1;
       } else if (i === pol.length - 3) {
         pol.pop();
         pol.pop();
@@ -360,12 +386,11 @@ function triangulate(pol) {
         left = j;
       }
     }
-    if (
-      pol[(left + pol.length - 1) % pol.length][1] <=
-      pol[(left + 1) % pol.length][1]
-    ) {
-      clockwise = true;
-    }
+    clockwise = IsClockwise(
+      pol[left],
+      pol[(left + 1) % pol.length],
+      pol[(left + pol.length - 1) % pol.length]
+    );
     if (!clockwise) {
       for (let i = pol.length - 1; i >= 0; i--) {
         polygon_reorder.push(pol[i]);
@@ -386,6 +411,7 @@ function triangulate(pol) {
 
 export {
   triangulate,
+  IsClockwise,
   IsEqual,
   IsCrossed,
   IsIdentical,

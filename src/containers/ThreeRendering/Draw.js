@@ -1,5 +1,5 @@
-// import {earcut, flatten} from "../Triangulation/triangulate";
-import * as earcut from '../Triangulation/triangulation2';
+import { earcut } from '../Triangulation/triangulate';
+// import earcut from '../Triangulation/triangulation2';
 import * as THREE from 'three';
 
 // custom triangulation
@@ -25,7 +25,7 @@ export default function draw(scene, data_json, object) {
     const geom = new THREE.Geometry();
 
     if (feature.type === 'MultiPolygon') {
-      const data = earcut.flatten(feature.coordinates[0]);
+      const data = flattenCoords(feature.coordinates[0]);
       const tr = earcut(data.vertices, data.holes, data.dimensions);
       //const data = flattenCoords(feature.coordinates[0]);
       //const prepData = elimination(data.vertices, data.holes, data.dimensions);

@@ -1,5 +1,5 @@
 import { earcut } from '../Triangulation/triangulate';
-// import earcut from '../Triangulation/triangulation2';
+// import {earcut} from '../Triangulation/triangulation2';
 import * as THREE from 'three';
 
 // custom triangulation

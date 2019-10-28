@@ -1,9 +1,24 @@
-'use strict';
+// 'use strict';
 
-module.exports = earcut;
-module.exports.default = earcut;
+// module.exports = earcut;
+// module.exports.default = earcut;
+import { Node, insertNode, removeNode } from './node';
+import {
+  area,
+  intersects,
+  isValidDiagonal,
+  middleInside,
+  locallyInside,
+  pointInTriangle,
+  splitPolygon,
+  signedArea,
+  getLeftmost
+} from './geometry';
+import { equals, compareX } from './source';
+import { eliminateHoles, filterPoints } from './preprocessing';
+// import {linkedList} from "./linkedList";
 
-function earcut(data, holeIndices, dim) {
+export function earcut(data, holeIndices, dim) {
   dim = dim || 2;
 
   var hasHoles = holeIndices && holeIndices.length,
@@ -38,6 +53,7 @@ function linkedList(data, start, end, dim, clockwise) {
   return last;
 }
 
+/*
 // eliminate colinear or duplicate points
 function filterPoints(start, end) {
   if (!start) return start;
@@ -60,6 +76,7 @@ function filterPoints(start, end) {
 
   return end;
 }
+*/
 
 // main ear slicing loop which triangulates a polygon (given as a linked list)
 function earcutLinked(ear, triangles, dim, pass) {
@@ -192,7 +209,7 @@ function splitEarcut(start, triangles, dim) {
     a = a.next;
   } while (a !== start);
 }
-
+/*
 // link every hole into the outer loop, producing a single-ring polygon without holes
 function eliminateHoles(data, holeIndices, outerNode, dim) {
   var queue = [],
@@ -220,11 +237,13 @@ function eliminateHoles(data, holeIndices, outerNode, dim) {
 
   return outerNode;
 }
-
+*/
+/*
 function compareX(a, b) {
   return a.x - b.x;
 }
-
+*/
+/*
 // find a bridge between vertices that connects hole with an outer ring and and link it
 function eliminateHole(hole, outerNode) {
   outerNode = findHoleBridge(hole, outerNode);
@@ -233,7 +252,8 @@ function eliminateHole(hole, outerNode) {
     filterPoints(b, b.next);
   }
 }
-
+*/
+/*
 // David Eberly's algorithm for finding a bridge between hole and outer polygon
 function findHoleBridge(hole, outerNode) {
   var p = outerNode,
@@ -307,7 +327,8 @@ function findHoleBridge(hole, outerNode) {
 
   return m;
 }
-
+ */
+/*
 // find the leftmost node of a polygon ring
 function getLeftmost(start) {
   var p = start,
@@ -341,17 +362,21 @@ function isValidDiagonal(a, b) {
     middleInside(a, b)
   );
 }
-
+*/
+/*
 // signed area of a triangle
 function area(p, q, r) {
   return (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
 }
-
+*/
+/*
 // check if two points are equal
 function equals(p1, p2) {
   return p1.x === p2.x && p1.y === p2.y;
 }
+*/
 
+/*
 // check if two segments intersect
 function intersects(p1, q1, p2, q2) {
   if ((equals(p1, q1) && equals(p2, q2)) || (equals(p1, q2) && equals(p2, q1)))
@@ -361,7 +386,9 @@ function intersects(p1, q1, p2, q2) {
     area(p2, q2, p1) > 0 !== area(p2, q2, q1) > 0
   );
 }
+*/
 
+/*
 // check if a polygon diagonal intersects any polygon segments
 function intersectsPolygon(a, b) {
   var p = a;
@@ -405,7 +432,8 @@ function middleInside(a, b) {
 
   return inside;
 }
-
+*/
+/*
 // link two polygon vertices with a bridge; if the vertices belong to the same ring, it splits polygon into two;
 // if one belongs to the outer ring and another to a hole, it merges it into a single ring
 function splitPolygon(a, b) {
@@ -429,6 +457,9 @@ function splitPolygon(a, b) {
   return b2;
 }
 
+*/
+
+/*
 // create a node and optionally link it with previous one (in a circular doubly linked list)
 function insertNode(i, x, y, last) {
   var p = new Node(i, x, y);
@@ -462,7 +493,18 @@ function Node(i, x, y) {
   this.prev = null;
   this.next = null;
 }
-
+*/
+/*
+function signedArea(data, start, end, dim) {
+  var sum = 0;
+  for (var i = start, j = end - dim; i < end; i += dim) {
+    sum += (data[j] - data[i]) * (data[i + 1] + data[j + 1]);
+    j = i;
+  }
+  return sum;
+}
+*/
+/*
 // return a percentage difference between the polygon area and its triangulation area;
 // used to verify correctness of triangulation
 earcut.deviation = function(data, holeIndices, dim, triangles) {
@@ -494,15 +536,6 @@ earcut.deviation = function(data, holeIndices, dim, triangles) {
     : Math.abs((trianglesArea - polygonArea) / polygonArea);
 };
 
-function signedArea(data, start, end, dim) {
-  var sum = 0;
-  for (var i = start, j = end - dim; i < end; i += dim) {
-    sum += (data[j] - data[i]) * (data[i + 1] + data[j + 1]);
-    j = i;
-  }
-  return sum;
-}
-
 // turn a polygon in a multi-dimensional array form (e.g. as in GeoJSON) into a form Earcut accepts
 earcut.flatten = function(data) {
   var dim = data[0][0].length,
@@ -520,3 +553,4 @@ earcut.flatten = function(data) {
   }
   return result;
 };
+*/

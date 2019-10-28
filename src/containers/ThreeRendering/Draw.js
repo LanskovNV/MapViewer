@@ -1,11 +1,6 @@
-import { earcut } from '../Triangulation/triangulate';
-// import {earcut} from '../Triangulation/triangulation2';
 import * as THREE from 'three';
-
-// custom triangulation
-// import elimination2 from '../Triangulation/preprocessing';
+import { earcut } from '../Triangulation/triangulate';
 import flattenCoords from '../Triangulation/flatten';
-// import { triangulate } from '../Triangulation/triangulation';
 
 import ConvertCoordinates from '../Parsing/Converter';
 
@@ -27,10 +22,6 @@ export default function draw(scene, data_json, object) {
     if (feature.type === 'MultiPolygon') {
       const data = flattenCoords(feature.coordinates[0]);
       const tr = earcut(data.vertices, data.holes, data.dimensions);
-      //const data = flattenCoords(feature.coordinates[0]);
-      //const prepData = elimination(data.vertices, data.holes, data.dimensions);
-      // const prepData = elimination2(feature.coordinates[0]);
-      // const tr = triangulate(prepData);
       triangles.push(tr);
 
       feature.coordinates[0].forEach(lineStr => {

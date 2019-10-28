@@ -76,8 +76,10 @@ const middleInside = (a, b) => {
     px = (a.x + b.x) / 2,
     py = (a.y + b.y) / 2;
   do {
+    const a1 = p.y > py;
+    const b1 = p.next.y > py;
     if (
-      p.y > py !== p.next.y > py &&
+      a1 !== b1 &&
       p.next.y !== p.y &&
       px < ((p.next.x - p.x) * (py - p.y)) / (p.next.y - p.y) + p.x
     )
@@ -91,10 +93,11 @@ const middleInside = (a, b) => {
 const intersects = (p1, q1, p2, q2) => {
   if ((equals(p1, q1) && equals(p2, q2)) || (equals(p1, q2) && equals(p2, q1)))
     return true;
-  return (
-    area(p1, q1, p2) > 0 !== area(p1, q1, q2) > 0 &&
-    area(p2, q2, p1) > 0 !== area(p2, q2, q1) > 0
-  );
+  const a = area(p1, q1, p2) > 0;
+  const b = area(p1, q1, q2) > 0;
+  const c = area(p2, q2, p1) > 0;
+  const d = area(p2, q2, q1) > 0;
+  return a !== b && c !== d;
 };
 
 const intersectsPolygon = (a, b) => {

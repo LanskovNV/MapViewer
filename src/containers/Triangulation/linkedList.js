@@ -6,7 +6,8 @@ import { insertNode, removeNode } from './node';
 const linkedList = (data, start, end, dim, clockwise) => {
   let i, last;
 
-  if ((clockwise === signedArea(data, start, end, dim)) > 0) {
+  const tmp = signedArea(data, start, end, dim) > 0;
+  if (clockwise === tmp) {
     for (i = start; i < end; i += dim)
       last = insertNode(i, data[i], data[i + 1], last);
   } else {

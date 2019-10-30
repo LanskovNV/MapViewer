@@ -8,10 +8,9 @@ import {
   locallyInside,
   getLeftmost
 } from './geometry';
-import { IsEqual } from './triangulation';
 
 // eliminate colinear or duplicate points
-const filterPoints = (start, end) => {
+export const filterPoints = (start, end) => {
   if (!start) return start;
   if (!end) end = start;
 
@@ -35,7 +34,7 @@ const filterPoints = (start, end) => {
 };
 
 // David Eberly's algorithm for finding a bridge between hole and outer polygon
-const findHoleBridge = (hole, outerNode) => {
+export const findHoleBridge = (hole, outerNode) => {
   let p = outerNode,
     hx = hole.x,
     hy = hole.y,
@@ -109,7 +108,7 @@ const findHoleBridge = (hole, outerNode) => {
 };
 
 // find a bridge between vertices that connects hole with an outer ring and and link it
-const eliminateHole = (hole, outerNode) => {
+export const eliminateHole = (hole, outerNode) => {
   outerNode = findHoleBridge(hole, outerNode);
   if (outerNode) {
     const b = splitPolygon(outerNode, hole);
@@ -118,7 +117,7 @@ const eliminateHole = (hole, outerNode) => {
 };
 
 // link every hole into the outer loop, producing a single-ring polygon without holes
-const eliminateHoles = (data, holeIndices, outerNode, dim) => {
+export const eliminateHoles = (data, holeIndices, outerNode, dim) => {
   let queue = [],
     i,
     len,
@@ -145,7 +144,7 @@ const eliminateHoles = (data, holeIndices, outerNode, dim) => {
   return outerNode;
 };
 
-const elimination = (data, holeIndices, dim) => {
+export const elimination = (data, holeIndices, dim) => {
   dim = dim || 2;
 
   let hasHoles = holeIndices && holeIndices.length,
@@ -168,54 +167,7 @@ const elimination = (data, holeIndices, dim) => {
     p = p.next;
   } while (p !== outerNode);
 
-  let polygon_reorder = [],
-    left = 0,
-    clockwise;
-  for (let i = 1; i < polygon.length; i++) {
-    if (polygon[i][0] < polygon[left][0]) {
-      left = i;
-    }
-  }
-  console.log('Pre-reorder');
-  for (let i = 0; i < polygon.length; i++) {
-    console.log(polygon[i]);
-  }
-
-  if (
-    polygon[(left + polygon.length - 1) % polygon.length][1] <=
-    polygon[(left + 1) % polygon.length][1]
-  ) {
-    clockwise = true;
-  }
-  if (!clockwise) {
-    for (let i = polygon.length - 1; i >= 0; i--) {
-      polygon_reorder.push(polygon[i]);
-    }
-  } else {
-    polygon_reorder = polygon;
-  }
-
-  // delete identical neighbors
-  for (let i = 0; i < polygon_reorder.length - 1; i++) {
-    while (
-      i < polygon_reorder.length - 1 &&
-      IsEqual(polygon_reorder[i], polygon_reorder[i + 1])
-    ) {
-      polygon_reorder = polygon_reorder
-        .slice(0, i)
-        .concat(polygon_reorder.slice(i + 1, polygon_reorder.length));
-    }
-  }
-  if (
-    IsEqual(polygon_reorder[0], polygon_reorder[polygon_reorder.length - 1])
-  ) {
-    polygon_reorder.pop();
-  }
-  console.log('Post-reorder');
-  for (let i = 0; i < polygon_reorder.length; i++) {
-    console.log(polygon_reorder[i]);
-  }
-  return polygon_reorder;
+  return polygon;
 };
 
 export default elimination;

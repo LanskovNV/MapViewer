@@ -1,4 +1,5 @@
 import { Node } from './node';
+import { equals } from './source';
 
 // signed area of a triangle
 const area = (p, q, r) => {
@@ -69,7 +70,68 @@ const getLeftmost = start => {
   return leftmost;
 };
 
+const middleInside = (a, b) => {
+  let p = a,
+    inside = false,
+    px = (a.x + b.x) / 2,
+    py = (a.y + b.y) / 2;
+  do {
+    const a1 = p.y > py;
+    const b1 = p.next.y > py;
+    if (
+      a1 !== b1 &&
+      p.next.y !== p.y &&
+      px < ((p.next.x - p.x) * (py - p.y)) / (p.next.y - p.y) + p.x
+    )
+      inside = !inside;
+    p = p.next;
+  } while (p !== a);
+
+  return inside;
+};
+
+const intersects = (p1, q1, p2, q2) => {
+  if ((equals(p1, q1) && equals(p2, q2)) || (equals(p1, q2) && equals(p2, q1)))
+    return true;
+  const a = area(p1, q1, p2) > 0;
+  const b = area(p1, q1, q2) > 0;
+  const c = area(p2, q2, p1) > 0;
+  const d = area(p2, q2, q1) > 0;
+  return a !== b && c !== d;
+};
+
+const intersectsPolygon = (a, b) => {
+  let p = a;
+  do {
+    if (
+      p.i !== a.i &&
+      p.next.i !== a.i &&
+      p.i !== b.i &&
+      p.next.i !== b.i &&
+      intersects(p, p.next, a, b)
+    )
+      return true;
+    p = p.next;
+  } while (p !== a);
+
+  return false;
+};
+
+const isValidDiagonal = (a, b) => {
+  return (
+    a.next.i !== b.i &&
+    a.prev.i !== b.i &&
+    !intersectsPolygon(a, b) &&
+    locallyInside(a, b) &&
+    locallyInside(b, a) &&
+    middleInside(a, b)
+  );
+};
+
 export {
+  intersects,
+  isValidDiagonal,
+  middleInside,
   area,
   signedArea,
   getLeftmost,

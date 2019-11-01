@@ -1,4 +1,4 @@
-import { earcut } from '../../containers/Triangulation/triangulate';
+import earcut from '../../containers/Triangulation/triangulate';
 import isCorrect from '../isCorrect';
 import createTrianglesFromIndices from '../triangles';
 import flattenCoords from '../../containers/Triangulation/flatten';
@@ -80,7 +80,7 @@ test('triangulate 6', () => {
 
   //get array of indices of vertices in triangles
   const data = flattenCoords(geometry);
-  let ind = earcut(data.vertices, data.holes, data.dimensions);
+  let ind = earcut(data.vertices, data.holes);
 
   //create triangles in coords from array of indices
   let vertices = geometry[0].concat(geometry[1]);

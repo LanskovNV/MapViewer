@@ -39,6 +39,7 @@ export default (callbackStart, callback) => {
   /**
    * @desc processes data chunk
    * @param {ArrayBuffer} data - read data
+   * @param Load - function to load next data chunk
    */
   function callbackDataProcess(data, Load) {
     const restFile = document.getElementById('restProcFile');
@@ -151,9 +152,10 @@ export default (callbackStart, callback) => {
         }
       })
       .then(ConvertCoordinates)
-      .then(Assemble)
+      .then(async () => {
+        await Assemble(callback);
+      })
       .then(ClearTempFiles)
-      .then(callback)
       .catch(function(err) {
         alert(err);
       });

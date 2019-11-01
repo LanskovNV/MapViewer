@@ -1,5 +1,4 @@
 import * as d3 from 'd3';
-import * as THREE from 'three';
 
 function getCurrentScale(camera, height) {
   const vFOV = (camera.fov * Math.PI) / 180;
@@ -19,25 +18,7 @@ export default function zoomInit(camera, width, height) {
         const new_z = event.transform.k;
 
         if (new_z !== camera.position.z) {
-          // Handle a zoom event
-          const { clientX, clientY } = event.sourceEvent;
-
-          // Project a vector from current mouse position and zoom level
-          // Find the x and y coordinates for where that vector intersects the new
-          // zoom level.
-          // Code from WestLangley https://stackoverflow.com/questions/13055214/mouse-canvas-x-y-to-three-js-world-x-y-z/13091694#13091694
-          const vector = new THREE.Vector3(
-            (clientX / width) * 2 - 1,
-            -(clientY / height) * 2 + 1,
-            1
-          );
-          vector.unproject(camera);
-          const dir = vector.sub(camera.position).normalize();
-          const distance = (new_z - camera.position.z) / dir.z;
-          const pos = camera.position.clone().add(dir.multiplyScalar(distance));
-
-          // Set the camera to new coordinates
-          camera.position.set(pos.x, pos.y, new_z);
+          camera.position.set(camera.position.x, camera.position.y, new_z);
         } else {
           // Handle panning
           const { movementX, movementY } = event.sourceEvent;

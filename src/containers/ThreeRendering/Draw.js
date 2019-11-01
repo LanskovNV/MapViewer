@@ -1,5 +1,7 @@
-import * as earcut from 'earcut';
 import * as THREE from 'three';
+import earcut from '../Triangulation/triangulate';
+import flattenCoords from '../Triangulation/flatten';
+
 import ConvertCoordinates from '../Parsing/Converter';
 
 /**
@@ -18,8 +20,8 @@ export default function draw(scene, data_json, object) {
     const geom = new THREE.Geometry();
 
     if (feature.type === 'MultiPolygon') {
-      const data = earcut.flatten(feature.coordinates[0]);
-      const tr = earcut(data.vertices, data.holes, data.dimensions);
+      const data = flattenCoords(feature.coordinates[0]);
+      const tr = earcut(data.vertices, data.holes);
       triangles.push(tr);
 
       feature.coordinates[0].forEach(lineStr => {

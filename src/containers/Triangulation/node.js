@@ -10,16 +10,6 @@ class Node {
     // previous and next vertex nodes in a polygon ring
     this.prev = null;
     this.next = null;
-
-    // z-order curve value
-    this.z = null;
-
-    // previous and next nodes in z-order
-    this.prevZ = null;
-    this.nextZ = null;
-
-    // indicates whether this is a steiner point
-    this.steiner = false;
   }
 }
 
@@ -43,9 +33,6 @@ const insertNode = (i, x, y, last) => {
 const removeNode = p => {
   p.next.prev = p.prev;
   p.prev.next = p.next;
-
-  if (p.prevZ) p.prevZ.nextZ = p.nextZ;
-  if (p.nextZ) p.nextZ.prevZ = p.prevZ;
 };
 
 export { Node, insertNode, removeNode };

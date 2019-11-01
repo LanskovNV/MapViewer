@@ -1,6 +1,5 @@
-import { eliminateHoles } from './preprocessing';
 import { removeNode } from './node';
-import { filterPoints } from './preprocessing';
+import { filterPoints, eliminateHoles } from './preprocessing';
 import { equals } from './source';
 import {
   area,
@@ -13,8 +12,8 @@ import {
 
 import { linkedList } from './linkedList';
 
-const earcut = (data, holeIndices, dim) => {
-  dim = dim || 2;
+const earcut = (data, holeIndices) => {
+  const dim = 2;
 
   let hasHoles = holeIndices && holeIndices.length,
     outerLen = hasHoles ? holeIndices[0] * dim : data.length,
@@ -153,4 +152,4 @@ const isEar = ear => {
   return true;
 };
 
-export { earcut };
+export default earcut;

@@ -1,6 +1,6 @@
 const flattenCoords = data => {
-  const dim = data[0][0].length;
-  const result = { vertices: [], holes: [], dimensions: dim };
+  const dim = 2;
+  const result = { vertices: [], holes: [] };
   let holeIndex = 0;
 
   for (let i = 0; i < data.length; i++) {

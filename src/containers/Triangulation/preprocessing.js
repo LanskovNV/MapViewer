@@ -9,8 +9,7 @@ import {
   getLeftmost
 } from './geometry';
 
-// eliminate colinear or duplicate points
-export const filterPoints = (start, end) => {
+const filterPoints = (start, end) => {
   if (!start) return start;
   if (!end) end = start;
 
@@ -34,7 +33,7 @@ export const filterPoints = (start, end) => {
 };
 
 // David Eberly's algorithm for finding a bridge between hole and outer polygon
-export const findHoleBridge = (hole, outerNode) => {
+const findHoleBridge = (hole, outerNode) => {
   let p = outerNode,
     hx = hole.x,
     hy = hole.y,
@@ -108,7 +107,7 @@ export const findHoleBridge = (hole, outerNode) => {
 };
 
 // find a bridge between vertices that connects hole with an outer ring and and link it
-export const eliminateHole = (hole, outerNode) => {
+const eliminateHole = (hole, outerNode) => {
   outerNode = findHoleBridge(hole, outerNode);
   if (outerNode) {
     const b = splitPolygon(outerNode, hole);
@@ -117,7 +116,7 @@ export const eliminateHole = (hole, outerNode) => {
 };
 
 // link every hole into the outer loop, producing a single-ring polygon without holes
-export const eliminateHoles = (data, holeIndices, outerNode, dim) => {
+const eliminateHoles = (data, holeIndices, outerNode, dim) => {
   let queue = [],
     i,
     len,
@@ -144,30 +143,4 @@ export const eliminateHoles = (data, holeIndices, outerNode, dim) => {
   return outerNode;
 };
 
-export const elimination = (data, holeIndices, dim) => {
-  dim = dim || 2;
-
-  let hasHoles = holeIndices && holeIndices.length,
-    outerLen = hasHoles ? holeIndices[0] * dim : data.length,
-    outerNode = linkedList(data, 0, outerLen, dim, true),
-    triangles = [];
-
-  if (!outerNode || outerNode.next === outerNode.prev) return triangles;
-
-  if (hasHoles) outerNode = eliminateHoles(data, holeIndices, outerNode, dim);
-
-  let p = outerNode;
-  const polygon = [];
-
-  do {
-    const l = polygon.length;
-    if (l === 0 || p.x !== polygon[l - 1][0] || p.y !== polygon[l - 1][1]) {
-      polygon.push([p.x, p.y]);
-    }
-    p = p.next;
-  } while (p !== outerNode);
-
-  return polygon;
-};
-
-export default elimination;
+export { eliminateHoles, filterPoints };

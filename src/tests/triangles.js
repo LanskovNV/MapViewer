@@ -1,9 +1,14 @@
-function createTriangles(vertices) {
+function createTrianglesFromIndices(indices, vertices) {
   let triangles = [];
-  for (let j = 0; j < vertices.length; j += 3) {
-    let triangle = [vertices[j], vertices[j + 1], vertices[j + 2]];
+  for (let j = 0; j < indices.length; j += 3) {
+    let triangle = [
+      vertices[indices[j]],
+      vertices[indices[j + 1]],
+      vertices[indices[j + 2]]
+    ];
     triangles.push(triangle);
   }
   return triangles;
 }
-module.exports = createTriangles;
+
+export default createTrianglesFromIndices;

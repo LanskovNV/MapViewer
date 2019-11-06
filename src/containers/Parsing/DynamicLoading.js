@@ -153,7 +153,7 @@ export default (callbackStart, callback) => {
       })
       .then(ConvertCoordinates)
       .then(async () => {
-        await Assemble();
+        await Assemble(callback);
       })
       .then(ClearTempFiles)
       .then(callback)

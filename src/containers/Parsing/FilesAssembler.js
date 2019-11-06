@@ -3,9 +3,8 @@ import { statusJSON, GetFileCounts, saveByteArray } from './Handle';
 /**
  * @desc assembles multiple files "fileName##index" into single file "fileName",
  *       files to assemble: ["streets##index", "houses##index", "water##index"]
- * @param {Function} callback - function called when all files assembled
  */
-async function Assemble(callback) {
+async function Assemble() {
   const arr_names = ['streets', 'houses', 'water'],
     arr_counts = GetFileCounts();
 
@@ -44,9 +43,6 @@ async function Assemble(callback) {
                   }),
                   f = new File([blob], docFull.download, { type: 'text/json' });
                 docFull.href = window.URL.createObjectURL(f);
-                if (i === arr_counts.length - 1 && j === arr_counts[i]) {
-                  callback();
-                }
               })
               .catch(function(err) {
                 alert(err);

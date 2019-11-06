@@ -153,9 +153,10 @@ export default (callbackStart, callback) => {
       })
       .then(ConvertCoordinates)
       .then(async () => {
-        await Assemble(callback);
+        await Assemble();
       })
       .then(ClearTempFiles)
+      .then(callback)
       .catch(function(err) {
         alert(err);
       });

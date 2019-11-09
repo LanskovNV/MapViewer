@@ -30,7 +30,14 @@ class Header extends React.Component {
     LoadPreparedMap('Stockton');
   }
   load() {
-    PickUsefulFromGeoJSONToTXT(this.props.loading, this.props.loaded);
+    PickUsefulFromGeoJSONToTXT(
+      this.props.loading,
+      this.props.loaded,
+      this.props.startParsing,
+      this.props.endParsing,
+      this.props.setNumFiles,
+      this.props.updateCurFileNum
+    );
   }
   render() {
     return (
@@ -101,6 +108,10 @@ class Header extends React.Component {
 
 Header.propTypes = {
   loading: PropTypes.func,
+  startParsing: PropTypes.func,
+  endParsing: PropTypes.func,
+  setNumFiles: PropTypes.func,
+  updateCurFileNum: PropTypes.func,
   loaded: PropTypes.func
 };
 

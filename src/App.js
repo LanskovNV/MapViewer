@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { injectIntl } from 'react-intl';
-import Spinner from './components/Spinner';
+import ShowProgress from './components/Progress';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import CheckboxBar from './components/OutputData';
@@ -25,13 +25,20 @@ class App extends Component {
     this.loadedCallback = this.loadedCallback.bind(this);
     this.startLoadingCallback = this.startLoadingCallback.bind(this);
     this.endLoadingCallback = this.endLoadingCallback.bind(this);
+    this.startParsingCallback = this.startParsingCallback.bind(this);
+    this.endParsingCallback = this.endParsingCallback.bind(this);
+    this.updateCurFileNumCallback = this.updateCurFileNumCallback.bind(this);
+    this.setNumFilesCallback = this.setNumFilesCallback.bind(this);
   }
   state = {
     isHouses: true,
     isStreets: true,
     isWater: true,
     isLoaded: 0,
-    isLoading: false
+    isLoading: false,
+    isParsing: false,
+    numFiles: 0,
+    curFileNum: 0
   };
   // Callbacks to support checkboxes
   updateHouses = value => {
@@ -53,6 +60,20 @@ class App extends Component {
   endLoadingCallback() {
     this.setState({ isLoading: false });
   }
+  startParsingCallback() {
+    this.setState({ isParsing: true });
+  }
+  endParsingCallback() {
+    this.setState({ isParsing: false });
+    this.setState({ numFiles: 0 });
+    this.setState({ curFileNum: 0 });
+  }
+  setNumFilesCallback = value => {
+    this.setState({ numFiles: value });
+  };
+  updateCurFileNumCallback() {
+    this.setState({ curFileNum: this.state.curFileNum + 1 });
+  }
   render() {
     const objects = {
       isHouses: this.state.isHouses,
@@ -64,8 +85,17 @@ class App extends Component {
         <Header
           loaded={this.loadedCallback}
           loading={this.startLoadingCallback}
+          startParsing={this.startParsingCallback}
+          endParsing={this.endParsingCallback}
+          setNumFiles={this.setNumFilesCallback}
+          updateCurFileNum={this.updateCurFileNumCallback}
         />
-        <Spinner isLoading={this.state.isLoading} />
+        <ShowProgress
+          isLoading={this.state.isLoading}
+          isParsing={this.state.isParsing}
+          numFiles={this.state.numFiles}
+          numCur={this.state.curFileNum}
+        />
         <ThreeRendering
           objects={objects}
           isLoading={this.state.isLoading}

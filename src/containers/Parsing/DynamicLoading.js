@@ -16,7 +16,14 @@ import { Assemble } from './FilesAssembler';
  * @param {function} callbackStart - notifies application that data started loading
  * @param {function} callback - notifies application that data loaded
  */
-export default (callbackStart, callback) => {
+export default (
+  callbackStart,
+  callback,
+  callbackStartParsing,
+  callbackEndParsing,
+  callBackSetNumFiles,
+  callBackUpdateFileNum
+) => {
   const FIRST_ELEMENT = 0;
   const file = document.getElementById('loadedMap').files[FIRST_ELEMENT];
 
@@ -32,8 +39,17 @@ export default (callbackStart, callback) => {
     }
 
     saveByteArray([''], 'rest.txt', 'restProcFile');
-    callbackStart();
-    loading(file, callbackDataProcess, callbackEnd, callback);
+    loading(
+      file,
+      callbackDataProcess,
+      callbackEnd,
+      callback,
+      callbackStart,
+      callbackStartParsing,
+      callbackEndParsing,
+      callBackSetNumFiles,
+      callBackUpdateFileNum
+    );
   }
 
   /**
@@ -41,7 +57,7 @@ export default (callbackStart, callback) => {
    * @param {ArrayBuffer} data - read data
    * @param Load - function to load next data chunk
    */
-  function callbackDataProcess(data, Load) {
+  function callbackDataProcess(data, callBackUpdateFileNum, Load) {
     const restFile = document.getElementById('restProcFile');
     const str_data = String.fromCharCode.apply(null, new Uint8Array(data)),
       str_valid_json = str_data.substr(0, str_data.lastIndexOf('\n')),
@@ -108,6 +124,7 @@ export default (callbackStart, callback) => {
       })
       .then(function() {
         Load();
+        callBackUpdateFileNum();
       })
       .catch(function(err) {
         alert(err);
@@ -119,7 +136,7 @@ export default (callbackStart, callback) => {
    * @param {ArrayBuffer} data - read data
    * @param {function} callback - notifies application that data loaded
    */
-  function callbackEnd(data, callback) {
+  function callbackEnd(data, callback, callBackEndParsing) {
     let restFile = document.getElementById('restProcFile');
     let str_data = String.fromCharCode.apply(null, new Uint8Array(data));
 
@@ -151,6 +168,7 @@ export default (callbackStart, callback) => {
           HandleFile(water, 'water');
         }
       })
+      .then(callBackEndParsing)
       .then(ConvertCoordinates)
       .then(async () => {
         await Assemble();

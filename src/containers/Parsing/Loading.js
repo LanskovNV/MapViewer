@@ -9,7 +9,12 @@ export default function loading(
   file,
   callbackProgressF,
   callbackEndF,
-  callback
+  callback,
+  callbackStart,
+  callbackStartParsing,
+  callbackEndParsing,
+  callBackSetNumFiles,
+  callBackUpdateFileNum
 ) {
   const CHUNK_SIZE = 10 * 1024;
   let start = 0;
@@ -26,6 +31,11 @@ export default function loading(
   if (file.size === 0) {
     return;
   }
+  let numFiles = Math.ceil(file.size / CHUNK_SIZE);
+  callBackSetNumFiles(numFiles);
+  callBackUpdateFileNum();
+  callbackStartParsing();
+  callbackStart();
   let reader = new FileReader();
   reader.onload = function(evt) {
     reader.offset = start;
@@ -34,7 +44,9 @@ export default function loading(
       file,
       evt,
       callbackProgressF,
+      callBackUpdateFileNum,
       callbackEndF,
+      callbackEndParsing,
       callback,
       Load
     );
@@ -77,14 +89,16 @@ export default function loading(
     file,
     evt,
     callbackProgressF,
+    callBackUpdateFileNum,
     callbackEndF,
+    callbackEndParsing,
     callback,
     Load
   ) {
     if (reader.offset + reader.size < file.size) {
-      callbackProgressF(evt.target.result, Load);
+      callbackProgressF(evt.target.result, callBackUpdateFileNum, Load);
     } else {
-      callbackEndF(evt.target.result, callback);
+      callbackEndF(evt.target.result, callback, callbackEndParsing);
     }
   }
 }

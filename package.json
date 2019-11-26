@@ -39,7 +39,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint src/**/*.js",
     "doc": "esdoc -c esdoc.json",
-    "extract:messages": "react-intl-cra 'src/**/*.{js,jsx}' -o 'src/i18n/messages/messages.json'",
+    "extract:messages": "react-intl-cra src/*.js -o src/i18n/messages/messages.json",
     "manage:translations": "node src/translationRunner.js"
   },
   "eslintConfig": {

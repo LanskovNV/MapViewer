@@ -24,8 +24,8 @@ class ShowProgress extends React.Component {
           </Modal.Header>
           <Modal.Body>
             <h5>
-              Обрабатывается {this.props.numCur} порция данных из{' '}
-              {this.props.numFiles}
+              <FormattedMessage {...messages.parsing} /> {this.props.numCur}{' '}
+              <FormattedMessage {...messages.batch} /> {this.props.numFiles}
             </h5>
             <ProgressBar
               variant="info"
@@ -53,7 +53,9 @@ class ShowProgress extends React.Component {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h5>Идет отрисовка карты, пожалуйста, подождите...</h5>
+            <h5>
+              <FormattedMessage {...messages.rendering} />
+            </h5>
             <div className="text-center">
               <div className="spinner-border text-info" />
             </div>

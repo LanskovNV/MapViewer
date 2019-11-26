@@ -6,6 +6,18 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
+  parsing: {
+    id: `parsing`,
+    defaultMessage: 'Parsing'
+  },
+  batch: {
+    id: `batch`,
+    defaultMessage: 'data batch from'
+  },
+  rendering: {
+    id: `rendering`,
+    defaultMessage: 'The map is rendered, please, wait for a few seconds...'
+  },
   helpOnChoosing: {
     id: `helpOnChoosing`,
     defaultMessage: 'Choose the types of data you want to see.'

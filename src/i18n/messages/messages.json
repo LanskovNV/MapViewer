@@ -1,7 +1,32 @@
 [
   {
+    "id": "parsing",
+    "defaultMessage": "Parsing",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "batch",
+    "defaultMessage": "data batch from",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "rendering",
+    "defaultMessage": "The map is rendered, please, wait for a few seconds...",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "helpOnChoosing",
+    "defaultMessage": "Choose the types of data you want to see.",
+    "filepath": "src/messages.js"
+  },
+  {
     "id": "lang",
     "defaultMessage": "Language",
+    "filepath": "src/messages.js"
+  },
+  {
+    "id": "loading",
+    "defaultMessage": "Uploading...",
     "filepath": "src/messages.js"
   },
   {
@@ -11,7 +36,7 @@
   },
   {
     "id": "about.text",
-    "defaultMessage": "MapViewer is the top-of-the-line app to work with maps uploaded in XML-format. The application runs on most desktop browsers (ex. Google Chrome, Microsoft Edge, Opera, e.t.c.) and mobile phones. ",
+    "defaultMessage": "MapViewer is the top-of-the-line app to work with maps uploaded in XML-format.The application runs on most desktop browsers (ex. Google Chrome, Microsoft Edge, Opera, e.t.c.) and mobile phones.",
     "filepath": "src/messages.js"
   },
   {
@@ -31,7 +56,7 @@
   },
   {
     "id": "choose.map",
-    "defaultMessage": "Choose Map  ",
+    "defaultMessage": "Choose Map",
     "filepath": "src/messages.js"
   },
   {
@@ -47,11 +72,6 @@
   {
     "id": "Stockton",
     "defaultMessage": "Stockton",
-    "filepath": "src/messages.js"
-  },
-  {
-    "id": "SPB",
-    "defaultMessage": "SPB",
     "filepath": "src/messages.js"
   },
   {
@@ -112,16 +132,6 @@
   {
     "id": "right",
     "defaultMessage": "right",
-    "filepath": "src/messages.js"
-  },
-  {
-    "id": "helpOnChoosing",
-    "defaultMessage": "Choose the types of data you want to see.",
-    "filepath": "src/messages.js"
-  },
-  {
-    "id": "loading",
-    "defaultMessage": "Uploading...",
     "filepath": "src/messages.js"
   }
 ]

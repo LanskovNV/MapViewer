@@ -1,7 +1,11 @@
 {
+  "Alexandria": "Alexandria",
+  "Baku": "Baku",
+  "Stockton": "Stockton",
   "about": "About",
   "about.text": "MapViewer is the top-of-the-line app to work with maps uploaded in XML-format. The application runs on most desktop browsers (ex. Google Chrome, Microsoft Edge, Opera, e.t.c.) and mobile phones. ",
   "author.message": "Made with love by {author}.",
+  "batch": "data batch from",
   "checkbox.houses": "houses",
   "checkbox.streets": "streets",
   "checkbox.water": "water objects",
@@ -16,12 +20,10 @@
   "lang": "Language",
   "left": "left",
   "license.message": "This project is licensed under the MIT license.",
-  "Alexandria": "Alexandria",
-  "Baku": "Baku",
-  "Stockton": "Stockton",
-  "SPB": "SPB",
+  "loading": "Uploading...",
+  "parsing": "Parsing",
+  "rendering": "The map is rendered, please, wait for a few seconds...",
   "right": "right",
   "up": "up",
-  "upload.map": "Upload Map",
-  "loading": "Uploading..."
+  "upload.map": "Upload Map"
 }

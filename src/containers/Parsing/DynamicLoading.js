@@ -9,7 +9,11 @@ import loading from './Loading';
 import { PickHouses, PickStreets, PickWater } from './DataFilter';
 import { FilterFile } from './ItemsFilter';
 import { ConvertCoordinates } from './CoordinatesConversion';
-import { Assemble } from './FilesAssembler';
+import {
+  AssembleHouses,
+  AssembleStreets,
+  AssembleWater
+} from './FilesAssembler';
 
 /**
  * @desc dynamic map load
@@ -152,11 +156,13 @@ export default (callbackStart, callback) => {
         }
       })
       .then(ConvertCoordinates)
-      .then(async () => {
-        await Assemble();
-      })
+      .then(AssembleStreets)
+      .then(AssembleHouses)
+      .then(AssembleWater)
       .then(ClearTempFiles)
-      .then(callback)
+      .then(async () => {
+        setTimeout(callback, 1000);
+      })
       .catch(function(err) {
         alert(err);
       });

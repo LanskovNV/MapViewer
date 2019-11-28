@@ -9,7 +9,7 @@ export default function updateToDrawFlags(elem, flags) {
     elem.toDraw = flags.isHouses;
   } else if (elem.name === 'streets') {
     elem.toDraw = flags.isStreets;
-  } else {
+  } else if (elem.name === 'water') {
     elem.toDraw = flags.isWater;
   }
   return elem;

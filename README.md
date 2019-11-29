@@ -3,7 +3,6 @@
 ## Purpose
 MapViewer is the React project providing web mapping service, which offers street maps watching with data filters, containing selectivity towards streets, houses and water objects.
 # Quick start guide
-Here's a guide to get you started using MapViewer.
 
 ## Locale settings
 You can choose one of two languages the application supports (Russian or English) by using the local toggle down below on the page. 
@@ -27,6 +26,8 @@ You can learn more about the application and developers by clicking on the *Abou
 *And now you are ready to start!*
 ## Limitations
 MapViewer works only with maps uploaded in .geojson format. 
+For now we support only maps less than 200M size. We hope to reduce this limitation in future.
+
 ## Prerequisites
  - NodeJS and npm
  - git
@@ -73,3 +74,6 @@ Also the app provide testing
 It solves temporary problem with node 11.11.0.
 
 2) If you have some problems with eslint, you can remove strange rules from eslint config.
+
+###Usefull links
+[link to MapViewer repo](https://github.com/LanskovNV/MapViewer)

@@ -75,5 +75,5 @@ It solves temporary problem with node 11.11.0.
 
 2) If you have some problems with eslint, you can remove strange rules from eslint config.
 
-###Usefull links
-[link to MapViewer repo](https://github.com/LanskovNV/MapViewer)
+
+https://github.com/LanskovNV/MapViewer
